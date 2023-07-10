@@ -349,6 +349,79 @@ header .navbar nav ul li:hover #pages {
 
 /* collection section end  */
 
+/* whole brand list section start  */
+
+#view-all-brands {
+    padding: 0 4vw;
+    margin-top: 4vh;
+}
+
+#view-all-brands h1 {
+    color: black;
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 2vh;
+}
+
+#all-brands {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+#all-brands .brand-list {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 30%;
+    background-color: #ebdef0;
+    padding: 20px 10px;
+    border-radius: 10px;
+    border: 1px solid #e7ab3c;
+}
+
+#all-brands .brand-list:nth-child(1),
+#all-brands .brand-list:nth-child(2),
+#all-brands .brand-list:nth-child(3) {
+    display: flex;
+}
+
+#all-brands .brand-list img {
+    width: 40%;
+}
+
+#all-brands .brand-list h3 {
+    font-size: 20px;
+}
+
+.load-button {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.load-button button {
+    padding: 10px 15px;
+    color: white;
+    background-color: #e7ab3c;
+    border: 1px solid #e7ab3c;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.load-button button:hover {
+    color: black;
+    font-weight: bolder;
+}
+
+/* whole brand list section end  */
+
 /* men-category section start  */
 
 .category {
@@ -471,6 +544,135 @@ header .navbar nav ul li:hover #pages {
 
 /* women-category section end */
 
+/* deal of the week section start */
+
+#weekly-deals{
+    display: flex;
+    flex-direction: row;
+    height: 50vh;
+    width: 100%;
+    padding: 0 4vw;
+    margin-top: 4vh;
+    background-color: #e7ab3c;
+}
+
+#weekly-deals .time{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 50%;
+}
+
+#weekly-deals .time h1{
+    font-size: 30px;
+}
+
+#weekly-deals .time h3{
+    font-size: 25px;
+}
+
+#weekly-deals .time p{
+    font-size: 20px;
+}
+
+#weekly-deals .time a{
+    font-size: 20px;
+    color: #e7ab3c;
+    background-color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-weight: bolder;
+}
+
+#weekly-deals .time .timer-countdown{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    text-align: center;
+}
+
+#weekly-deals .time .timer-countdown div{
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+#weekly-deals .time .timer-countdown p{
+    color: black;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+#weekly-deals .product-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+#weekly-deals .product-img img{
+    width: 50%;
+}
+
+ /* deal of the week section end  */
+
+/* Back To Top button start  */
+
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #e7ab3c;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+#myBtn:hover {
+    color: black;
+    font-weight: bolder;
+}
+
+/* Back To Top button end  */
+
+/* pwa update message section start */
+
+#snackbar {
+    display: none;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    bottom: 30px;
+}
+
+#snackbar.show {
+    display: block;
+}
+
+#snackbar p {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+}
+
+#reload {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* pwa update message section end */
+
 /* footer start  */
 footer {
     display: flex;
@@ -567,7 +769,6 @@ footer .support-links .links-info form input {
 
 }
 
-
 footer .support-links .links-info form input:focus {
     border: 2px solid #e7ab3c;
 }
@@ -596,7 +797,6 @@ footer .rights p a {
 
 /* footer end  */
 
-
 /* custom scrollbar section start */
 
 ::-webkit-scrollbar {
@@ -615,33 +815,3 @@ footer .rights p a {
 }
 
 /* custom scrollbar section end */
-
-/* pwa update message section start */
-
-#snackbar {
-    display: none;
-    justify-content: center;
-    position: fixed;
-    width: 100%;
-    z-index: 1;
-    bottom: 30px;
-}
-
-#snackbar.show {
-    display: block;
-}
-
-#snackbar p {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-}
-
-#reload {
-    font-size: 20px;
-    cursor: pointer;
-}
-
-/* pwa update message section end */

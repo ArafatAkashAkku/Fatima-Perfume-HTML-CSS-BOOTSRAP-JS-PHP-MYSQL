@@ -51,7 +51,7 @@
         </div>
         <div class="website-search-wishlist-shop">
             <div class="website-box">
-                <h1><a href="">Website</a></h1>
+                <h1><a href="#home">Website</a></h1>
             </div>
             <div class="search-box">
                 <form action="">
@@ -67,16 +67,16 @@
         <div class="navbar">
             <nav>
                 <ul>
-                    <li><a href="">Home</a></li>
+                    <li><a href="#home">Home</a></li>
                     <li><a href="">Shop</a></li>
                     <li>
-                        <a href="">Collection </a>
+                        <a href="#brand-collection">Collection </a>
                         <ul id="collection">
                             <li><a href="">Men</a></li>
                             <li><a href="">Women</a></li>
                         </ul>
                     </li>
-                    <li><a href="">Contact</a></li>
+                    <li><a href="#contact">Contact</a></li>
                     <li><a href="">Pages</a>
                         <ul id="pages">
                             <li><a href="">Shopping Cart</a></li>
@@ -132,8 +132,42 @@
             </div>
         </section>
         <!-- collection section end  -->
+        <!-- whole brand list section start  -->
+        <section id="view-all-brands">
+            <h1>View All Brands</h1>
+            <div id="all-brands">
+                <div class="brand-list">
+                    <img src="images/perfume.png" alt="">
+                    <h3>Calvin Clein</h3>
+                </div>
+                <div class="brand-list">
+                    <img src="images/perfume.png" alt="">
+                    <h3>Calvin Clein</h3>
+                </div>
+                <div class="brand-list">
+                    <img src="images/perfume.png" alt="">
+                    <h3>Calvin Clein</h3>
+                </div>
+                <div class="brand-list">
+                    <img src="images/perfume.png" alt="">
+                    <h3>Calvin Clein</h3>
+                </div>
+                <div class="brand-list">
+                    <img src="images/perfume.png" alt="">
+                    <h3>Calvin Clein</h3>
+                </div>
+                <div class="brand-list">
+                    <img src="images/perfume.png" alt="">
+                    <h3>Calvin Clein</h3>
+                </div>
+            </div>
+            <div class="load-button">
+                <button id="load-more">Load More</button>
+            </div>
+        </section>
+        <!-- whole brand list section end  -->
         <!-- men-category section start  -->
-        <div class="category">
+        <section class="category">
             <div class="img">
                 <a href="">Men's Brand</a>
             </div>
@@ -209,16 +243,10 @@
                 </div>
 
             </div>
-        </div>
-
-
+        </section>
         <!-- men-category section end  -->
-
-
-
         <!-- women-category section start  -->
-
-        <div class="category">
+        <section class="category">
             <div class="perfume">
                 <div class="swiper all-brand">
                     <div class="swiper-wrapper">
@@ -293,12 +321,44 @@
             <div class="imgw">
                 <a href="">Women's Brand</a>
             </div>
-        </div>
+        </section>
         <!-- women-category section end  -->
-
-
-
-
+        <!-- deal of the week section start-->
+        <section id="weekly-deals">
+            <div class="time">
+                <h1>Deal Of The Week</h1>
+                <h3>Product Name</h3>
+                <p>Price: 400 / Perfume</p>
+                <div class="timer-countdown">
+                    <div>
+                        <p id="days">00</p>
+                        <span>&nbsp;&nbsp;&nbsp;Days&nbsp;&nbsp;&nbsp;</span>
+                    </div>
+                    <div>
+                        <p id="hours">00</p>
+                        <span>&nbsp;&nbsp;Hours&nbsp;&nbsp;</span>
+                    </div>
+                    <div>
+                        <p id="minutes">00</p>
+                        <span>Minutes</span>
+                    </div>
+                    <div>
+                        <p id="seconds">00</p>
+                        <span>Seconds</span>
+                    </div>
+                </div>
+                <a href="">Shop Now</a>
+            </div>
+            <div class="product-img">
+                <img src="images/perfume.png" alt="">
+            </div>
+        </section>
+        <!-- deal of the week section start-->
+        <!-- Back To Top button section start  -->
+        <section>
+            <button id="myBtn" title="Go to top">&uarr;</button>
+        </section>
+        <!-- Back To Top button section end  -->
         <!-- pwa update message section start  -->
         <section>
             <div id="snackbar">
@@ -308,11 +368,8 @@
         <!-- pwa update message section end  -->
     </main>
     <!-- main end  -->
-
     <!-- footer start -->
-    <footer>
-
-
+    <footer id="contact">
         <div class="support-links">
             <div class="links-info">
                 <h1><a href="">Website</a></h1>
@@ -351,26 +408,18 @@
                 <h1><a href="">Subscription</a></h1>
                 <form action="">
                     <input type="email" name="" id="" placeholder="Example: abc@gmail.com"
-                    pattern="^([a-zA-Z0-9]|[a-z\.A-Z\.0-9]|[a-zA-Z\.a-zA-Z0-9])+@(gmail|yahoo)\.com$"
-                    title="Example: abc@gmail.com" maxlength="50" required>
+                        pattern="^([a-zA-Z0-9]|[a-z\.A-Z\.0-9]|[a-zA-Z\.a-zA-Z0-9])+@(gmail|yahoo)\.com$"
+                        title="Example: abc@gmail.com" maxlength="50" required>
                     <button type="submit">Subscribe</button>
                 </form>
             </div>
         </div>
-
-
         <div class="rights">
-            <p> Copyright &copy <span id="update-year"></span><a href="" target="_blank"> Website</a> All Rights Reserved.</p>
+            <p> Copyright &copy <span id="update-year"></span><a href="" target="_blank"> Website</a> All Rights
+                Reserved.</p>
         </div>
-
-
-
     </footer>
-
     <!-- footer end -->
-
-
-
     <!-- google translation link  -->
     <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
     <!-- external js link  -->
@@ -420,10 +469,9 @@
                 1024: {
                     slidesPerView: 4,
                     spaceBetween: 20,
-                },
-            },
+                }
+            }
         });
-
     </script>
     <script>
         // pwa installation updation 
@@ -447,14 +495,12 @@
                     });
                 });
             });
-
             navigator.serviceWorker.addEventListener('controllerchange', () => {
                 // This will be triggered when the service worker is replaced with a new one.
                 // It does not just reload the page right away, so to make sure it is fully activated using the checkUpdate function.
                 updated = true;
                 checkUpdate();
             });
-
             function checkUpdate() {
                 let snackbar = document.getElementById('snackbar');
                 if (activated && updated) {
