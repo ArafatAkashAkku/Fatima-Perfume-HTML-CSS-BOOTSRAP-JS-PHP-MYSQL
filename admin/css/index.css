@@ -1,0 +1,46 @@
+/* css reset start */
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-transform: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+/* css reset end */
+
+/* html & body start  */
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* html & body end  */
+
+header{
+    display: flex;
+}
+
+.log-in-body{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.log-in-body .admin-image{
+    width: 50%;
+}
+
+.log-in-body .admin-image img{
+    width: 50%;
+}
+

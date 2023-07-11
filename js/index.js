@@ -1,8 +1,7 @@
 // google translator 
-// function loadGoogleTranslate() {
-//     new google.translate.TranslateElement("google_element");
-
-// }
+function loadGoogleTranslate() {
+    new google.translate.TranslateElement("google_element");
+}
 
 // navigation bar on scroll effect and scroll progress bar
 const container = document.querySelector("body");
@@ -58,7 +57,7 @@ loadButton.onclick = () => {
 }
 
 // weekly deals countdown
-let countDownDate = new Date("Dec 31, 2025 00:00:00").getTime();
+let countDownDate = new Date("Jul 31, 2023 00:00:00").getTime();
 let x = setInterval(function() {
     let now = new Date().getTime();
     let d = countDownDate - now;
@@ -76,5 +75,6 @@ let x = setInterval(function() {
         document.getElementById("hours").innerHTML = "00";
         document.getElementById("minutes").innerHTML = "00";
         document.getElementById("seconds").innerHTML = "00";
+        document.getElementById("deal-shop").style.pointerEvents="none";
     }
 }, 1000);

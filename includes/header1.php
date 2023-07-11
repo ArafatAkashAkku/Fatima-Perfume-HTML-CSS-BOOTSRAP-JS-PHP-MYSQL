@@ -1,1 +1,3 @@
-<div class="top" id="google_element"></div>
+<div class="google-box">
+    <div id="google_element"></div>
+</div>
