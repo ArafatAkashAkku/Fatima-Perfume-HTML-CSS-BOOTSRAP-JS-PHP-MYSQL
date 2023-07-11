@@ -60,14 +60,51 @@
         width: 100%;
     }
 
+    header .email-phone-brand-user .user-box p {
+        margin-left: 0;
+    }
+
     #weekly-deals .product-img img {
         width: 80%;
     }
 
 }
 
-@media screen and (max-width:650px) {
+@media screen and (max-width:760px) {
 
+    header .navbar .phone-navbar {
+        text-align: right;
+        width: 100%;
+        display: block;
+    }
+
+    header .navbar .desktop-navbar {
+        position: absolute;
+        top: 43px;
+        left: 110%;
+        background-color: #333;
+        width: 100%;
+        padding: 10px 0;
+        z-index: 2000;
+    }
+
+    header .navbar .desktop-navbar.active {
+        left: 0;
+    }
+
+    header .navbar .desktop-navbar nav ul {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 12px;
+        padding-right: 4vw;
+    }
+
+    header .navbar .desktop-navbar nav ul li .sub-desktop-navbar {
+        position: static;
+        gap: 12px;
+        align-items: flex-end;
+        margin-top: 4px;
+    }
 
 }
 
@@ -76,8 +113,6 @@
     #weekly-deals {
         flex-direction: column-reverse;
         gap: 10px;
-        height: 100%;
-        padding: 15px 0;
     }
 
     #weekly-deals .time {

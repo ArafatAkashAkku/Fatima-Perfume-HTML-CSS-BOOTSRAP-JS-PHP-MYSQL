@@ -31,6 +31,18 @@ window.onscroll = () => {
     }
 }
 
+// navigation phone bar on click effect 
+let phoneBar = document.getElementById("phone-tab");
+let phoneNav = document.querySelector("header .navbar .desktop-navbar");
+phoneBar.onclick = () => {
+    phoneNav.classList.toggle("active")
+    if (phoneNav.classList.contains("active")) {
+        phoneBar.classList.replace("fa-bars", "fa-xmark");
+    } else {
+        phoneBar.classList.replace("fa-xmark", "fa-bars");
+    };
+};
+
 // Auto update year 
 const yearUpdate = document.getElementById("update-year");
 yearUpdate.innerHTML = new Date().getFullYear();
@@ -58,7 +70,7 @@ loadButton.onclick = () => {
 
 // weekly deals countdown
 let countDownDate = new Date("Jul 31, 2023 00:00:00").getTime();
-let x = setInterval(function() {
+let x = setInterval(function () {
     let now = new Date().getTime();
     let d = countDownDate - now;
     let days = Math.floor(d / (1000 * 60 * 60 * 24));
@@ -75,6 +87,11 @@ let x = setInterval(function() {
         document.getElementById("hours").innerHTML = "00";
         document.getElementById("minutes").innerHTML = "00";
         document.getElementById("seconds").innerHTML = "00";
-        document.getElementById("deal-shop").style.pointerEvents="none";
+        document.getElementById("deal-shop").style.pointerEvents = "none";
     }
 }, 1000);
+
+
+
+
+

@@ -114,7 +114,18 @@ header .email-phone-brand-user .phone-brand-box .brand-box ul li:nth-child(4) a 
 header .email-phone-brand-user .user-box {
     display: flex;
     width: 30%;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .email-phone-brand-user .user-box p {
+    font-size: 20px;
+    margin-left: 20px;
+    color: black;
+}
+
+header .email-phone-brand-user .user-box p span {
+    color: #e7ab3c;
 }
 
 header .email-phone-brand-user .user-box a {
@@ -126,7 +137,7 @@ header .email-phone-brand-user .user-box a {
     font-size: 20px;
 }
 
-header .email-phone-brand-user .user-box a i{
+header .email-phone-brand-user .user-box a i {
     font-size: 25px;
 }
 
@@ -171,6 +182,7 @@ header .website-search-wishlist-shop .search-box form input {
     border: 2px solid #e5e5e5;
     color: black;
     border-right: none;
+    font-size: 15px;
 }
 
 header .website-search-wishlist-shop .search-box form input:focus {
@@ -178,7 +190,7 @@ header .website-search-wishlist-shop .search-box form input:focus {
 }
 
 header .website-search-wishlist-shop .search-box form button {
-    padding: 10px;
+    padding: 11px;
     border: 2px solid #e7ab3c;
     background-color: #e7ab3c;
     color: white;
@@ -200,57 +212,69 @@ header .website-search-wishlist-shop .wishlist-shop-box a {
 }
 
 header .navbar {
-    height: 7vh;
-    background-color: #252525;
-    padding: 0 4vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 4vw;
+    background-color: #333;
     position: relative;
 }
 
-header .navbar nav ul {
+header .navbar .desktop-navbar nav ul {
     display: flex;
     flex-direction: row;
-    padding-top: 2vh;
+    align-items: center;
+    justify-content: center;
 }
 
-header .navbar nav ul li a {
-    font-size: 18px;
+header .navbar .desktop-navbar nav ul li a {
     text-transform: uppercase;
-    background-color: #4c4c4c;
-    padding: 10px 25px;
+    font-size: 20px;
     color: white;
-    border: 1px solid #4c4c4c;
+    cursor: pointer;
+    padding: 6px 10px;
 }
 
-header .navbar nav ul li a:hover {
+header .navbar .desktop-navbar nav ul li a:hover,
+header .navbar .desktop-navbar nav ul li a.active {
     background-color: #e7ab3c;
-    border: 1px solid #e5e5e5;
 }
 
-header #collection {
-    display: none;
-    flex-direction: column;
+header .navbar .desktop-navbar nav ul li .sub-desktop-navbar {
     position: absolute;
+    flex-direction: column;
     gap: 15px;
-    top: 45px;
-    background-color: #4c4c4c;
-    z-index: 200;
-    padding-bottom: 15px;
-}
-
-header #pages {
+    background-color: #333;
+    top: 35px;
+    padding: 8px 0;
+    align-items: flex-start;
     display: none;
-    flex-direction: column;
-    position: absolute;
-    gap: 21px;
-    top: 45px;
-    background-color: #4c4c4c;
-    z-index: 200;
-    padding-bottom: 15px;
+    z-index: 2000;
 }
 
-header .navbar nav ul li:hover #collection,
-header .navbar nav ul li:hover #pages {
+header .navbar .desktop-navbar nav ul li:hover .sub-desktop-navbar {
     display: flex;
+}
+
+header .navbar .phone-navbar {
+    display: none;
+}
+
+header .navbar .phone-navbar .fa-bars {
+    font-size: 15px;
+    padding: 4px 7px;
+    color: white;
+    background-color: #e7ab3c;
+    cursor: pointer;
+}
+
+header .navbar .phone-navbar .fa-xmark {
+    font-size: 15px;
+    padding: 4px 7px;
+    color: white;
+    background-color: #e7ab3c;
+    cursor: pointer;
 }
 
 /* header end  */
@@ -310,7 +334,7 @@ header .navbar nav ul li:hover #pages {
 }
 
 .slideshow .swiper-button-next,
-.slideshow  .swiper-button-prev{
+.slideshow .swiper-button-prev {
     position: absolute;
     color: #e7ab3c;
 }
@@ -392,6 +416,7 @@ header .navbar nav ul li:hover #pages {
     align-items: center;
     justify-content: center;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 #all-brands .brand-list {
@@ -590,9 +615,8 @@ header .navbar nav ul li:hover #pages {
 #weekly-deals {
     display: flex;
     flex-direction: row;
-    height: 50vh;
     width: 100%;
-    padding: 0 4vw;
+    padding: 15px 4vw;
     margin-top: 4vh;
     background-color: #e7ab3c;
 }
@@ -629,7 +653,7 @@ header .navbar nav ul li:hover #pages {
 }
 
 #weekly-deals .time a:hover {
-box-shadow: 0px 0px 3vh 1vh white;
+    box-shadow: 0px 0px 3vh 1vh white;
 }
 
 #weekly-deals .time .timer-countdown {
@@ -739,6 +763,7 @@ footer .support-links {
 footer #support-social-links {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
@@ -769,6 +794,10 @@ footer #support-social-links li:nth-child(3) a {
 
 footer #support-social-links li:nth-child(4) a {
     background-color: red;
+}
+
+footer #support-social-links li:nth-child(5) a {
+    background-color: green;
 }
 
 footer .support-links .links-info {
