@@ -1,0 +1,262 @@
+/* css reset start */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-transform: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    user-select: none;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* css reset end */
+
+/* html & body start  */
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* html & body end  */
+
+/* header start  */
+
+header {
+    height: 7vh;
+    padding: 0 4vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .website-box h1 a,
+header .sign-up-box h1 a {
+    color: #e7ab3c;
+    font-size: 30px;
+}
+
+header .sign-up-box {
+    display: none;
+}
+
+/* header end  */
+
+/* log in page section start  */
+
+#log-in-page {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+}
+
+#log-in-page .log-in-form {
+    width: 50%;
+}
+
+#log-in-page .log-in-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#log-in-page .log-in-form form .or-button {
+    border-bottom: 2px solid #e7ab3c;
+    padding-bottom: 20px;
+    width: 30%;
+}
+
+#log-in-page .log-in-form form h1 {
+    font-size: 25px;
+    text-align: center;
+}
+
+#log-in-page .log-in-form form p {
+    font-size: 15px;
+    text-align: center;
+}
+
+#log-in-page .log-in-form form .social-networks {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#log-in-page .log-in-form form .social-networks a i {
+    font-size: 20px;
+    color: white;
+    background-color: #e7ab3c;
+    padding: 10px;
+    border-radius: 50px;
+}
+
+#log-in-page .log-in-form form .social-networks a {
+    border-radius: 50px;
+    pointer-events: none;
+}
+
+#log-in-page .log-in-form form input {
+    width: 100%;
+    height: 6vh;
+    padding: 0 10px;
+    outline: none;
+    border: 1px solid black;
+    font-size: 16px;
+}
+
+#log-in-page .log-in-form form input:focus {
+    border: 1px solid #e7ab3c;
+}
+
+#log-in-page .log-in-form form button {
+    padding: 10px 50px;
+    background-color: #e7ab3c;
+    color: white;
+    border: 1px solid #e7ab3c;
+    border-radius: 50px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#log-in-page .log-in-form form button:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid #e7ab3c;
+}
+
+#log-in-page .log-in-form form .email-body,
+#log-in-page .log-in-form form .password-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
+}
+
+#log-in-page .log-in-form form .password-body .password-eye-button {
+    position: relative;
+}
+
+#log-in-page .log-in-form form .password-body .password-eye-button .fa-eye-slash {
+    position: absolute;
+    right: 8px;
+    top: 30%;
+    cursor: pointer;
+    color: black;
+}
+
+#log-in-page .log-in-form form .password-body .password-eye-button .fa-eye {
+    position: absolute;
+    right: 8px;
+    top: 30%;
+    cursor: pointer;
+    color: black;
+}
+
+#log-in-page .home-page-form {
+    width: 50%;
+    background-color: #e7ab3c;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#log-in-page .home-page-form h1 {
+    font-size: 35px;
+    color: white;
+}
+
+#log-in-page .home-page-form p {
+    font-size: 18px;
+    color: white;
+    text-align: center;
+}
+
+#log-in-page .home-page-form a {
+    font-size: 18px;
+    padding: 10px 50px;
+    background-color: white;
+    color: black;
+    border: 1px solid #e7ab3c;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+/* log in page section end  */
+
+/* footer start  */
+
+footer {
+    height: 3vh;
+    padding: 0 4vw;
+    text-align: center;
+    font-size: 15px;
+}
+
+footer p a {
+    color: #e7ab3c;
+}
+
+/* footer end  */
+
+/* custom scrollbar section start */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+    background-clip: content-box;
+    background-color: #e7ab3c;
+    border-radius: 4px;
+    border: 1px solid #e7ab3c;
+}
+
+/* custom scrollbar section end */
+
+/* responsive css start  */
+
+@media screen and (max-width:1200px) {
+
+    header .sign-up-box {
+        display: block;
+    }
+
+    #log-in-page .home-page-form {
+        display: none;
+    }
+
+    #log-in-page .log-in-form {
+        width: 100%;
+        padding: 0 4vw;
+    }
+
+    #log-in-page .log-in-form form .email-body,
+    #log-in-page .log-in-form form .password-body {
+        width: 100%;
+    }
+
+}
+
+/* responsive css ends  */

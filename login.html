@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- external css link  -->
+    <link rel="stylesheet" href="css/login.css">
+    <!-- favicon link  -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <!-- font awesome cdn 6.3.0 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    <!-- website title  -->
+    <title>Website Title</title>
+</head>
+
+<body>
+    <!-- header start  -->
+    <header>
+        <div class="website-box">
+            <h1><a href="index.html">Website</a></h1>
+        </div>
+        <div class="sign-up-box">
+            <h1><a href="index.html">Signup</a></h1>
+        </div>
+    </header>
+    <!-- header end  -->
+    <!-- main start  -->
+    <main>
+        <!-- log in page section start  -->
+        <section id="log-in-page">
+            <div class="log-in-form">
+                <form action="" autocomplete="off">
+                    <h1>Login To Your Account</h1>
+                    <p>Login using social networks</p>
+                    <div class="social-networks">
+                        <a href="#" title="Google"><i class="fa-brands fa-google"></i></a>
+                        <a href="#" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                    <p class="or-button">or</p>
+                    <div class="email-body">
+                        <label for="">Email</label>
+                        <input type="email" name="" id="" placeholder="Enter your email"
+                            pattern="^([a-zA-Z0-9]|[a-z\.A-Z\.0-9]|[a-zA-Z\.a-zA-Z0-9])+@(gmail|yahoo)\.com$"
+                            title="Example: abc@gmail.com" maxlength="50" required>
+                    </div>
+                    <div class="password-body">
+                        <label for="">Password</label>
+                        <div class="password-eye-button">
+                            <input type="password" name="" id="password-pass" placeholder="Enter your password"
+                                minlength="8" required>
+                            <i class="fa-solid fa-eye-slash" id="password-eye"></i>
+                        </div>
+                    </div>
+                    <button type="submit">Sign in</button>
+                    <p>Don't have account? <a href="" style="color:
+                    #e7ab3c;">Sign up</a></p>
+                </form>
+            </div>
+            <div class="home-page-form">
+                <h1>New Here?</h1>
+                <p>Social networks login currently unavailable right now.<br> Please sign up using your email. <br>Thank
+                    you.</p>
+                <a href="">Sign Up</a>
+            </div>
+        </section>
+        <!-- log in page section end  -->
+    </main>
+    <!-- main end  -->
+    <!-- footer start  -->
+    <footer>
+        <p> Copyright &copy 2023 - <span id="update-year"></span><a href="" target="_blank"> Website</a> All Rights
+            Reserved.</p>
+    </footer>
+    <!-- footer end  -->
+    <!-- external js link  -->
+    <script src="js/login.js"></script>
+</body>
+
+</html>
