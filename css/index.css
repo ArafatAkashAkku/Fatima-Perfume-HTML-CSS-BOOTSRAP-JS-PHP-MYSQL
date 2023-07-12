@@ -73,7 +73,7 @@ header .email-phone-brand-user .phone-brand-box {
     width: 40%;
 }
 
-header .email-phone-brand-user .phone-brand-box .phone-box {
+header .email-phone-brand-user .phone-brand-box .phone-box a{
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -535,6 +535,9 @@ header .navbar .phone-navbar .fa-xmark {
 .category .perfume .all-brand .swiper-slide img {
     width: 60%;
     margin-bottom: 10px;
+    /* background-image: url("../images/loader-gif.gif");
+    background-position: center;
+    background-repeat: no-repeat; */
 }
 
 .category .perfume .all-brand .swiper-slide h3 {
@@ -676,6 +679,9 @@ header .navbar .phone-navbar .fa-xmark {
     justify-content: center;
     align-items: center;
     width: 50%;
+    /* background-image: url("../images/loader-gif.gif");
+    background-position: center;
+    background-repeat: no-repeat; */
 }
 
 #weekly-deals .product-img img {
@@ -942,6 +948,26 @@ footer .rights p a {
 
 /* responsive css start  */
 
+@media screen and (max-width:1500px) {
+
+    header .email-phone-brand-user .email-box {
+        display: none;
+    }
+
+    header .email-phone-brand-user .phone-brand-box {
+        display: none;
+    }
+
+    header .email-phone-brand-user .user-box {
+        width: 100%;
+    }
+
+    header .email-phone-brand-user .user-box p {
+        margin-left: 0;
+    }
+
+}
+
 @media screen and (max-width:1300px) {
 
     #feature-list {
@@ -1004,22 +1030,6 @@ footer .rights p a {
 }
 
 @media screen and (max-width:750px) {
-
-    header .email-phone-brand-user .email-box {
-        display: none;
-    }
-
-    header .email-phone-brand-user .phone-brand-box {
-        display: none;
-    }
-
-    header .email-phone-brand-user .user-box {
-        width: 100%;
-    }
-
-    header .email-phone-brand-user .user-box p {
-        margin-left: 0;
-    }
 
     #weekly-deals .product-img img {
         width: 80%;
