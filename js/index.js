@@ -34,3 +34,14 @@ yearUpdate.forEach((element) => {
 document.oncontextmenu = (element) => {
     element.preventDefault();
 }
+
+const navigationBar = document.querySelector(".navigation-header");
+
+// windows scroll function 
+window.onscroll = () => {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        navigationBar.style.position = "fixed";
+    }else{
+        navigationBar.style.position = "relative";
+    } 
+}
