@@ -5,470 +5,386 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap css link  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- external css link  -->
     <link rel="stylesheet" href="css/index.css">
-    <!-- favicon link  -->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <!-- swipper css link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <!-- font awesome cdn 6.3.0 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-    <!-- manifest link  -->
-    <link rel="manifest" href="manifest.webmanifest">
+    <!-- favicon link  -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <!-- website title  -->
-    <title>Website Title</title>
+    <title>Document</title>
 </head>
 
-<body>
+<body class="overflow-x-hidden">
 
-    <!-- header start  -->
-    <header>
-        <div class="google-box">
-            <div id="google_element"></div>
-        </div>
-        <div class="email-phone-brand-user">
-            <div class="email-box">
-                <a href="mailto:arafatakash5@gmail.com"><i class="fa-solid fa-envelope"></i>abc@gmail.com</a>
-            </div>
-            <div class="phone-brand-box">
-                <div class="phone-box">
-                    <a href="tel:+8801798480941"><i class="fa-solid fa-phone"></i>+8801798480941</a>
-                </div>
-                <div class="brand-box">
-                    <ul>
-                        <li><a href="" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a></li>
-                        <li><a href="" target="_blank" title="Instagram"><i
-                                    class="fa-brands fa-square-instagram"></i></a></li>
-                        <li><a href="" target="_blank" title="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
-                        <li><a href="" target="_blank" title="Youtube"><i class="fa-brands fa-youtube"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="user-box">
-                <p>Welcome <span>Md. Arafat Akash</span></p>
-                <a href="login.html"><i class="fa-solid fa-user"></i>Login</a>
-            </div>
-        </div>
-        <div class="website-search-wishlist-shop">
-            <div class="website-box">
-                <h1><a href="#home">Website</a></h1>
-            </div>
-            <div class="search-box">
-                <form action="">
-                    <input type="text" name="" id="" placeholder="Search here">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </form>
-            </div>
-            <div class="wishlist-shop-box">
-                <a href=""><i class="fa-solid fa-heart"></i></a>
-                <a href=""><i class="fa-sharp fa-solid fa-cart-shopping"></i></a>
-            </div>
-        </div>
-        <div class="navbar">
-            <div class="desktop-navbar">
-                <nav>
-                    <ul>
-                        <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="">Shop</a></li>
-                        <li><a>Collection &#43;</a>
-                            <ul class="sub-desktop-navbar">
-                                <li><a href="">Men</a></li>
-                                <li><a href="">Women</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#weekly-deals">Deals</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li><a>More Pages &#43;</a>
-                            <ul class="sub-desktop-navbar">
-                                <li><a href="">Faq</a></li>
-                                <li><a href="">Account</a></li>
-                                <li><a href="">Registration</a></li>
-                                <li><a href="login.html">Login</a></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </nav>
-            </div>
-            <div class="phone-navbar">
-                <i class="fa-solid fa-bars" id="phone-tab"></i>
-            </div>
-        </div>
-    </header>
-    <!-- header end  -->
     <!-- main start  -->
     <main>
-        <!-- progress bar section start  -->
-        <section>
-            <div class="progress">
-                <div class="highlight" id="bar-highlight"></div>
-            </div>
-        </section>
-        <!-- progress bar section end  -->
-        <!-- slideshow section start  -->
-        <section id="home">
-            <div class="swiper slideshow">
+
+        <!-- top banner section start  -->
+        <section id="top-banner">
+            <div class="swiper top-banner">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="images/banner1.jpg" loading="lazy" alt="">
+                        <img src="images/banner1.jpg" class="img-fluid error-img" alt="Banner">
                     </div>
                     <div class="swiper-slide">
-                        <img src="images/banner2.jpg" loading="lazy" alt="">
+                        <img src="images/banner2.jpg" class="img-fluid error-img" alt="Banner">
                     </div>
                     <div class="swiper-slide">
-                        <img src="images/banner3.jpg" loading="lazy" alt="">
+                        <img src="images/banner3.jpg" class="img-fluid error-img" alt="Banner">
                     </div>
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next text-warning"></div>
+                <div class="swiper-button-prev text-warning"></div>
             </div>
         </section>
-        <!-- slideshow section end  -->
-        <!-- collection section start  -->
-        <section id="brand-collection">
-            <div class="men">
-                <a href="">Men's</a>
-            </div>
-            <div class="women">
-                <a href="">Women's</a>
-            </div>
-        </section>
-        <!-- collection section end  -->
-        <!-- whole brand list section start  -->
-        <section id="view-all-brands">
-            <h1>View All Brands</h1>
-            <div id="all-brands">
-                <div class="brand-list">
-                    <img src="images/perfume.png" loading="lazy" alt="">
-                    <h3>Calvin Clein</h3>
-                </div>
-                <div class="brand-list">
-                    <img src="images/perfume.png" loading="lazy" alt="">
-                    <h3>Calvin Clein</h3>
-                </div>
-                <div class="brand-list">
-                    <img src="images/perfume.png" loading="lazy" alt="">
-                    <h3>Calvin Clein</h3>
-                </div>
-                <div class="brand-list">
-                    <img src="images/perfume.png" loading="lazy" alt="">
-                    <h3>Calvin Clein</h3>
-                </div>
-                <div class="brand-list">
-                    <img src="images/perfume.png" loading="lazy" alt="">
-                    <h3>Calvin Clein</h3>
-                </div>
-                <div class="brand-list">
-                    <img src="images/perfume.png" loading="lazy" alt="">
-                    <h3>Calvin Clein</h3>
-                </div>
-            </div>
-            <div class="load-button">
-                <button id="load-more">Load More</button>
-            </div>
-        </section>
-        <!-- whole brand list section end  -->
-        <!-- men-category section start  -->
-        <section class="category">
-            <div class="img">
-                <a href="">Men's Brand</a>
-            </div>
-            <div class="perfume">
-                <div class="swiper all-brand">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
-                            <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
-                            <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
-                            <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
-                            <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
-                            <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
-                            <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
-                            <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
-                            <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
-                            <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
-                        </div>
+        <!-- top banner section end  -->
+
+        <!-- view all brands section start  -->
+        <section id="view-all-brands" class="py-3">
+            <div class="text-center">
+                <h1>Top Fragrance Brand</h1>
+                <a href="#">View All Brands</a>
+                <div class="row gap-3 d-flex align-items-center justify-content-center mt-3">
+                    <div class="col-md-3 col-4 brand-item bg-light py-2">
+                        <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg" class="img-fluid mb-3 error-img"
+                            alt="Perfume" loading="lazy">
+                        <a href="#">Calvin Clein</a>
                     </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+                    <div class="col-md-3 col-4 brand-item bg-light py-2">
+                        <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg" class="img-fluid mb-3 error-img"
+                            alt="Perfume" loading="lazy">
+                        <a href="#">Calvin Clein</a>
+                    </div>
+                    <div class="col-md-3 col-4 brand-item bg-light py-2">
+                        <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg" class="img-fluid mb-3 error-img"
+                            alt="Perfume" loading="lazy">
+                        <a href="#">Calvin Clein</a>
+                    </div>
+                    <div class="col-md-3 col-4 brand-item bg-light py-2">
+                        <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg" class="img-fluid mb-3 error-img"
+                            alt="Perfume" loading="lazy">
+                        <a href="#">Calvin Clein</a>
+                    </div>
+                    <div class="col-md-3 col-4 brand-item bg-light py-2">
+                        <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg" class="img-fluid mb-3 error-img"
+                            alt="Perfume" loading="lazy">
+                        <a href="#">Calvin Clein</a>
+                    </div>
                 </div>
+                <button id="load-more"
+                    class="px-3 py-2 mt-3 border border-2 border-warning bg-warning text-light rounded-2">Load
+                    More</button>
             </div>
         </section>
-        <!-- men-category section end  -->
-        <!-- women-category section start  -->
-        <section class="category">
-            <div class="imgw">
-                <a href="">Women's Brand</a>
-            </div>
-            <div class="perfume">
-                <div class="swiper all-brand">
+        <!-- view all brands section end  -->
+
+        <!-- best sellers section start  -->
+        <section id="best-sellers" class="py-3">
+            <div class="text-center">
+                <h1>Best Sellers</h1>
+                <a href="#">See All</a>
+                <div class="swiper slider-for-all mx-4 mt-3">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
+                            <a href="#">
+                                <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg"
+                                    class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <h3>Calvin Clein</h3>
+                            </a>
                             <p>Price: 200</p>
                             <a href="#">Add to Cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
                         </div>
                         <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
+                            <a href="#">
+                                <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg"
+                                    class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <h3>Calvin Clein</h3>
+                            </a>
                             <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
+                            <a href="#">Add to Cart</a>
                         </div>
                         <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
+                            <a href="#">
+                                <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg"
+                                    class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+
+                                <h3>Calvin Clein</h3>
+                            </a>
                             <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
+                            <a href="#">Add to Cart</a>
                         </div>
                         <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
+                            <a href="#">
+                                <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg"
+                                    class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+
+                                <h3>Calvin Clein</h3>
+                            </a>
                             <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
+                            <a href="#">Add to Cart</a>
                         </div>
                         <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
+                            <a href="#">
+                                <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg"
+                                    class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+
+                                <h3>Calvin Clein</h3>
+                            </a>
                             <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
-                            <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
-                            <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
-                            <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="images/perfume.png" loading="lazy" alt="">
-                            <h3>Calvin Clein</h3>
-                            <p>Price: 200</p>
-                            <a href="#">Add to cart</a>
-                            <i class="fa-sharp fa-regular fa-heart"></i>
+                            <a href="#">Add to Cart</a>
                         </div>
                     </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next text-warning"></div>
+                    <div class="swiper-button-prev text-warning"></div>
                 </div>
             </div>
         </section>
-        <!-- women-category section end  -->
-        <!-- deal of the week section start-->
-        <section id="weekly-deals">
-            <div class="time">
-                <h1>Deal Of The Week</h1>
-                <h3>Product Name</h3>
-                <p>Price: 400 / Perfume</p>
-                <div class="timer-countdown">
-                    <div>
-                        <p id="days">00</p>
-                        <span>&nbsp;&nbsp;&nbsp;Days&nbsp;&nbsp;&nbsp;</span>
+        <!-- best sellers section end  -->
+
+        <!-- new arrivals section start  -->
+        <section id="new-arrivals" class="py-3">
+            <div class="text-center">
+                <h1>New Arrivals</h1>
+                <a href="#">See All</a>
+                <div class="swiper slider-for-all mx-4 mt-3">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg"
+                                    class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+
+                                <h3>Calvin Clein</h3>
+                            </a>
+                            <p>Price: 200</p>
+                            <a href="#">Add to Cart</a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg"
+                                    class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+
+                                <h3>Calvin Clein</h3>
+                            </a>
+                            <p>Price: 200</p>
+                            <a href="#">Add to Cart</a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg"
+                                    class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+
+                                <h3>Calvin Clein</h3>
+                            </a>
+                            <p>Price: 200</p>
+                            <a href="#">Add to Cart</a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg"
+                                    class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+
+                                <h3>Calvin Clein</h3>
+                            </a>
+                            <p>Price: 200</p>
+                            <a href="#">Add to Cart</a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg"
+                                    class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+
+                                <h3>Calvin Clein</h3>
+                            </a>
+                            <p>Price: 200</p>
+                            <a href="#">Add to Cart</a>
+                        </div>
                     </div>
-                    <div>
-                        <p id="hours">00</p>
-                        <span>&nbsp;&nbsp;Hours&nbsp;&nbsp;</span>
-                    </div>
-                    <div>
-                        <p id="minutes">00</p>
-                        <span>Minutes</span>
-                    </div>
-                    <div>
-                        <p id="seconds">00</p>
-                        <span>Seconds</span>
-                    </div>
+                    <div class="swiper-button-next text-warning"></div>
+                    <div class="swiper-button-prev text-warning"></div>
                 </div>
-                <a href="" id="deal-shop">Shop Now</a>
-            </div>
-            <div class="product-img">
-                <img src="images/perfume.png" loading="lazy" alt="">
             </div>
         </section>
-        <!-- deal of the week section start-->
-        <!-- special feature section start  -->
-        <section id="feature-list">
-            <div class="features">
-                <div class="feature-icon">
-                    <i class="fa-solid fa-truck"></i>
-                </div>
-                <div class="feature-advantage">
-                    <h1>Free Shipping</h1>
-                    <p>For all order</p>
+        <!-- new arrivals section end  -->
+
+        <!-- review section start  -->
+        <section id="reviews" class="py-3">
+            <div class="text-center">
+                <h1>Reviews</h1>
+                <div class="swiper slider-for-review mx-4 mt-3">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide review-bg p-3">
+                            <i class="fa-solid fa-user fs-3 text-warning border rounded-circle bg-white p-3"></i>
+                            <h5>Have made a dozen orders in past 6 months, It has been exceptionally great
+                                for what I was looking for. Great prices and selection.</h5>
+                            <p>XYZ</p>
+                        </div>
+                        <div class="swiper-slide review-bg p-3">
+                            <i class="fa-solid fa-user fs-3 text-warning border rounded-circle bg-white p-3"></i>
+                            <h5>Have made a dozen orders in past 6 months, It has been exceptionally great
+                                for what I was looking for. Great prices and selection.</h5>
+                            <p>XYZ</p>
+                        </div>
+                        <div class="swiper-slide review-bg p-3">
+                            <i class="fa-solid fa-user fs-3 text-warning border rounded-circle bg-white p-3"></i>
+                            <h5>Have made a dozen orders in past 6 months, It has been exceptionally great
+                                for what I was looking for. Great prices and selection.</h5>
+                            <p>XYZ</p>
+                        </div>
+                        <div class="swiper-slide review-bg p-3">
+                            <i class="fa-solid fa-user fs-3 text-warning border rounded-circle bg-white p-3"></i>
+                            <h5>Have made a dozen orders in past 6 months, It has been exceptionally great
+                                for what I was looking for. Great prices and selection.</h5>
+                            <p>XYZ</p>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next text-warning"></div>
+                    <div class="swiper-button-prev text-warning"></div>
                 </div>
             </div>
-            <div class="features">
-                <div class="feature-icon">
-                    <i class="fa-solid fa-clock"></i>
-                </div>
-                <div class="feature-advantage">
-                    <h1>Delivery On Time</h1>
-                    <p>If good have problems</p>
-                </div>
-            </div>
-            <div class="features">
-                <div class="feature-icon">
-                    <i class="fa-solid fa-credit-card"></i>
-                </div>
-                <div class="feature-advantage">
-                    <h1>Secure Payment</h1>
-                    <p>100% secure payment</p>
+        </section>
+        <!-- review section end  -->
+
+        <!-- top picks for you section start  -->
+        <section id="top-picks-for-you" class="py-3">
+            <div class="text-center">
+                <h1>Top picks for you</h1>
+                <div class="swiper slider-for-all mx-4 mt-3">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg"
+                                    class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <h3>Calvin Clein</h3>
+                            </a>
+                            <p>Price: 200</p>
+                            <a href="#">Add to Cart</a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg"
+                                    class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <h3>Calvin Clein</h3>
+                            </a>
+                            <p>Price: 200</p>
+                            <a href="#">Add to Cart</a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg"
+                                    class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <h3>Calvin Clein</h3>
+                            </a>
+                            <p>Price: 200</p>
+                            <a href="#">Add to Cart</a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg"
+                                    class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <h3>Calvin Clein</h3>
+                            </a>
+                            <p>Price: 200</p>
+                            <a href="#">Add to Cart</a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <img src="http://69.64.95.100/pcaimages/pricelist/I0085772.jpg"
+                                    class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <h3>Calvin Clein</h3>
+                            </a>
+                            <p>Price: 200</p>
+                            <a href="#">Add to Cart</a>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next text-warning"></div>
+                    <div class="swiper-button-prev text-warning"></div>
                 </div>
             </div>
         </section>
-        <!-- special feature section end  -->
-        <!-- Back To Top button section start  -->
-        <section>
-            <button id="myBtn" title="Go to top">&uarr;</button>
-        </section>
-        <!-- Back To Top button section end  -->
-        <!-- pwa update message section start  -->
-        <section>
-            <div id="snackbar">
-                <p><a id="reload">A new version of this app is available. Click here to update.</a></p>
-            </div>
-        </section>
-        <!-- pwa update message section end  -->
+        <!-- top picks for you section end  -->
+
     </main>
     <!-- main end  -->
-    <!-- footer start -->
-    <footer id="contact">
-        <div class="support-links">
-            <div class="links-info">
-                <h1><a href="#home">Website</a></h1>
-                <ul>
-                    <li><a>Phone: </a></li>
-                    <li><a href="mailto:">Email: </a></li>
-                    <li>
-                        <ul id="support-social-links">
-                            <li><a href="" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                            </li>
-                            <li><a href="" target="_blank" title="Instagram"><i
-                                        class="fa-brands fa-square-instagram"></i></a></li>
-                            <li><a href="" target="_blank" title="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
-                            <li><a href="" target="_blank" title="Youtube"><i class="fa-brands fa-youtube"></i></a></li>
-                            <li><a href="" target="_blank" title="Youtube"><i class="fa-brands fa-whatsapp"></i></a>
-                            </li>
-                        </ul>
-                    </li>
+
+    <!-- footer start  -->
+    <footer class="bg-dark pt-3">
+        <div class="mx-4">
+            <div class="row">
+                <div class="col-12 col-md-2 mb-3">
+                    <h5 class="text-light">Website Title</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="mailto:arafatakash5@gmail.com"
+                                class="nav-link p-0 text-light"><i class="fa-solid fa-envelope"></i></a></li>
+                        <li class="nav-item mb-2"><a href="tel:+8801798480941" class="nav-link p-0 text-light"><i
+                                    class="fa-solid fa-phone"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="col-12 col-md-2 mb-3">
+                    <h5 class="text-light">Navbar</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Top Fraggrance</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Best Seller</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">New Arrivals</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Reviews</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Top Picks For You</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-12 col-md-2 mb-3">
+                    <h5 class="text-light">Portals</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">User</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Admin</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Owner</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-5 offset-md-1 mb-3">
+                    <form>
+                        <h5 class="text-light">Subscribe to our newsletter</h5>
+                        <p class="text-light">Monthly digest of what's new and exciting from us.</p>
+                        <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                            <label for="newsletter1" class="visually-hidden">Email address</label>
+                            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                            <button class="btn btn-warning" type="button">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-sm-row justify-content-between pt-4 border-top align-items-center">
+                <p class="text-light">© <span class="update-year"></span> Company, Inc. All rights reserved.</p>
+                <ul class="list-unstyled d-flex">
+                    <li class="ms-3"><a class="text-warning fs-4" href="#" target="_blank" title="Facebook"><i
+                                class="fa-brands fa-facebook"></i></a></li>
+                    <li class="ms-3"><a class="text-warning fs-4" href="#" target="_blank" title="Instagram"><i
+                                class="fa-brands fa-square-instagram"></i></a></li>
+                    <li class="ms-3"><a class="text-warning fs-4" href="#" target="_blank" title="Twitter"><i
+                                class="fa-brands fa-twitter"></i></a></li>
+                    <li class="ms-3"><a class="text-warning fs-4" href="#" target="_blank" title="Youtube"><i
+                                class="fa-brands fa-youtube"></i></a></li>
                 </ul>
             </div>
-            <div class="links-info">
-                <h1><a>Navbar</a></h1>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="">Shop</a></li>
-                    <li><a href="">Collection </a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="login.html">Login</a></li>
-                </ul>
-            </div>
-            <div class="links-info">
-                <h1><a>Account</a></h1>
-                <ul>
-                    <li><a href="">My Account</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="">Shopping Cart </a></li>
-                </ul>
-            </div>
-            <div class="links-info">
-                <h1><a>Subscription</a></h1>
-                <p>Get E-mail updates about our latest shop and special offers.</p>
-                <form action="" autocomplete="off">
-                    <input type="email" name="" id="" placeholder="Example: abc@gmail.com"
-                        pattern="^([a-zA-Z0-9]|[a-z\.A-Z\.0-9]|[a-zA-Z\.a-zA-Z0-9])+@(gmail|yahoo)\.com$"
-                        title="Example: abc@gmail.com" maxlength="50" required>
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
-        </div>
-        <div class="rights">
-            <p> Copyright &copy 2023 - <span id="update-year"></span><a href="" target="_blank"> Website</a> All Rights
-                Reserved.</p>
         </div>
     </footer>
-    <!-- footer end -->
-    <!-- google translation link  -->
-    <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+    <!-- footer end  -->
+
+    <!-- bootstrap js link  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- external js link  -->
     <script src="js/index.js"></script>
-    <!-- swipper js  -->
+    <!-- swipper js link  -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <!-- swipper js source code for swipper content  -->
+    <!-- internal script link  -->
     <script>
-        // slideshow swipper 
-        const progressContent = document.querySelector(".autoplay-progress span");
-        const slideshowswiper = new Swiper(".slideshow", {
+        // swipper for top banners 
+        const slideshowswiper = new Swiper(".top-banner", {
             spaceBetween: 30,
             centeredSlides: true,
             autoplay: {
@@ -485,8 +401,33 @@
             }
         }
         );
-        // all brand swipper 
-        const allbrandswiper = new Swiper('.all-brand', {
+        // swipper for all brands 
+        const allbrandswiper = new Swiper('.slider-for-all', {
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                50: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                500: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                980: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                }
+            }
+        });
+        // swipper for reviews
+        const allreviewswiper = new Swiper('.slider-for-review', {
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
@@ -494,15 +435,15 @@
             breakpoints: {
                 50: {
                     slidesPerView: 1,
-                    spaceBetween: 20,
+                    spaceBetween: 15,
                 },
-                500: {
+                700: {
                     slidesPerView: 2,
-                    spaceBetween: 20,
+                    spaceBetween: 15,
                 },
                 980: {
-                    slidesPerView: 2,
-                    spaceBetween: 30,
+                    slidesPerView: 3,
+                    spaceBetween: 20,
                 },
                 1024: {
                     slidesPerView: 3,
@@ -510,45 +451,6 @@
                 }
             }
         });
-    </script>
-    <script>
-        // pwa installation updation 
-        // https://codyanhorn.tech/blog/pwa-reload-page-on-application-update
-        // every update requires the changes in cache name in sw.js file 
-        (function () {
-            // Track an updated flag and an activated flag.
-            // When both of these are flagged true the service worker was updated and activated.
-            let updated = false;
-            let activated = false;
-            navigator.serviceWorker.register('/sw.js').then(regitration => {
-                regitration.addEventListener("updatefound", () => {
-                    const worker = regitration.installing;
-                    worker.addEventListener('statechange', () => {
-                        if (worker.state === "activated") {
-                            // Here is when the activated state was triggered from the lifecycle of the service worker.
-                            // This will trigger on the first install and any updates.
-                            activated = true;
-                            checkUpdate();
-                        }
-                    });
-                });
-            });
-            navigator.serviceWorker.addEventListener('controllerchange', () => {
-                // This will be triggered when the service worker is replaced with a new one.
-                // It does not just reload the page right away, so to make sure it is fully activated using the checkUpdate function.
-                updated = true;
-                checkUpdate();
-            });
-            function checkUpdate() {
-                let snackbar = document.getElementById('snackbar');
-                if (activated && updated) {
-                    snackbar.classList.add('show');
-                    document.getElementById('reload').addEventListener('click', function () {
-                        window.location.reload();
-                    });
-                }
-            }
-        })();
     </script>
 </body>
 
