@@ -67,6 +67,13 @@ background-color: #fff;
 background-color: rgba(191,198,254,.25);
 }
 
+.error-img{
+    background-image: url(../images/loader-gif.gif)!important;
+    background-position: center!important;
+    background-repeat: no-repeat!important;
+    background-size: auto!important;
+}
+
 /* reviews section end  */
 
 .form-control:focus {

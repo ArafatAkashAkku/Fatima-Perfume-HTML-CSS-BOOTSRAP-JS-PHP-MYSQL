@@ -40,6 +40,13 @@ html {
     height: 100vh;
 }
 
+.error-img{
+    background-image: url(../images/loader-gif.gif)!important;
+    background-position: center!important;
+    background-repeat: no-repeat!important;
+    background-size: auto!important;
+}
+
 /* custom scrollbar section start */
 
 ::-webkit-scrollbar {

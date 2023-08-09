@@ -59,7 +59,7 @@ include("config.php");
                                 <a class="nav-link text-light" href="index.php#new-arrivals">New Arrivals</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" href="index.php#contact">Contact</a>
+                                <a class="nav-link text-light" href="#contact">Contact</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -124,10 +124,12 @@ include("config.php");
                                     }
                             ?>
                                     <div>
-                                        <input type="checkbox" name="designers[]" value="<?= $designerlist['id']; ?>" <?php if (in_array($designerlist['id'], $checked)) {
-                                                                                                                            echo "checked";
-                                                                                                                        } ?> />
-                                        <?= $designerlist['designer']; ?>
+                                        <label for="<?= $designerlist['designer']; ?>">
+                                            <input class="bg-warning" type="checkbox" id="<?= $designerlist['designer']; ?>" name="designers[]" value="<?= $designerlist['id']; ?>" <?php if (in_array($designerlist['id'], $checked)) {
+                                                                                                                                                                        echo "checked";
+                                                                                                                                                                    } ?> />
+                                            <?= $designerlist['designer']; ?>
+                                        </label>
                                     </div>
                             <?php
                                 }
@@ -146,20 +148,25 @@ include("config.php");
                     <div class="card-body row">
                         <?php
                         if (isset($_GET['designers'])) {
-                            $branchecked = [];
-                            $branchecked = $_GET['designers'];
-                            foreach ($branchecked as $rowbrand) {
+                            $designerschecked = [];
+                            $designerschecked = $_GET['designers'];
+                            foreach ($designerschecked as $rowbrand) {
                                 // echo $rowbrand;
-                                $products = "SELECT * FROM all_products_info WHERE brand_id IN ($rowbrand)";
+                                $products = "SELECT * FROM all_products_info WHERE designer_id IN ($rowbrand)";
                                 $products_run = mysqli_query($con, $products);
                                 if (mysqli_num_rows($products_run) > 0) {
                                     foreach ($products_run as $proditems) :
                         ?>
-                                        <div class="col-md-4 mt-3">
-                                            <div class="border p-2">
-                                                <h6><?= $proditems['designer']; ?></h6>
-                                            </div>
+                                        <div class="col-md-3 col-6 mt-3 text-center">
+                                        <div class="border border-warning p-2">
+                                            <img src="<?= $proditems['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                            <a href="#">
+                                                <h5><?= $proditems['designer']; ?></h5>
+                                            </a>
+                                            <p>Price:<?= $proditems['price']; ?></p>
+                                            <a href="#">Add to Cart</a>
                                         </div>
+                                    </div>
                                     <?php
                                     endforeach;
                                 }
@@ -172,7 +179,7 @@ include("config.php");
                                     ?>
                                     <div class="col-md-3 col-6 mt-3 text-center">
                                         <div class="border border-warning p-2">
-                                            <img src="images/perfume.png" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                            <img src="<?= $proditems['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
                                             <a href="#">
                                                 <h5><?= $proditems['designer']; ?></h5>
                                             </a>

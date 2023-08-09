@@ -2,15 +2,12 @@
 const errorImages = document.querySelectorAll(".error-img");
 errorImages.forEach((element) => {
     element.onerror = () => {
-        const defaultImage = "../images/No-Image.jpg";
-        element.src = defaultImage;
-        element.alt = "default";
+        element.alt = "No Image Available";
     }
 })
 
 // Auto update year 
 const yearUpdate = document.querySelectorAll(".update-year");
-
 yearUpdate.forEach((element) => {
     element.innerHTML = new Date().getFullYear();
 });
@@ -24,23 +21,22 @@ const navigationBar = document.querySelector(".navigation-header");
 
 // windows scroll function 
 window.onscroll = () => {
-        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-            navigationBar.style.position = "fixed";
-        } else {
-            navigationBar.style.position = "relative";
-        }
-    };
-
-
-    const filterClick = document.querySelector(".filter-click");
-    const filterShow = document.querySelector(".filter-show");
-
-
-    filterClick.onclick =()=>{
-        filterShow.classList.toggle("active");
-        if(filterShow.classList.contains("active")){
-            filterClick.innerHTML="Filter Search Remove";
-        }else{
-            filterClick.innerHTML="Filter Search Click";
-        }
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        navigationBar.style.position = "fixed";
+    } else {
+        navigationBar.style.position = "relative";
     }
+};
+
+// product search filter 
+const filterClick = document.querySelector(".filter-click");
+const filterShow = document.querySelector(".filter-show");
+
+filterClick.onclick = () => {
+    filterShow.classList.toggle("active");
+    if (filterShow.classList.contains("active")) {
+        filterClick.innerHTML = "Filter Search Remove";
+    } else {
+        filterClick.innerHTML = "Filter Search Click";
+    }
+}

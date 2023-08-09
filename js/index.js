@@ -18,9 +18,7 @@ loadButton.onclick = () => {
 const errorImages = document.querySelectorAll(".error-img");
 errorImages.forEach((element) => {
     element.onerror = () => {
-        const defaultImage = "../images/No-Image.jpg";
-        element.src = defaultImage;
-        element.alt = "default";
+        element.alt = "No Image Available";
     }
 })
 

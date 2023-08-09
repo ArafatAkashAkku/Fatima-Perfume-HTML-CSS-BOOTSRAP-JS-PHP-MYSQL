@@ -119,7 +119,7 @@ include("config.php");
                     while ($row = mysqli_fetch_array($ret)) {
                     ?>
                         <div class="col-md-3 col-4 brand-item bg-light py-2">
-                            <img src="images/perfume.png" class="img-fluid mb-3 error-img" alt="Perfume" loading="lazy">
+                            <img src="http://69.64.95.100/pcaimages/pricelist/I0090435.jpg" class="img-fluid mb-3 error-img" alt="Perfume" loading="lazy">
                             <a href="product_search_filter.php?designers%5B%5D=<?php
                                                                                 echo htmlentities($row["id"]);
                                                                                 ?>"><?php
@@ -144,11 +144,13 @@ include("config.php");
                 <div class="swiper slider-for-all mx-4 mt-3">
                     <div class="swiper-wrapper">
                         <?php
-                        $ret = mysqli_query($con, "select * from all_products_info");
+                        $ret = mysqli_query($con, "select * from all_products_info where visibility='bestsellers'");
                         while ($row = mysqli_fetch_array($ret)) {
                         ?>
                             <div class="swiper-slide">
-                                <img src="images/perfume.png" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <img src="<?php
+                                        echo htmlentities($row["product_image"]);
+                                        ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
                                 <a href="#">
                                     <h3><?php
                                         echo htmlentities($row["designer"]);
@@ -178,11 +180,13 @@ include("config.php");
                 <div class="swiper slider-for-all mx-4 mt-3">
                     <div class="swiper-wrapper">
                         <?php
-                        $ret = mysqli_query($con, "select * from all_products_info");
+                        $ret = mysqli_query($con, "select * from all_products_info where visibility='newarrivals'");
                         while ($row = mysqli_fetch_array($ret)) {
                         ?>
                             <div class="swiper-slide">
-                                <img src="images/perfume.png" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <img src="<?php
+                                        echo htmlentities($row["product_image"]);
+                                        ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
                                 <a href="#">
                                     <h3><?php
                                         echo htmlentities($row["designer"]);
@@ -241,16 +245,18 @@ include("config.php");
                 <div class="swiper slider-for-all mx-4 mt-3">
                     <div class="swiper-wrapper">
                         <?php
-                        $ret = mysqli_query($con, "select * from all_products_info");
-                        while ($row = mysqli_fetch_array($ret)) {
-                        ?>
-                            <div class="swiper-slide">
-                                <img src="images/perfume.png" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                <a href="#">
-                                    <h3><?php
-                                        echo htmlentities($row["designer"]);
-                                        ?></h3>
-                                </a>
+                       $ret = mysqli_query($con, "select * from all_products_info where visibility='toppicksfy'");
+                       while ($row = mysqli_fetch_array($ret)) {
+                       ?>
+                           <div class="swiper-slide">
+                               <img src="<?php
+                                       echo htmlentities($row["product_image"]);
+                                       ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                               <a href="#">
+                                   <h3><?php
+                                       echo htmlentities($row["designer"]);
+                                       ?></h3>
+                               </a>
                                 <p>Price: <?php
                                             echo htmlentities($row["price"]);
                                             ?></p>
