@@ -22,18 +22,5 @@ errorImages.forEach((element) => {
     }
 })
 
-// product search filter 
-const filterClick = document.querySelector(".filter-click");
-const filterShow = document.querySelector(".filter-show");
-
-filterClick.onclick = () => {
-    filterShow.classList.toggle("active");
-    if (filterShow.classList.contains("active")) {
-        filterClick.innerHTML = "Filter Search Remove";
-    } else {
-        filterClick.innerHTML = "Filter Search Click";
-    }
-}
-
 
 

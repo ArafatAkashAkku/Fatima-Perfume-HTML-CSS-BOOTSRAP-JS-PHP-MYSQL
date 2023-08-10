@@ -107,7 +107,7 @@ include("config.php");
                                             <div class="col-md-3 col-6 mt-3 text-center">
                                                 <div class="border border-warning p-2">
                                                     <img src="<?= $proditems['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                                    <a href="#">
+                                                    <a href="product_details.php?id=<?=$proditems['id'];?>">
                                                         <h5><?= $proditems['designer']; ?></h5>
                                                     </a>
                                                     <p>Price:<?= $proditems['price']; ?></p>
@@ -127,7 +127,7 @@ include("config.php");
                                         <div class="col-md-3 col-6 mt-3 text-center">
                                             <div class="border border-warning p-2">
                                                 <img src="<?= $proditems['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                                <a href="#">
+                                                <a href="product_details.php?id=<?=$proditems['id'];?>">
                                                     <h5><?= $proditems['designer']; ?></h5>
                                                 </a>
                                                 <p>Price:<?= $proditems['price']; ?></p>
@@ -157,9 +157,24 @@ include("config.php");
     <!-- bootstrap js link  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- external js link  -->
-    <script src="js/index.js"></script>
+    <!-- <script src="js/index.js"></script> -->
     <!-- swipper js link  -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+        // product search filter 
+        const filterClick = document.querySelector(".filter-click");
+        const filterShow = document.querySelector(".filter-show");
+
+        filterClick.onclick = () => {
+            console.log("clicked")
+            filterShow.classList.toggle("active");
+            if (filterShow.classList.contains("active")) {
+                filterClick.innerHTML = "Filter Search Remove";
+            } else {
+                filterClick.innerHTML = "Filter Search Click";
+            }
+        }
+    </script>
 </body>
 
 </html>

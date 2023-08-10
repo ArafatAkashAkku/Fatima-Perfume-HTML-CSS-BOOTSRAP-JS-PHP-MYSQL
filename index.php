@@ -1,5 +1,6 @@
 <?php
 include("config.php");
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,13 +43,16 @@ include("config.php");
             <div class="swiper top-banner">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="images/banner1.jpg" class="img-fluid error-img" alt="Banner">
+                        <img src="images/banner1.jpeg" class="img-fluid error-img banner-img" alt="Banner">
                     </div>
                     <div class="swiper-slide">
-                        <img src="images/banner2.jpg" class="img-fluid error-img" alt="Banner">
+                        <img src="images/banner2.jpeg" class="img-fluid error-img banner-img" alt="Banner">
                     </div>
                     <div class="swiper-slide">
-                        <img src="images/banner3.jpg" class="img-fluid error-img" alt="Banner">
+                        <img src="images/banner3.jpeg" class="img-fluid error-img banner-img" alt="Banner">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/banner4.jpeg" class="img-fluid error-img banner-img" alt="Banner">
                     </div>
                 </div>
                 <div class="swiper-button-next text-warning"></div>
@@ -89,7 +93,7 @@ include("config.php");
         <section id="best-sellers" class="py-3">
             <div class="text-center">
                 <h1>Best Sellers</h1>
-                <a href="#">See All</a>
+                <a href="product_search_filter.php">See All</a>
                 <div class="swiper slider-for-all mx-4 mt-3">
                     <div class="swiper-wrapper">
                         <?php
@@ -97,21 +101,31 @@ include("config.php");
                         while ($row = mysqli_fetch_array($ret)) {
                         ?>
                             <div class="swiper-slide">
-                                <img src="<?php
-                                            echo htmlentities($row["product_image"]);
-                                            ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                <a href="product_details.php?id=<?php
-                                        echo htmlentities($row["id"]);
-                                        ?>">
-                                    <h3><?php
-                                        echo htmlentities($row["designer"]);
-                                        ?></h3>
-                                </a>
+                                <form action="manage_cart.php" method="POST">
+                                    <img src="<?php
+                                                echo htmlentities($row["product_image"]);
+                                                ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                    <a href="product_details.php?id=<?php
+                                                                    echo htmlentities($row["id"]);
+                                                                    ?>">
+                                        <h3><?php
+                                            echo htmlentities($row["designer"]);
+                                            ?></h3>
+                                    </a>
 
-                                <p>Price: <?php
-                                            echo htmlentities($row["price"]);
-                                            ?></p>
-                                <a href="#">Add to Cart</a>
+                                    <p>Price: <?php
+                                                echo htmlentities($row["price"]);
+                                                ?></p>
+                                    <button class="btn btn-link" type="submit" name="Add_To_Cart">Add to Cart</button>
+                                    <input type="hidden" name="Item_Name" value="<?php
+                                                                                    echo htmlentities($row["designer"]);
+                                                                                    ?>">
+
+                                    <input type="hidden" name="Price" value="<?php
+                                                                                echo htmlentities($row["price"]);
+                                                                                ?>">
+
+                                </form>
                             </div>
                         <?php
                         }
@@ -128,7 +142,7 @@ include("config.php");
         <section id="new-arrivals" class="py-3">
             <div class="text-center">
                 <h1>New Arrivals</h1>
-                <a href="#">See All</a>
+                <a href="product_search_filter.php">See All</a>
                 <div class="swiper slider-for-all mx-4 mt-3">
                     <div class="swiper-wrapper">
                         <?php
@@ -140,8 +154,8 @@ include("config.php");
                                             echo htmlentities($row["product_image"]);
                                             ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
                                 <a href="product_details.php?id=<?php
-                                        echo htmlentities($row["id"]);
-                                        ?>">
+                                                                echo htmlentities($row["id"]);
+                                                                ?>">
                                     <h3><?php
                                         echo htmlentities($row["designer"]);
                                         ?></h3>
@@ -167,7 +181,7 @@ include("config.php");
             <div class="text-center">
                 <h1>Reviews</h1>
                 <div class="swiper slider-for-review mx-4 mt-3">
-                    <div class="swiper-wrapper">
+                    <div class="swiper-wrapper mb-5">
                         <?php
                         $ret = mysqli_query($con, "select * from frontpage_reviews");
                         while ($row = mysqli_fetch_array($ret)) {
@@ -187,6 +201,7 @@ include("config.php");
                     </div>
                     <div class="swiper-button-next text-warning"></div>
                     <div class="swiper-button-prev text-warning"></div>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
         </section>
@@ -207,8 +222,8 @@ include("config.php");
                                             echo htmlentities($row["product_image"]);
                                             ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
                                 <a href="product_details.php?id=<?php
-                                        echo htmlentities($row["id"]);
-                                        ?>">
+                                                                echo htmlentities($row["id"]);
+                                                                ?>">
                                     <h3><?php
                                         echo htmlentities($row["designer"]);
                                         ?></h3>
@@ -246,7 +261,7 @@ include("config.php");
     <script>
         // swipper for top banners 
         const slideshowswiper = new Swiper(".top-banner", {
-            spaceBetween: 30,
+            spaceBetween: 10,
             centeredSlides: true,
             autoplay: {
                 delay: 2500,
@@ -254,7 +269,7 @@ include("config.php");
             },
             pagination: {
                 el: ".swiper-pagination",
-                clickable: true
+                clickable: false
             },
             navigation: {
                 nextEl: ".swiper-button-next",
@@ -266,6 +281,10 @@ include("config.php");
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: false,
             },
             breakpoints: {
                 50: {
@@ -291,6 +310,10 @@ include("config.php");
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
             },
             breakpoints: {
                 50: {

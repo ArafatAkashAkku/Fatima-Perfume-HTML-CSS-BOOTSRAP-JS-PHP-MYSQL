@@ -30,7 +30,7 @@
                             <a class="nav-link text-light" href="login.php">Log In</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="">Cart</a>
+                            <a class="nav-link text-light" href="cart.php">Cart</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
