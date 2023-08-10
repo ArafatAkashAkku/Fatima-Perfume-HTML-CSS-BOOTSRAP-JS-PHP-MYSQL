@@ -1,5 +1,10 @@
 <?php
 include("config.php");
+
+$id = "";
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,30 +41,36 @@ include("config.php");
 
     <!-- main start  -->
     <main>
-
-        <div class="d-flex flex-column align-items-center justify-content-center p-5 bg-warning">
-            <div class="bg-light p-3 res-width">
-                <h2 class="text-muted text-center pt-2">Enter your login details</h2>
-                <form class="p-3" action="loginprocessing.php" method="POST" autocomplete="off">
-                    <div class="form-group py-2">
-                        <div class="input-field"> 
-                            <input type="email" name="useremail" placeholder="Enter your Email" required class="form-control px-3 py-2"> 
-                        </div>
-                    </div>
-                    <div class="form-group py-2">
-                        <div class="input-field">
-                            <input type="password" name="userpassword" placeholder="Enter your Password" required class="form-control px-3 py-2 "> 
-                        </div>
-                    </div>
-                        <button class="btn btn-width btn-outline-warning bg-warning text-dark" name="submit" value="submit">Log in</button>
-                    <div class="text-center mt-3 text-muted">Not a member? <a href="signup.php">Sign up</a></div>
-                    <div class="text-center mt-3 text-muted">
-                        <a href="#" id="forgot">Forgot Password?</a>
-                    </div>
-                </form>
+        <div class="row mx-4 mb-3">
+            <div class="col-sm-12 col-12 text-center">
+                <h4>Product Details</h4>
             </div>
+            <?php
+            $ret = mysqli_query($con, "select * from all_products_info where id='$id'");
+            while ($row = mysqli_fetch_array($ret)) {
+            ?>
+                <div class="col-sm-6 col-6">
+                    <img src="<?php
+                                echo htmlentities($row["product_image"]);
+                                ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                </div>
+                <div class="col-sm-6 col-6 d-flex flex-column justify-content-center gap-3">
+                    <h3><?php
+                        echo htmlentities($row["designer"]);
+                        ?></h3>
+                    <p>Price: <?php
+                                echo htmlentities($row["price"]);
+                                ?></p>
+                    <a href="">Add to Cart</a>
+                    <h6>Product Description</h6>
+                    <p><?php
+                                echo htmlentities($row["description"]);
+                                ?></p>
+                </div>
+            <?php
+            }
+            ?>
         </div>
-
     </main>
     <!-- main end  -->
 
@@ -73,7 +84,7 @@ include("config.php");
     <script src="js/index.js"></script>
     <!-- swipper js link  -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <!-- internal script link  -->
+
 </body>
 
 </html>

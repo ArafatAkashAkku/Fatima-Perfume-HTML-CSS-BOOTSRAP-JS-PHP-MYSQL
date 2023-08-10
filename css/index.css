@@ -22,11 +22,6 @@ html{
 
 /* html body end */
 
-.navigation-header {
-    width: 100%;
-    z-index: 1000;
-}
-
 /* view all brands section start  */
 
 #view-all-brands{
@@ -99,3 +94,47 @@ background-color: rgba(191,198,254,.25);
 }
 
 /* custom scrollbar section end */
+
+
+.btn-width {
+    width: 100% !important;
+}
+
+@media screen and (max-width:750px) {
+
+    .res-width {
+        width: 90vw !important;
+    }
+
+}
+
+
+
+.filter-click {
+    display: none;
+}
+
+.scroll-card {
+    overflow: scroll;
+    height: 100vh;
+}
+
+
+@media screen and (max-width:767px) {
+
+    .filter-click {
+        display: block;
+    }
+
+    .filter-show {
+        position: fixed;
+        z-index: 500;
+        top: 8vh;
+        left: -50%;
+    }
+
+    .filter-show.active {
+        left: 0;
+    }
+
+}
