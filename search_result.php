@@ -11,7 +11,7 @@ include("config.php");
     <!-- bootstrap css link  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- external css link  -->
-    <link rel="stylesheet" href="css/product_search_filter.css">
+    <link rel="stylesheet" href="css/search_result.css">
     <!-- swipper css link -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <!-- font awesome cdn 6.3.0 -->
@@ -72,7 +72,7 @@ include("config.php");
                                 </ul>
                             </li>
                         </ul>
-                        <form class="d-flex" role="search" action="search_result.php" method="GET" autocomplete="off">
+                        <form class="d-flex" role="search" action="" method="GET" autocomplete="off">
                             <input type="text" name="search" required value="<?php if (isset($_GET['search'])) {
                                                                                     echo $_GET['search'];
                                                                                 } ?>" class="form-control" placeholder="Search data">
@@ -90,114 +90,45 @@ include("config.php");
     <!-- main start  -->
     <main>
 
-        <div class="mx-4">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h4>Product Filter Search</h4>
-                    <h6 class="text-end text-decoration-underline filter-click">Filter Search Click</h6>
-                </div>
-                <!-- Brand List  -->
-                <div class="col-md-3 col-6 filter-show">
-                    <form action="" method="GET">
-                        <div class="card shadow mt-3">
-                            <div class="card-header bg-light">
-                                <h5>Filter
-                                    <button type="submit" class="btn btn-warning btn-sm float-end">Search</button>
-                                </h5>
-                                <div class="d-flex align-items-center justify-content-between mt-3">
-                                    <h6>Brand List</h6>
-                                    <a href="product_search_filter.php" class="text-decoration-none text-dark">
-                                        <h6>Clear List</h6>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body scroll-card">
-                                <?php
-                                $product_designer_info_query = "SELECT * FROM product_designer_info";
-                                $product_designer_info_query_run  = mysqli_query($con, $product_designer_info_query);
+        <div class="card-body row mx-4 mb-3">
+            <div class="col-12 mt-3 text-center">
+                <h4>Search Results For <?php if (isset($_GET['search'])) {
+                                            echo $_GET['search'];
+                                        } ?></h4>
+            </div>
+            <?php
+            if (isset($_GET['search'])) {
+                $filtervalues = $_GET['search'];
+                $query = "SELECT * FROM all_products_info WHERE CONCAT(designer,description) LIKE '%$filtervalues%' ";
+                $query_run = mysqli_query($con, $query);
 
-                                if (mysqli_num_rows($product_designer_info_query_run) > 0) {
-                                    foreach ($product_designer_info_query_run as $designerlist) {
-                                        $checked = [];
-                                        if (isset($_GET['designers'])) {
-                                            $checked = $_GET['designers'];
-                                        }
-                                ?>
-                                        <div>
-                                            <label for="<?= $designerlist['designer']; ?>">
-                                                <input class="bg-warning" type="checkbox" id="<?= $designerlist['designer']; ?>" name="designers[]" value="<?= $designerlist['id']; ?>" <?php if (in_array($designerlist['id'], $checked)) {
-                                                                                                                                                                                            echo "checked";
-                                                                                                                                                                                        } ?> />
-                                                <?= $designerlist['designer']; ?>
-                                            </label>
-                                        </div>
-                                <?php
-                                    }
-                                } else {
-                                    echo "No Brands Found";
-                                }
-                                ?>
+                if (mysqli_num_rows($query_run) > 0) {
+                    foreach ($query_run as $items) {
+            ?>
+                        <div class="col-md-4 col-6 mt-3 text-center">
+                            <div class="border border-warning p-2">
+                                <img src="<?= $items['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <a href="#">
+                                    <h5><?= $items['designer']; ?></h5>
+                                </a>
+                                <p>Price:<?= $items['price']; ?></p>
+                                <a href="#">Add to Cart</a>
                             </div>
                         </div>
-                    </form>
-                </div>
-
-                <!-- Brand Product Item List -->
-                <div class="col-md-9 col-12 mt-3">
-                    <div class="card ">
-                        <div class="card-body row">
-                            <?php
-                            if (isset($_GET['designers'])) {
-                                $designerschecked = [];
-                                $designerschecked = $_GET['designers'];
-                                foreach ($designerschecked as $rowbrand) {
-                                    // echo $rowbrand;
-                                    $products = "SELECT * FROM all_products_info WHERE designer_id IN ($rowbrand)";
-                                    $products_run = mysqli_query($con, $products);
-                                    if (mysqli_num_rows($products_run) > 0) {
-                                        foreach ($products_run as $proditems) :
-                            ?>
-                                            <div class="col-md-3 col-6 mt-3 text-center">
-                                                <div class="border border-warning p-2">
-                                                    <img src="<?= $proditems['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                                    <a href="#">
-                                                        <h5><?= $proditems['designer']; ?></h5>
-                                                    </a>
-                                                    <p>Price:<?= $proditems['price']; ?></p>
-                                                    <a href="#">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                        <?php
-                                        endforeach;
-                                    }
-                                }
-                            } else {
-                                $products = "SELECT * FROM all_products_info";
-                                $products_run = mysqli_query($con, $products);
-                                if (mysqli_num_rows($products_run) > 0) {
-                                    foreach ($products_run as $proditems) :
-                                        ?>
-                                        <div class="col-md-3 col-6 mt-3 text-center">
-                                            <div class="border border-warning p-2">
-                                                <img src="<?= $proditems['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                                <a href="#">
-                                                    <h5><?= $proditems['designer']; ?></h5>
-                                                </a>
-                                                <p>Price:<?= $proditems['price']; ?></p>
-                                                <a href="#">Add to Cart</a>
-                                            </div>
-                                        </div>
-                            <?php
-                                    endforeach;
-                                } else {
-                                    echo "No Items Found";
-                                }
-                            }
-                            ?>
+                    <?php
+                    }
+                } else {
+                    ?>
+                    <div class="col-12 mt-3 text-center">
+                        <div class="border border-warning p-2">
+                            <h5><?php echo "No Items Found"; ?></h5>
                         </div>
                     </div>
-                </div>
-            </div>
+            <?php
+
+                }
+            }
+            ?>
         </div>
 
     </main>
@@ -232,11 +163,11 @@ include("config.php");
                     <div class="col-12 col-md-2 mb-3">
                         <h5 class="text-light">Navbar</h5>
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="index.php#view-all-brands" class="nav-link p-0 text-light">Top Fraggrance</a></li>
-                            <li class="nav-item mb-2"><a href="index.php#best-sellers" class="nav-link p-0 text-light">Best Seller</a></li>
-                            <li class="nav-item mb-2"><a href="index.php#new-arrivals" class="nav-link p-0 text-light">New Arrivals</a></li>
-                            <li class="nav-item mb-2"><a href="index.php#reviews" class="nav-link p-0 text-light">Reviews</a></li>
-                            <li class="nav-item mb-2"><a href="index.php#top-picks-for-you" class="nav-link p-0 text-light">Top Picks For You</a></li>
+                            <li class="nav-item mb-2"><a href="#view-all-brands" class="nav-link p-0 text-light">Top Fraggrance</a></li>
+                            <li class="nav-item mb-2"><a href="#best-sellers" class="nav-link p-0 text-light">Best Seller</a></li>
+                            <li class="nav-item mb-2"><a href="#new-arrivals" class="nav-link p-0 text-light">New Arrivals</a></li>
+                            <li class="nav-item mb-2"><a href="#reviews" class="nav-link p-0 text-light">Reviews</a></li>
+                            <li class="nav-item mb-2"><a href="#top-picks-for-you" class="nav-link p-0 text-light">Top Picks For You</a></li>
                         </ul>
                     </div>
 
@@ -289,9 +220,10 @@ include("config.php");
     <!-- bootstrap js link  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- external js link  -->
-    <script src="js/product_search_filter.js"></script>
+    <script src="js/search_result.js"></script>
     <!-- swipper js link  -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <!-- internal script link  -->
 </body>
 
 </html>

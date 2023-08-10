@@ -68,12 +68,14 @@ include("config.php");
                                 <ul class="dropdown-menu bg-dark">
                                     <li><a class="dropdown-item text-light bg-dark" href="#">My Account</a></li>
                                     <li><a class="dropdown-item text-light bg-dark" href="#">My Cart</a></li>
-                                    <li><a class="dropdown-item text-light bg-dark" href="#">Log In</a></li>
+                                    <li><a class="dropdown-item text-light bg-dark" href="login.php">Log In</a></li>
                                 </ul>
                             </li>
                         </ul>
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <form class="d-flex" role="search" action="search_result.php" method="GET" autocomplete="off">
+                            <input type="text" name="search" required value="<?php if (isset($_GET['search'])) {
+                                                                                    echo $_GET['search'];
+                                                                                } ?>" class="form-control" placeholder="Search data">
                             <button class="btn btn-outline-warning" type="submit">Search</button>
                         </form>
                     </div>
@@ -149,8 +151,8 @@ include("config.php");
                         ?>
                             <div class="swiper-slide">
                                 <img src="<?php
-                                        echo htmlentities($row["product_image"]);
-                                        ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                            echo htmlentities($row["product_image"]);
+                                            ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
                                 <a href="#">
                                     <h3><?php
                                         echo htmlentities($row["designer"]);
@@ -185,8 +187,8 @@ include("config.php");
                         ?>
                             <div class="swiper-slide">
                                 <img src="<?php
-                                        echo htmlentities($row["product_image"]);
-                                        ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                            echo htmlentities($row["product_image"]);
+                                            ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
                                 <a href="#">
                                     <h3><?php
                                         echo htmlentities($row["designer"]);
@@ -245,18 +247,18 @@ include("config.php");
                 <div class="swiper slider-for-all mx-4 mt-3">
                     <div class="swiper-wrapper">
                         <?php
-                       $ret = mysqli_query($con, "select * from all_products_info where visibility='toppicksfy'");
-                       while ($row = mysqli_fetch_array($ret)) {
-                       ?>
-                           <div class="swiper-slide">
-                               <img src="<?php
-                                       echo htmlentities($row["product_image"]);
-                                       ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                               <a href="#">
-                                   <h3><?php
-                                       echo htmlentities($row["designer"]);
-                                       ?></h3>
-                               </a>
+                        $ret = mysqli_query($con, "select * from all_products_info where visibility='toppicksfy'");
+                        while ($row = mysqli_fetch_array($ret)) {
+                        ?>
+                            <div class="swiper-slide">
+                                <img src="<?php
+                                            echo htmlentities($row["product_image"]);
+                                            ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <a href="#">
+                                    <h3><?php
+                                        echo htmlentities($row["designer"]);
+                                        ?></h3>
+                                </a>
                                 <p>Price: <?php
                                             echo htmlentities($row["price"]);
                                             ?></p>
@@ -292,13 +294,13 @@ include("config.php");
                             <li class="nav-item mb-2"><a href="mailto:<?php
                                                                         echo htmlentities($row["email"]);
                                                                         ?>" class="nav-link p-0 text-light"><i class="fa-solid fa-envelope text-warning pe-2"></i><?php
-                                                                                                                                                            echo htmlentities($row["email"]);
-                                                                                                                                                            ?></a></li>
+                                                                                                                                                                    echo htmlentities($row["email"]);
+                                                                                                                                                                    ?></a></li>
                             <li class="nav-item mb-2"><a href="tel:<?php
                                                                     echo htmlentities($row["phone_no"]);
                                                                     ?>" class="nav-link p-0 text-light"><i class="fa-solid fa-phone text-warning pe-2"></i><?php
-                                                                                                                                                    echo htmlentities($row["phone_no"]);
-                                                                                                                                                    ?></a></li>
+                                                                                                                                                            echo htmlentities($row["phone_no"]);
+                                                                                                                                                            ?></a></li>
                         </ul>
                     </div>
 
