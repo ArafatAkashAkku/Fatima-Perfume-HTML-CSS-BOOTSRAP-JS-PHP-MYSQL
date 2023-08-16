@@ -1,6 +1,7 @@
 <?php
 
 include("config.php");
+session_start();
 
 ?>
 
@@ -46,20 +47,20 @@ include("config.php");
                 <form class="p-3" action="signupprocessing.php" method="POST" autocomplete="off">
                     <div class="form-group py-2">
                         <div class="input-field">
-                            <input type="test" name="username" placeholder="Enter your Name" required class="form-control px-3 py-2">
+                            <input type="text" name="fullname" placeholder="Enter your full name" required class="form-control px-3 py-2">
                         </div>
                     </div>
                     <div class="form-group py-2">
                         <div class="input-field">
-                            <input type="email" name="useremail" placeholder="Enter your Email" required class="form-control px-3 py-2">
+                            <input type="email" name="useremail" placeholder="Enter your email" required class="form-control px-3 py-2">
                         </div>
                     </div>
                     <div class="form-group py-2">
                         <div class="input-field">
-                            <input type="password" name="userpassword" placeholder="Enter your Password" required class="form-control px-3 py-2 ">
+                            <input type="password" name="userpassword" placeholder="Enter your password" required class="form-control px-3 py-2 ">
                         </div>
                     </div>
-                    <button class="btn btn-width btn-outline-warning bg-warning text-dark" name="submit" value="submit">Sign Up</button>
+                    <button class="btn btn-width btn-outline-warning bg-warning text-dark" name="submit" type="submit">Sign Up</button>
                     <div class="text-center mt-3 text-muted">Already a member? <a href="login.php">Sign In</a></div>
                     <div class="text-center mt-3 text-muted">
                         <a href="#" id="forgot">Forgot Password?</a>

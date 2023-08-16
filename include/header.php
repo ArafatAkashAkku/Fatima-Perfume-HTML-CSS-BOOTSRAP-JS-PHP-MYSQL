@@ -20,15 +20,41 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active text-light" aria-current="page" href="index.php">Home</a>
-                        </li>
+                        <?php
+                        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
+                        ?>
+                            <li class="nav-item">
+                                <a class="nav-link active text-light" aria-current="page">Welcome <span class="text-warning"><?php echo $_SESSION['full_name']; ?></span></a>
+                            </li>
+                        <?php
+                        } else {
+                        ?>
+                            <li class="nav-item">
+                                <a class="nav-link active text-light" aria-current="page">Welcome</a>
+                            </li>
+                        <?php
+                        }
+                        ?>
                         <li class="nav-item">
                             <a class="nav-link text-light" href="">My Account</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="login.php">Log In</a>
-                        </li>
+                        <?php
+                        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
+                        ?>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="logout.php">Log Out</a>
+
+                            </li>
+                        <?php
+                        } else {
+                        ?>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="login.php">Log In</a>
+
+                            </li>
+                        <?php
+                        }
+                        ?>
                         <li class="nav-item">
                             <a class="nav-link text-light" href="cart.php">Cart</a>
                         </li>

@@ -53,7 +53,7 @@ session_start();
                             <input type="password" name="userpassword" placeholder="Enter your Password" required class="form-control px-3 py-2 "> 
                         </div>
                     </div>
-                        <button class="btn btn-width btn-outline-warning bg-warning text-dark" name="submit" value="submit">Log in</button>
+                        <button class="btn btn-width btn-outline-warning bg-warning text-dark" name="submit" type="submit">Log in</button>
                     <div class="text-center mt-3 text-muted">Not a member? <a href="signup.php">Sign up</a></div>
                     <div class="text-center mt-3 text-muted">
                         <a href="#" id="forgot">Forgot Password?</a>

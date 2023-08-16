@@ -2,81 +2,50 @@
 session_start();
 include("config.php");
 
-if (isset($_POST['useremail']) && isset($_POST['userpassword'])) {
-
-    function validate($data){
-
-       $data = trim($data);
-
-       $data = stripslashes($data);
-
-       $data = htmlspecialchars($data);
-
-       return $data;
-
-    }
-
-    $useremail = validate($_POST['useremail']);
-
-    $userpassword = validate($_POST['userpassword']);
-
-    if (empty($useremail)) {
-
-        header("Location: login.php?error=Email is required");
-        exit();
-
-    }else if(empty($userpassword)){
-
-        header("Location: login.php?error=Password is required");
-
-        exit();
-
-    }else{
-
-        $sql = "SELECT * FROM user_info WHERE user_email='$useremail' AND user_password='$userpassword'";
-
-        $result = mysqli_query($con, $sql);
-
-        if (mysqli_num_rows($result) === 1) {
-
-            $row = mysqli_fetch_assoc($result);
-
-            if ($row['user_email'] === $useremail && $row['user_password'] === $userpassword) {
-
-                echo "Logged in!";
-
-                $_SESSION['user_email'] = $row['user_email'];
-
-                $_SESSION['user_name'] = $row['user_name'];
-
-                $_SESSION['id'] = $row['id'];
-
-                header("Location: home.php");
-
-                exit();
-
-            }else{
-
-                header("Location: login.php?error=Incorect email or password");
-
-                exit();
-
-            }
-
-        }else{
-
-            header("Location: login.php?error=Incorect email or password");
-
-            exit();
-
+if (isset($_POST['submit'])) {
+    $query = " SELECT * FROM `user_info` WHERE `user_email`='$_POST[useremail]'";
+    $result = mysqli_query($con, $query);
+    if ($result) {
+        if (mysqli_num_rows($result) == 1)
+         {
+            $result_fetch = mysqli_fetch_assoc($result);
+            if ($result_fetch['verified'] == 1) {
+                if (password_verify($_POST['userpassword'], $result_fetch['user_password'])) {
+                    $_SESSION['logged_in'] = true;
+                    $_SESSION['user_email'] = $result_fetch['user_email'];
+                    $_SESSION['full_name'] = $result_fetch['full_name'];
+                    header("location:index.php");
+                } else {
+                    echo "
+                <script>
+              alert('Incorrect password);
+                window.location.href='login.php';
+               </script>
+                  ";
+                }
+               } else 
+               {
+                echo "
+      <script>
+      alert('Email not verified check your email);
+      window.location.href='login.php';
+      </script>
+      ";
+               }
+        } else {
+            echo "
+      <script>
+      alert('Email not registered);
+      window.location.href='signup.php';
+      </script>
+      ";
         }
-
+    } else {
+        echo "
+      <script>
+      alert('Can not run query');
+      window.location.href='login.php';
+      </script>
+      ";
     }
-
-}else{
-
-    header("Location: login.php");
-
-    exit();
-
 }

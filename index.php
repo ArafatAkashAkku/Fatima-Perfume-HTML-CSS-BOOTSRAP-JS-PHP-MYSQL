@@ -73,7 +73,7 @@ session_start();
                     ?>
                         <div class="col-md-3 col-4 brand-item bg-light py-2">
                             <img src="http://69.64.95.100/pcaimages/pricelist/I0090435.jpg" class="img-fluid mb-3 error-img" alt="Perfume" loading="lazy">
-                            <a href="product_search_filter.php?designers%5B%5D=<?php
+                            <a class="text-dark" href="product_search_filter.php?designers%5B%5D=<?php
                                                                                 echo htmlentities($row["id"]);
                                                                                 ?>"><?php
                                                                                     echo htmlentities($row["designer"]);
@@ -105,7 +105,7 @@ session_start();
                                     <img src="<?php
                                                 echo htmlentities($row["product_image"]);
                                                 ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                    <a href="product_details.php?id=<?php
+                                    <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
                                                                     echo htmlentities($row["id"]);
                                                                     ?>">
                                         <h3><?php
@@ -153,7 +153,7 @@ session_start();
                                 <img src="<?php
                                             echo htmlentities($row["product_image"]);
                                             ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                <a href="product_details.php?id=<?php
+                                <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
                                                                 echo htmlentities($row["id"]);
                                                                 ?>">
                                     <h3><?php
@@ -221,7 +221,7 @@ session_start();
                                 <img src="<?php
                                             echo htmlentities($row["product_image"]);
                                             ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                <a href="product_details.php?id=<?php
+                                <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
                                                                 echo htmlentities($row["id"]);
                                                                 ?>">
                                     <h3><?php

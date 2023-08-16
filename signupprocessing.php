@@ -1,43 +1,97 @@
-<?php 
+<?php
 
 include("config.php");
+session_start();
 
-  if (isset($_POST['submit'])) {
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-    $username = $_POST['username'];
+function sendMail($email, $v_code)
+{
+require("PHPMailer/PHPMailer.php");
+require("PHPMailer/SMTP.php");
+require("PHPMailer/Exception.php");
 
-    $useremail = $_POST['useremail'];
+$mail = new PHPMailer(true);
+try {                 
+  $mail->isSMTP();                                            //Send using SMTP
+  $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+  $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+  $mail->Username   = 'arafatakash5@gmail.com';                     //SMTP username
+  $mail->Password   = 'evlqvmxfagsegkud';                               //SMTP password
+  $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+  $mail->Port       = 465;                                    //TCP port to connect to; use 587 if 
 
-    $userpassword = $_POST['userpassword'];
+  //Recipients
+  $mail->setFrom('arafatakash5@gmail.com', 'Akash');
+  $mail->addAddress($email);     //Add a recipient
 
-    $sql = "INSERT INTO `user_info`(`user_email`, `user_password`, `user_name`) 
+  //Content
+  $mail->isHTML(true);                                  //Set email format to HTML
+  $mail->Subject = 'Email Verification for Fatima Perfumes';
+  $mail->Body    = "Thanks for registration <br>
+  click the link below to verify your email address <a href='http://localhost/perfume/verify.php?user_email=$email&v_code=$v_code'>Verifiy</a>";
 
-           VALUES ('$useremail','$userpassword','$username')";
+  $mail->send();
+  return true;
+} catch (Exception $e) {
+ return false;
+}
+}
 
-    $result = $con->query($sql);
 
-    if ($result == TRUE) {
-
-        header("Location: login.php?Account Created Successfully");
-
-        exit();
-        ?>
+if (isset($_POST['submit'])) {
+  $user_exist_query = "SELECT * from `user_info` WHERE `user_email`='$_POST[useremail]' AND `verified`=1";
+  $result = mysqli_query($con, $user_exist_query);
+  if ($result) {
+    if (mysqli_num_rows($result) > 0) {
+      $result_fetch = mysqli_fetch_assoc($result);
+      if ($result_fetch['user_email'] == $_POST['useremail']) {
+        echo "
+         <script>
+         alert('$result_fetch[user_email] - Email already taken');
+         window.location.href='signup.php';
+         </script>
+         ";
+      }
+      else{
+        echo "
         <script>
-            alert("Account Created Successfully")
+        alert('$result_fetch[user_email] - Email available for registration');
         </script>
+    ";
+      }
+    } else {
+      $v_code = bin2hex(random_bytes(16));
+      $password = password_hash($_POST['userpassword'],PASSWORD_BCRYPT);
+      $query = "INSERT INTO `user_info`(`user_email`, `user_password`,`full_name`,`v_code`,`verified`) VALUES ('$_POST[useremail]','$password','$_POST[fullname]', '$v_code','0')";
+      if(mysqli_query($con,$query) && sendMail($_POST['useremail'],$v_code))
+      {
+        echo "
+        <script>
+        alert('Registration successful. Please check your email');
+        window.location.href='login.php';
+        </script>
+        ";
 
-        <?php
-
-    }else{
-
-        header("Location: login.php?Error Occured");
-
-        exit();
-
+      }else{
+        echo "
+        <script>
+        alert('Server Down');
+        window.location.href='signup.php';
+        </script>
+        ";
+      }
     }
+  } else {
+    echo "
+      <script>
+      alert('Can not run query');
+      window.location.href='signup.php';
+      </script>
+      ";
+  }
+}
 
-    $con->close();
-
-  } 
-
-?> 
+?>
