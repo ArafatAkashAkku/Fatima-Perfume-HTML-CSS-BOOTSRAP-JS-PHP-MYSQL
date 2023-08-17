@@ -21,7 +21,7 @@ session_start();
     <!-- favicon link  -->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <!-- website title  -->
-    <title>
+    <title>Product Search Filter |
         <?php
         $ret = mysqli_query($con, "select * from website_info");
         while ($row = mysqli_fetch_array($ret)) {
@@ -108,7 +108,7 @@ session_start();
                             ?>
                                             <div class="col-md-3 col-6 mt-3 text-center">
                                                 <div class="border border-warning p-2">
-                                                    <img src="<?= $proditems['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                                    <img src="images/products/<?= $proditems['id']; ?>/<?= $proditems['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
                                                     <a href="product_details.php?id=<?=$proditems['id'];?>">
                                                         <h5><?= $proditems['designer']; ?></h5>
                                                     </a>
@@ -128,7 +128,7 @@ session_start();
                                         ?>
                                         <div class="col-md-3 col-6 mt-3 text-center">
                                             <div class="border border-warning p-2">
-                                                <img src="<?= $proditems['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                                <img src="images/products/<?= $proditems['id']; ?>/<?= $proditems['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
                                                 <a href="product_details.php?id=<?=$proditems['id'];?>">
                                                     <h5><?= $proditems['designer']; ?></h5>
                                                 </a>

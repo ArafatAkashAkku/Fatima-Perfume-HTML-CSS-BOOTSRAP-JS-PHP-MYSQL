@@ -24,15 +24,14 @@ try {
   $mail->Port       = 465;                                    //TCP port to connect to; use 587 if 
 
   //Recipients
-  $mail->setFrom('arafatakash5@gmail.com', 'Akash');
+  $mail->setFrom('arafatakash5@gmail.com', 'Fatima Perfumes & Gift Inc');
   $mail->addAddress($email);     //Add a recipient
 
   //Content
   $mail->isHTML(true);                                  //Set email format to HTML
-  $mail->Subject = 'Email Verification for Fatima Perfumes';
-  $mail->Body    = "Thanks for registration <br>
-  click the link below to verify your email address <a href='http://localhost/perfume/verify.php?user_email=$email&v_code=$v_code'>Verifiy</a>";
-
+  $mail->Subject = 'Email Verification for Fatima Perfumes & Gift Inc';
+  $mail->Body    = "Thanks for your registration. <br>
+  Click the link below to verify your email address <a href='http://localhost/perfume/verify.php?email=$email&v_code=$v_code'>Verifiy</a>";
   $mail->send();
   return true;
 } catch (Exception $e) {
@@ -42,15 +41,15 @@ try {
 
 
 if (isset($_POST['submit'])) {
-  $user_exist_query = "SELECT * from `user_info` WHERE `user_email`='$_POST[useremail]' AND `verified`=1";
+  $user_exist_query = "SELECT * from `user_info` WHERE `email`='$_POST[email]' AND `verified`=1";
   $result = mysqli_query($con, $user_exist_query);
   if ($result) {
     if (mysqli_num_rows($result) > 0) {
       $result_fetch = mysqli_fetch_assoc($result);
-      if ($result_fetch['user_email'] == $_POST['useremail']) {
+      if ($result_fetch['email'] == $_POST['email']) {
         echo "
          <script>
-         alert('$result_fetch[user_email] - Email already taken');
+         alert('$result_fetch[email] - Email already taken');
          window.location.href='signup.php';
          </script>
          ";
@@ -58,15 +57,15 @@ if (isset($_POST['submit'])) {
       else{
         echo "
         <script>
-        alert('$result_fetch[user_email] - Email available for registration');
+        alert('$result_fetch[email] - Email available for registration');
         </script>
     ";
       }
     } else {
       $v_code = bin2hex(random_bytes(16));
-      $password = password_hash($_POST['userpassword'],PASSWORD_BCRYPT);
-      $query = "INSERT INTO `user_info`(`user_email`, `user_password`,`full_name`,`v_code`,`verified`) VALUES ('$_POST[useremail]','$password','$_POST[fullname]', '$v_code','0')";
-      if(mysqli_query($con,$query) && sendMail($_POST['useremail'],$v_code))
+      $password = password_hash($_POST['password'],PASSWORD_BCRYPT);
+      $query = "INSERT INTO `user_info`(`email`, `password`,`fullname`,`v_code`,`verified`) VALUES ('$_POST[email]','$password','$_POST[fullname]', '$v_code','0')";
+      if(mysqli_query($con,$query) && sendMail($_POST['email'],$v_code))
       {
         echo "
         <script>
@@ -88,7 +87,7 @@ if (isset($_POST['submit'])) {
     echo "
       <script>
       alert('Can not run query');
-      window.location.href='signup.php';
+      window.location.href='index.php';
       </script>
       ";
   }

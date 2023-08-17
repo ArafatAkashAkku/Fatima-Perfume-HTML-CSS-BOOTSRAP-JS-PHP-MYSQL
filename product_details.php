@@ -26,7 +26,7 @@ if (isset($_GET["id"])) {
     <!-- favicon link  -->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <!-- website title  -->
-    <title>
+    <title>Product Details |
         <?php
         $ret = mysqli_query($con, "select * from website_info");
         while ($row = mysqli_fetch_array($ret)) {
@@ -53,15 +53,17 @@ if (isset($_GET["id"])) {
             while ($row = mysqli_fetch_array($ret)) {
             ?>
                 <div class="col-sm-6 col-6">
-                    <img src="<?php
-                                echo htmlentities($row["product_image"]);
-                                ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                    <img src="images/products/<?php
+                                                echo htmlentities($row['id']);
+                                                ?>/<?php
+                                                echo htmlentities($row['product_image']);
+                                                ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
                 </div>
                 <div class="col-sm-6 col-6 d-flex flex-column justify-content-center gap-3">
                     <h3><?php
                         echo htmlentities($row["designer"]);
                         ?></h3>
-                    <p>Price: <?php
+                    <p>Price: $<?php
                                 echo htmlentities($row["price"]);
                                 ?></p>
                     <a href="">Add to Cart</a>

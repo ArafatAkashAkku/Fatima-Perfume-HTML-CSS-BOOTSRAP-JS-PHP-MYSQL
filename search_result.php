@@ -21,7 +21,7 @@ session_start();
     <!-- favicon link  -->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <!-- website title  -->
-    <title>
+    <title>Search Result |
         <?php
         $ret = mysqli_query($con, "select * from website_info");
         while ($row = mysqli_fetch_array($ret)) {
@@ -56,8 +56,10 @@ session_start();
             ?>
                         <div class="col-md-4 col-6 mt-3 text-center">
                             <div class="border border-warning p-2">
-                                <img src="<?= $items['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                <a href="#">
+                                <img src="images/products/<?= $items['id']; ?>/<?= $items['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <a  href="product_details.php?id=<?php
+                                                                    echo htmlentities($items["id"]);
+                                                                    ?>">
                                     <h5><?= $items['designer']; ?></h5>
                                 </a>
                                 <p>Price:<?= $items['price']; ?></p>

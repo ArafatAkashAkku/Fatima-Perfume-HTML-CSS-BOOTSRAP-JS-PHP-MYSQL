@@ -59,7 +59,7 @@
             <div class="d-flex flex-column flex-sm-row justify-content-between pt-4 border-top align-items-center">
                 <p class="text-light">© <span class="update-year"></span> <?php
                                             echo htmlentities($row["website_name"]);
-                                            ?>, Inc. All rights reserved.</p>
+                                            ?>. All rights reserved.</p>
                 <ul class="list-unstyled d-flex">
                     <li class="ms-3"><a class="text-warning fs-4" href="<?php
                                                                         echo htmlentities($row["facebook_link"]);

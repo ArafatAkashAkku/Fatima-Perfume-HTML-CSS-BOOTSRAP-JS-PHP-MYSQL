@@ -1,5 +1,6 @@
 <?php
 include("config.php");
+// error_reporting(0);
 session_start();
 ?>
 <!DOCTYPE html>
@@ -20,7 +21,7 @@ session_start();
     <!-- favicon link  -->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <!-- website title  -->
-    <title>
+    <title>Cart |
         <?php
         $ret = mysqli_query($con, "select * from website_info");
         while ($row = mysqli_fetch_array($ret)) {
@@ -56,17 +57,24 @@ session_start();
                         </thead>
                         <tbody class="text-center">
                             <?php
-                            $total=0;
+                            $total = 0;
+                            $serial = 0;
                             if (isset($_SESSION['cart'])) {
                                 foreach ($_SESSION['cart'] as $key => $value) {
-                                    $total=$total+$value['Price'];
+                                    $total = $total + $value['Price'];
+                                    $serial = $serial + 1;
                                     echo "
                                 <tr>
-                                <th>1</th>
+                                <th>$serial</th>
                                 <td>$value[Item_Name]</td>
                                 <td>$value[Price]</td>
                                 <td><input class='text-center' type='number' value='$value=[Quantity]' min='1' max='10'></td>
-                                <td><button class='btn btn-sm btn-outline-danger'>REMOVE</button></td>
+                                <td>
+                                <form action='manage_cart.php' method='POST'>
+                                <button name='Remove_Item' class='btn btn-sm btn-outline-danger'>Remove</button>
+                                <input type='hidden' value='$value=[Item_Name]' name='Item_Name'>
+                                </form>
+                                </td>
                             </tr>
                             ";
                                 }
@@ -76,8 +84,13 @@ session_start();
                     </table>
                 </div>
                 <div class="col-lg-4">
-                    <h3>Total:</h3>
-                    <h5><?php echo $total?></h5>
+                    <div class="border bg-light rounded p-4">
+                        <h3>Total:</h3>
+                        <h5 class="text-right"><?php echo $total ?></h5>
+                        <form action="">
+                            <button class="btn btn-primary btn-block">Purchase</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

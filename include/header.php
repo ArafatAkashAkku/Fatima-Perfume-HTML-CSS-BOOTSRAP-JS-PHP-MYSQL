@@ -24,7 +24,16 @@
                         if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
                         ?>
                             <li class="nav-item">
-                                <a class="nav-link active text-light" aria-current="page">Welcome <span class="text-warning"><?php echo $_SESSION['full_name']; ?></span></a>
+                                <a class="nav-link active text-light" aria-current="page">Welcome <span class="text-warning"><?php echo $_SESSION['fullname']; ?></span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="account.php">My Account</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="logout.php">Log Out</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="cart.php">Cart</a>
                             </li>
                         <?php
                         } else {
@@ -32,32 +41,18 @@
                             <li class="nav-item">
                                 <a class="nav-link active text-light" aria-current="page">Welcome</a>
                             </li>
-                        <?php
-                        }
-                        ?>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="">My Account</a>
-                        </li>
-                        <?php
-                        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
-                        ?>
                             <li class="nav-item">
-                                <a class="nav-link text-light" href="logout.php">Log Out</a>
-
+                                <a class="nav-link text-light" href="login.php">My Account</a>
                             </li>
-                        <?php
-                        } else {
-                        ?>
                             <li class="nav-item">
                                 <a class="nav-link text-light" href="login.php">Log In</a>
-
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="login.php">Cart</a>
                             </li>
                         <?php
                         }
                         ?>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="cart.php">Cart</a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Pages

@@ -43,16 +43,16 @@ session_start();
             <div class="swiper top-banner">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="images/banner1.jpeg" class="img-fluid error-img banner-img" alt="Banner">
+                        <img src="images/banners/banner1.png" class="img-fluid error-img banner-img" alt="Banner">
                     </div>
                     <div class="swiper-slide">
-                        <img src="images/banner2.jpeg" class="img-fluid error-img banner-img" alt="Banner">
+                        <img src="images/banners/banner2.jpeg" class="img-fluid error-img banner-img" alt="Banner">
                     </div>
                     <div class="swiper-slide">
-                        <img src="images/banner3.jpeg" class="img-fluid error-img banner-img" alt="Banner">
+                        <img src="images/banners/banner3.png" class="img-fluid error-img banner-img" alt="Banner">
                     </div>
                     <div class="swiper-slide">
-                        <img src="images/banner4.jpeg" class="img-fluid error-img banner-img" alt="Banner">
+                        <img src="images/banners/banner4.jpeg" class="img-fluid error-img banner-img" alt="Banner">
                     </div>
                 </div>
                 <div class="swiper-button-next text-warning"></div>
@@ -102,8 +102,10 @@ session_start();
                         ?>
                             <div class="swiper-slide">
                                 <form action="manage_cart.php" method="POST">
-                                    <img src="<?php
-                                                echo htmlentities($row["product_image"]);
+                                    <img src="images/products/<?php
+                                                echo htmlentities($row['id']);
+                                                ?>/<?php
+                                                echo htmlentities($row['product_image']);
                                                 ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
                                     <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
                                                                     echo htmlentities($row["id"]);
@@ -113,17 +115,17 @@ session_start();
                                             ?></h3>
                                     </a>
 
-                                    <p>Price: <?php
+                                    <p>Price: $<?php
                                                 echo htmlentities($row["price"]);
                                                 ?></p>
                                     <button class="btn btn-link" type="submit" name="Add_To_Cart">Add to Cart</button>
-                                    <input type="hidden" name="Item_Name" value="<?php
+                                    <input type="hidden" name="Item_Name" value='<?php
                                                                                     echo htmlentities($row["designer"]);
-                                                                                    ?>">
+                                                                                    ?>'>
 
-                                    <input type="hidden" name="Price" value="<?php
+                                    <input type="hidden" name="Price" value='<?php
                                                                                 echo htmlentities($row["price"]);
-                                                                                ?>">
+                                                                                ?>'>
 
                                 </form>
                             </div>
