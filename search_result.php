@@ -57,13 +57,25 @@ session_start();
                         <div class="col-md-4 col-6 mt-3 text-center">
                             <div class="border border-warning p-2">
                                 <img src="images/products/<?= $items['id']; ?>/<?= $items['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                <a  href="product_details.php?id=<?php
-                                                                    echo htmlentities($items["id"]);
-                                                                    ?>">
+                                <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
+                                                                                                        echo htmlentities($items["id"]);
+                                                                                                        ?>">
                                     <h5><?= $items['designer']; ?></h5>
                                 </a>
-                                <p>Price:<?= $items['price']; ?></p>
-                                <a href="#">Add to Cart</a>
+                                <p>Price: $<?= $items['price']; ?></p>
+                                <form action="manage_cart.php" method="POST">
+                                    <button class="btn btn-link" type="submit" name="Add_To_Cart">Add to Cart</button>
+                                    <input type="hidden" name="Item_Name" value='<?php
+                                                                                    echo htmlentities($items["designer"]);
+                                                                                    ?>'>
+
+                                    <input type="hidden" name="Price" value='<?php
+                                                                                echo htmlentities($items["price"]);
+                                                                                ?>'>
+                                    <input type="hidden" name="Upc" value='<?php
+                                                                            echo htmlentities($items["upc"]);
+                                                                            ?>'>
+                                </form>
                             </div>
                         </div>
                     <?php

@@ -109,11 +109,23 @@ session_start();
                                             <div class="col-md-3 col-6 mt-3 text-center">
                                                 <div class="border border-warning p-2">
                                                     <img src="images/products/<?= $proditems['id']; ?>/<?= $proditems['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                                    <a href="product_details.php?id=<?=$proditems['id'];?>">
+                                                    <a class="text-dark text-decoration-none" href="product_details.php?id=<?= $proditems['id']; ?>">
                                                         <h5><?= $proditems['designer']; ?></h5>
                                                     </a>
-                                                    <p>Price:<?= $proditems['price']; ?></p>
-                                                    <a href="#">Add to Cart</a>
+                                                    <p>Price: $<?= $proditems['price']; ?></p>
+                                                    <form action="manage_cart.php" method="POST">
+                                                        <button class="btn btn-link" type="submit" name="Add_To_Cart">Add to Cart</button>
+                                                        <input type="hidden" name="Item_Name" value='<?php
+                                                                                                        echo htmlentities($proditems["designer"]);
+                                                                                                        ?>'>
+
+                                                        <input type="hidden" name="Price" value='<?php
+                                                                                                    echo htmlentities($proditems["price"]);
+                                                                                                    ?>'>
+                                                        <input type="hidden" name="Upc" value='<?php
+                                                                                                echo htmlentities($proditems["upc"]);
+                                                                                                ?>'>
+                                                    </form>
                                                 </div>
                                             </div>
                                         <?php
@@ -129,11 +141,23 @@ session_start();
                                         <div class="col-md-3 col-6 mt-3 text-center">
                                             <div class="border border-warning p-2">
                                                 <img src="images/products/<?= $proditems['id']; ?>/<?= $proditems['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                                <a href="product_details.php?id=<?=$proditems['id'];?>">
+                                                <a class="text-dark text-decoration-none" href="product_details.php?id=<?= $proditems['id']; ?>">
                                                     <h5><?= $proditems['designer']; ?></h5>
                                                 </a>
-                                                <p>Price:<?= $proditems['price']; ?></p>
-                                                <a href="#">Add to Cart</a>
+                                                <p>Price: $<?= $proditems['price']; ?></p>
+                                                <form action="manage_cart.php" method="POST">
+                                                    <button class="btn btn-link" type="submit" name="Add_To_Cart">Add to Cart</button>
+                                                    <input type="hidden" name="Item_Name" value='<?php
+                                                                                                    echo htmlentities($proditems["designer"]);
+                                                                                                    ?>'>
+
+                                                    <input type="hidden" name="Price" value='<?php
+                                                                                                echo htmlentities($proditems["price"]);
+                                                                                                ?>'>
+                                                    <input type="hidden" name="Upc" value='<?php
+                                                                                            echo htmlentities($proditems["upc"]);
+                                                                                            ?>'>
+                                                </form>
                                             </div>
                                         </div>
                             <?php
