@@ -13,13 +13,13 @@
                         <li class="nav-item mb-2"><a href="mailto:<?php
                                                                     echo htmlentities($row["email"]);
                                                                     ?>" class="nav-link p-0 text-light"><i class="fa-solid fa-envelope text-warning pe-2"></i><?php
-                                                                                                                                                                    echo htmlentities($row["email"]);
-                                                                                                                                                                    ?></a></li>
+                                                                                                                                                                echo htmlentities($row["email"]);
+                                                                                                                                                                ?></a></li>
                         <li class="nav-item mb-2"><a href="tel:<?php
                                                                 echo htmlentities($row["phone_no"]);
                                                                 ?>" class="nav-link p-0 text-light"><i class="fa-solid fa-phone text-warning pe-2"></i><?php
-                                                                                                                                                            echo htmlentities($row["phone_no"]);
-                                                                                                                                                            ?></a></li>
+                                                                                                                                                        echo htmlentities($row["phone_no"]);
+                                                                                                                                                        ?></a></li>
                     </ul>
                 </div>
 
@@ -37,9 +37,21 @@
                 <div class="col-12 col-md-2 mb-3">
                     <h5 class="text-light">Portals</h5>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">User</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Admin</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Owner</a></li>
+                        <?php
+                        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
+                        ?>
+                            <li class="nav-item mb-2"><a class="nav-link p-0 text-light">User</a></li>
+                            <li class="nav-item mb-2"><a class="nav-link p-0 text-light">Admin</a></li>
+                            <li class="nav-item mb-2"><a class="nav-link p-0 text-light">Owner</a></li>
+                        <?php
+                        } else {
+                        ?>
+                            <li class="nav-item mb-2"><a href="login.php" class="nav-link p-0 text-light">User</a></li>
+                            <li class="nav-item mb-2"><a href="admin/index.php" class="nav-link p-0 text-light">Admin</a></li>
+                        <li class="nav-item mb-2"><a href="owner/index.php" class="nav-link p-0 text-light">Owner</a></li>
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </div>
 
@@ -58,8 +70,8 @@
 
             <div class="d-flex flex-column flex-sm-row justify-content-between pt-4 border-top align-items-center">
                 <p class="text-light">© <span class="update-year"></span> <?php
-                                            echo htmlentities($row["website_name"]);
-                                            ?>. All rights reserved.</p>
+                                                                            echo htmlentities($row["website_name"]);
+                                                                            ?>. All rights reserved.</p>
                 <ul class="list-unstyled d-flex">
                     <li class="ms-3"><a class="text-warning fs-4" href="<?php
                                                                         echo htmlentities($row["facebook_link"]);

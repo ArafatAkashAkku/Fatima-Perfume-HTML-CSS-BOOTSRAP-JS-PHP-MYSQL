@@ -21,7 +21,7 @@ session_start();
     <!-- favicon link  -->
     <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
     <!-- website title  -->
-    <title>
+    <title>Admin |
         <?php
         $ret = mysqli_query($con, "select * from website_info");
         while ($row = mysqli_fetch_array($ret)) {
@@ -45,12 +45,12 @@ session_start();
                 <form class="p-3" action="loginprocessing.php" method="POST" autocomplete="off">
                     <div class="form-group py-2">
                         <div class="input-field"> 
-                            <input type="email" name="adminemail" placeholder="Enter your Email" required class="form-control px-3 py-2"> 
+                            <input type="email" name="email" placeholder="Enter your Email" required class="form-control px-3 py-2"> 
                         </div>
                     </div>
                     <div class="form-group py-2">
                         <div class="input-field">
-                            <input type="password" name="adminpassword" placeholder="Enter your Password" required class="form-control px-3 py-2 "> 
+                            <input type="password" name="password" placeholder="Enter your Password" required class="form-control px-3 py-2 "> 
                         </div>
                     </div>
                         <button class="btn btn-width btn-outline-warning bg-warning text-dark" name="submit" type="submit">Log in</button>

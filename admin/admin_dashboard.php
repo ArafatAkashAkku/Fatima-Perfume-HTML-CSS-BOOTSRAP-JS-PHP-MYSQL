@@ -20,7 +20,7 @@ session_start();
     <!-- favicon link  -->
     <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
     <!-- website title  -->
-    <title>
+    <title>Dashboard |
         <?php
         $ret = mysqli_query($con, "select * from website_info");
         while ($row = mysqli_fetch_array($ret)) {
@@ -30,15 +30,26 @@ session_start();
 </head>
 
 <body class="overflow-x-hidden">
+    <?php
+    if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] == true) {
+    ?>
 
-    <!-- header start  -->
-    <?php include("include/header.php") ?>
-    <!-- header end  -->
+        <!-- header start  -->
+        <?php include("include/header.php") ?>
+        <!-- header end  -->
 
 
-    <!-- footer start  -->
-    <?php include("include/footer.php") ?>
-    <!-- footer end  -->
+        <!-- footer start  -->
+        <?php include("include/footer.php") ?>
+        <!-- footer end  -->
+    <?php
+    } else {
+        echo "<script>
+                alert('You need to log in first');
+                window.location.href='index.php';
+                </script>";
+    }
+    ?>
 
     <!-- bootstrap js link  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
