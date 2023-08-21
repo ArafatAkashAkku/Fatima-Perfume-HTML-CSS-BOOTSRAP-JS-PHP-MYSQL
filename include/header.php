@@ -27,13 +27,15 @@
                                 <a class="nav-link active text-light" aria-current="page">Welcome <span class="text-warning"><?php echo $_SESSION['fullname']; ?></span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" href="account.php">My Account</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" href="logout.php">Log Out</a>
+                                <a class="nav-link text-light" href="account.php?email=<?php
+                                                                                        echo $_SESSION['email'];
+                                                                                        ?>&id=<?php echo $_SESSION['id']; ?>">My Account</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" href="cart.php">Cart</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="logout.php">Log Out</a>
                             </li>
                         <?php
                         } else {
@@ -45,10 +47,10 @@
                                 <a class="nav-link text-light" href="login.php">My Account</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" href="login.php">Log In</a>
+                                <a class="nav-link text-light" href="login.php">Cart</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" href="login.php">Cart</a>
+                                <a class="nav-link text-light" href="login.php">Log In</a>
                             </li>
                         <?php
                         }

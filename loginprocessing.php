@@ -13,6 +13,7 @@ if (isset($_POST['submit'])) {
                 if (password_verify($_POST['password'], $result_fetch['password'])) {
                     $_SESSION['logged_in'] = true;
                     $_SESSION['email'] = $result_fetch['email'];
+                    $_SESSION['id'] = $result_fetch['id'];
                     $_SESSION['fullname'] = $result_fetch['fullname'];
                     header("location:index.php");
                 } else {

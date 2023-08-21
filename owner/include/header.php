@@ -16,8 +16,8 @@
                 if (isset($_SESSION['owner_logged_in']) && $_SESSION['owner_logged_in'] == true) {
                 ?>
                     <a class="navbar-brand text-warning" href="owner_dashboard.php"> <?php
-                                                            echo htmlentities($row["website_name"]);
-                                                            ?></a>
+                                                                                        echo htmlentities($row["website_name"]);
+                                                                                        ?></a>
                 <?php
                 } else {
                 ?>
@@ -61,7 +61,7 @@
                                     User Details
                                 </a>
                                 <ul class="dropdown-menu bg-dark">
-                                <li> <a class="dropdown-item text-light bg-dark" href="verified_user_info.php">Verified User Info</a></li>
+                                    <li> <a class="dropdown-item text-light bg-dark" href="verified_user_info.php">Verified User Info</a></li>
                                     <li> <a class="dropdown-item text-light bg-dark" href="not_verified_user_info.php">Not Verified User Info</a></li>
                                 </ul>
                             </li>
@@ -96,8 +96,10 @@
                                     Account
                                 </a>
                                 <ul class="dropdown-menu bg-dark">
-                                    <li> <a class="dropdown-item text-light bg-dark" href="">Change Password</a></li>
-                                    <li> <a class="dropdown-item text-light bg-dark" href="logout.php">Log Out</a></li>
+                                        <li> <a class="dropdown-item text-light bg-dark" href="owner_account.php?email=<?php
+                                                                                                                    echo $_SESSION['email'];
+                                                                                                                    ?>&id=<?php echo $_SESSION['id']; ?>">Change Password</a></li>
+                                        <li> <a class="dropdown-item text-light bg-dark" href="logout.php">Log Out</a></li>
                                 </ul>
                             </li>
                         <?php

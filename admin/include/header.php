@@ -16,8 +16,8 @@
                 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] == true) {
                 ?>
                     <a class="navbar-brand text-warning" href="admin_dashboard.php"> <?php
-                                                            echo htmlentities($row["website_name"]);
-                                                            ?></a>
+                                                                                        echo htmlentities($row["website_name"]);
+                                                                                        ?></a>
                 <?php
                 } else {
                 ?>
@@ -78,7 +78,9 @@
                                     Account
                                 </a>
                                 <ul class="dropdown-menu bg-dark">
-                                    <li> <a class="dropdown-item text-light bg-dark" href="">Change Password</a></li>
+                                    <li> <a class="dropdown-item text-light bg-dark" href="admin_account.php?email=<?php
+                                                                                                                echo $_SESSION['email'];
+                                                                                                                ?>&id=<?php echo $_SESSION['id']?>">Change Password</a></li>
                                     <li> <a class="dropdown-item text-light bg-dark" href="logout.php">Log Out</a></li>
                                 </ul>
                             </li>

@@ -27,7 +27,7 @@
                     <h5 class="text-light">Navbar</h5>
                     <ul class="nav flex-column">
                         <?php
-                        if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] == true) {
+                        if (isset($_SESSION['owner_logged_in']) && $_SESSION['owner_logged_in'] == true) {
                         ?>
                             <li class="nav-item mb-2"><a class="nav-link p-0 text-light">Top Fraggrance</a></li>
                             <li class="nav-item mb-2"><a class="nav-link p-0 text-light">Best Seller</a></li>
@@ -53,7 +53,7 @@
                     <h5 class="text-light">Portals</h5>
                     <ul class="nav flex-column">
                         <?php
-                        if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] == true) {
+                        if (isset($_SESSION['owner_logged_in']) && $_SESSION['owner_logged_in'] == true) {
                         ?>
                             <li class="nav-item mb-2"><a class="nav-link p-0 text-light">User</a></li>
                             <li class="nav-item mb-2"><a class="nav-link p-0 text-light">Admin</a></li>

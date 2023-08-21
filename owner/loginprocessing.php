@@ -13,6 +13,7 @@ if (isset($_POST['submit'])) {
                 if ($_POST['password']==$result_fetch['password']) {
                     $_SESSION['owner_logged_in'] = true;
                     $_SESSION['email'] = $result_fetch['email'];
+                    $_SESSION['id'] = $result_fetch['id'];
                     header("location:owner_dashboard.php");
                 } else {
                     echo "<script>

@@ -44,16 +44,23 @@ session_start();
                 <h2 class="text-muted text-center pt-2">Enter your owner login details</h2>
                 <form class="p-3" action="loginprocessing.php" method="POST" autocomplete="off">
                     <div class="form-group py-2">
-                        <div class="input-field"> 
-                            <input type="email" name="email" placeholder="Enter your Email" required class="form-control px-3 py-2"> 
+                        <div class="input-field">
+                            <input type="email" name="email" placeholder="Enter your Email" required class="form-control px-3 py-2">
                         </div>
                     </div>
                     <div class="form-group py-2">
                         <div class="input-field">
-                            <input type="password" name="password" placeholder="Enter your Password" required class="form-control px-3 py-2 "> 
+                            <input type="password" id="myInput" name="password" placeholder="Enter your Password" required class="form-control px-3 py-2 ">
                         </div>
                     </div>
-                        <button class="btn btn-width btn-outline-warning bg-warning text-dark" name="submit" type="submit">Log in</button>
+                    <div class="form-group py-2">
+                        <label for="showpass">
+                            <div class="input-field">
+                                <input type="checkbox" id="showpass" onclick="myFunction()">&nbsp;Show Password
+                            </div>
+                        </label>
+                    </div>
+                    <button class="btn btn-width btn-outline-warning bg-warning text-dark" name="submit" type="submit">Log in</button>
                 </form>
             </div>
         </div>
@@ -72,6 +79,16 @@ session_start();
     <!-- swipper js link  -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <!-- internal script link  -->
+    <script>
+        function myFunction() {
+            let x = document.getElementById("myInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
 </body>
 
 </html>
