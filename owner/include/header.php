@@ -49,6 +49,15 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Product Details
+                                </a>
+                                <ul class="dropdown-menu bg-dark">
+                                    <li> <a class="dropdown-item text-light bg-dark" href="designer_info.php">Designer Info</a></li>
+                                    <li> <a class="dropdown-item text-light bg-dark" href="products_info.php">Products Info</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     User Details
                                 </a>
                                 <ul class="dropdown-menu bg-dark">
@@ -63,15 +72,7 @@
                                 <ul class="dropdown-menu bg-dark">
                                     <li> <a class="dropdown-item text-light bg-dark" href="verified_admin_info.php">Verified Admin Info</a></li>
                                     <li> <a class="dropdown-item text-light bg-dark" href="not_verified_admin_info.php">Not Verified Admin Info</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Product Details
-                                </a>
-                                <ul class="dropdown-menu bg-dark">
-                                    <li> <a class="dropdown-item text-light bg-dark" href="designer_info.php">Designer Info</a></li>
-                                    <li> <a class="dropdown-item text-light bg-dark" href="products_info.php">Products Info</a></li>
+                                    <li> <a class="dropdown-item text-light bg-dark" href="admin_info_add.php">Add Admin Info</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">

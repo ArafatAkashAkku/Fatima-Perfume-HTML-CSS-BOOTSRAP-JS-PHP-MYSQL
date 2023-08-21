@@ -59,13 +59,11 @@ session_start();
             </thead>
             <tbody>
                 <?php
-                $serial=0;
                 $ret = mysqli_query($con, "select * from website_info");
                 while ($row = mysqli_fetch_array($ret)) {
-                    $serial = $serial + 1;
                 ?>
                     <tr>
-                        <th scope="row"><?php echo $serial ?> </th>
+                        <th scope="row"><?php echo htmlentities($row['id']) ?> </th>
                         <td><?php
                             echo htmlentities($row["website_name"]);
                             ?> </td>
@@ -87,7 +85,9 @@ session_start();
                                                     <td><?php
                             echo htmlentities($row["youtube_link"]);
                             ?></td>
-                        <td><a href="" >Edit</a></td>
+                        <td><a href="company_info_edit.php?id=<?php
+                                                                echo htmlentities($row['id']);
+                                                                ?>">Edit</a></td>
                     </tr>
                 <?php
                 }

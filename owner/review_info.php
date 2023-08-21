@@ -54,20 +54,20 @@ session_start();
             </thead>
             <tbody>
                 <?php
-                $serial=0;
                 $ret = mysqli_query($con, "select * from frontpage_reviews");
                 while ($row = mysqli_fetch_array($ret)) {
-                    $serial = $serial + 1;
                 ?>
                     <tr>
-                        <th scope="row"><?php echo $serial ?> </th>
+                        <th scope="row"><?php echo htmlentities($row["id"]); ?> </th>
                         <td><?php
                             echo htmlentities($row["review_message"]);
                             ?> </td>
                         <td><?php
                                 echo htmlentities($row["review_sender"]);
                                 ?></td>
-                        <td><a href="">Edit</a></td>
+                        <td><a href="review_info_edit.php?id=<?php
+                                                                echo htmlentities($row['id']);
+                                                                ?>">Edit</a></td>
                     </tr>
                 <?php
                 }

@@ -50,7 +50,6 @@ session_start();
                         <th scope="col">Full Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Verified</th>
-                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,7 +70,6 @@ session_start();
                             <td><?php
                                 echo htmlentities($row["verified"]);
                                 ?> </td>
-                            <td><a href="" class="pe-1">Edit</a><a class="ps-1" href="">Delete</a></td>
                         </tr>
                     <?php
                     }
@@ -83,7 +81,6 @@ session_start();
                         <th scope="col">Full Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Verified</th>
-                        <th scope="col">Action</th>
                     </tr>
                 </tfoot>
             </table>

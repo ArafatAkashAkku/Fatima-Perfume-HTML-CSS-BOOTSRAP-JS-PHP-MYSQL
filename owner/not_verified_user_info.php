@@ -47,6 +47,7 @@ session_start();
                 <thead>
                     <tr>
                         <th scope="col">Serial</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Full Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Verified</th>
@@ -63,6 +64,9 @@ session_start();
                         <tr>
                             <th scope="row"><?php echo $serial ?> </th>
                             <td><?php
+                                echo htmlentities($row["id"]);
+                                ?> </td>
+                            <td><?php
                                 echo htmlentities($row["fullname"]);
                                 ?> </td>
                             <td><?php
@@ -71,7 +75,9 @@ session_start();
                                                             <td><?php
                                 echo htmlentities($row["verified"]);
                                 ?> </td>
-                            <td><a href="" class="pe-1">Edit</a><a class="ps-1" href="">Delete</a></td>
+                            <td><a href="not_verified_user_info_delete.php?id=<?php
+                                                                echo htmlentities($row['id']);
+                                                                ?>" onclick="return checkdelete()">Delete</a></td>
                         </tr>
                     <?php
                     }
@@ -80,6 +86,7 @@ session_start();
                 <tfoot>
                     <tr>
                         <th scope="col">Serial</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Full Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Verified</th>
@@ -113,6 +120,11 @@ session_start();
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
         new DataTable('#example');
+    </script>
+      <script>
+        function checkdelete(){
+            return confirm('Are you sure want to delete?')
+        }
     </script>
 
 </body>

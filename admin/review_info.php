@@ -67,7 +67,9 @@ session_start();
                         <td><?php
                                 echo htmlentities($row["review_sender"]);
                                 ?></td>
-                        <td><a href="">Edit</a></td>
+                        <td><a href="review_info_edit.php?id=<?php
+                                                                echo htmlentities($row['id']);
+                                                                ?>">Edit</a></td>
                     </tr>
                 <?php
                 }
