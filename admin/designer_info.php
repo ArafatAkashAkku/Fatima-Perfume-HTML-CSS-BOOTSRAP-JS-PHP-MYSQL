@@ -42,11 +42,12 @@ session_start();
     <!-- header end  -->
 
     <!-- main start  -->
-    <main class="mx-4 my-3">
+    <main class="mx-4 my-3 overflow-scroll">
         <table id="example" class="table table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th scope="col">Serial</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Designer</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -61,9 +62,16 @@ session_start();
                     <tr>
                         <th scope="row"><?php echo $serial ?> </th>
                         <td><?php
+                                echo htmlentities($row["id"]);
+                                ?> </td>
+                        <td><?php
                             echo htmlentities($row["designer"]);
                             ?> </td>
-                        <td><a href="" class="pe-1">Edit</a><a class="ps-1" href="">Delete</a></td>
+                        <td><a href="designer_info_edit.php?id=<?php
+                                                                echo htmlentities($row['id']);
+                                                                ?>" class="pe-1">Edit</a><a href="designer_info_delete.php?id=<?php
+                                                                echo htmlentities($row['id']);
+                                                                ?>" onclick="return checkdelete()" class="ps-1">Delete</a></td>
                     </tr>
                 <?php
                 }
@@ -72,6 +80,7 @@ session_start();
             <tfoot>
                 <tr>
                 <th scope="col">Serial</th>
+                <th scope="col">ID</th>
                     <th scope="col">Designer</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -104,7 +113,11 @@ session_start();
     <script>
         new DataTable('#example');
     </script>
-
+    <script>
+        function checkdelete() {
+            return confirm('Are you sure want to delete?')
+        }
+    </script>
 </body>
 
 </html>

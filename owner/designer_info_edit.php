@@ -29,7 +29,7 @@ if (isset($_GET["id"])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <!-- website title  -->
-    <title>Review Info Edit |
+    <title>Design Info Edit |
         <?php
         $ret = mysqli_query($con, "select * from website_info");
         while ($row = mysqli_fetch_array($ret)) {
@@ -50,25 +50,25 @@ if (isset($_GET["id"])) {
         <main>
             <div class="d-flex flex-column align-items-center justify-content-center p-5 bg-warning">
                 <div class="bg-light p-3 res-width">
-                    <h2 class="text-muted text-center pt-2">Update Review Info details</h2>
+                    <h2 class="text-muted text-center pt-2">Update Design Info details</h2>
                     <?php
-                    $ret = mysqli_query($con, "select * from frontpage_reviews where id='$id'");
+                    $ret = mysqli_query($con, "select * from product_designer_info where id='$id'");
                     while ($row = mysqli_fetch_array($ret)) {
                     ?>
                         <form class="p-3" action="" method="POST" autocomplete="off">
                             <div class="form-group py-2">
                                 <div class="input-field">
-                                    <h5 class="text-muted">Review Message</h5>
-                                    <input type="text" name="message" class="form-control px-3 py-2" value="<?php
-                                                                                                            echo htmlentities($row["review_message"]);
+                                    <h5 class="text-muted">Designer ID</h5>
+                                    <input type="text" name="id" disabled class="form-control px-3 py-2" value="<?php
+                                                                                                            echo htmlentities($row["id"]);
                                                                                                             ?>">
                                 </div>
                             </div>
                             <div class="form-group py-2">
                                 <div class="input-field">
-                                    <h5 class="text-muted">Review Sender</h5>
-                                    <input type="text" name="sender" class="form-control px-3 py-2" value="<?php
-                                                                                                            echo htmlentities($row["review_sender"]);
+                                    <h5 class="text-muted">Designer</h5>
+                                    <input type="text" name="designer" class="form-control px-3 py-2" value="<?php
+                                                                                                            echo htmlentities($row["designer"]);
                                                                                                             ?>">
                                 </div>
                             </div>
@@ -96,16 +96,16 @@ if (isset($_GET["id"])) {
 
     <?php
     if (isset($_POST['submit'])) {
-        $user_exist_query = "SELECT * from `frontpage_reviews` WHERE `id`='$id'";
+        $user_exist_query = "SELECT * from `product_designer_info` WHERE `id`='$id'";
         $result = mysqli_query($con, $user_exist_query);
         if ($result) {
             if (mysqli_num_rows($result) > 0) {
-                $query = "UPDATE `frontpage_reviews` SET `review_message`='$_POST[message]',`review_sender`='$_POST[sender]' WHERE `id`='$id'";
+                $query = "UPDATE `product_designer_info` SET `designer`='$_POST[designer]' WHERE `id`='$id'";
                 if (mysqli_query($con, $query)) {
                     echo "
           <script>
-          alert('Review info updated.');
-          window.location.href='review_info.php';
+          alert('Designer info updated.');
+          window.location.href='designer_info.php';
           </script>
           ";
                 } else {

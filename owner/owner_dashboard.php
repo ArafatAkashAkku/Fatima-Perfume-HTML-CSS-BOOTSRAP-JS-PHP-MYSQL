@@ -29,7 +29,7 @@ session_start();
 
 </head>
 
-<body class="overflow-x-hidden">
+<body class="overflow-x-hidden bg-warning">
     <?php
     if (isset($_SESSION['owner_logged_in']) && $_SESSION['owner_logged_in'] == true) {
     ?>
@@ -38,6 +38,48 @@ session_start();
         <?php include("include/header.php") ?>
         <!-- header end  -->
 
+        <!-- main start  -->
+        <main>
+            <div class="row d-flex justify-content-center m-3 p-3 gap-3 text-center">
+                <div class="card col-sm-3 col-12">
+                    <div class="card-body">
+                        <h1 class="card-title">Total Users</h1>
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con,"SELECT id from `user_info` ORDER BY id")); echo $row; ?></h2>
+                    </div>
+                </div>
+
+                <div class="card col-sm-3 col-12">
+                    <div class="card-body">
+                        <h1 class="card-title">Total Products</h1>
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con,"SELECT id from `all_products_info` ORDER BY id")); echo $row; ?></h2>
+                    </div>
+                </div>
+
+                <div class="card col-sm-3 col-12">
+                    <div class="card-body">
+                        <h1 class="card-title">Total Delivery</h1>
+                        <p> need to work code</p>
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con,"SELECT id from `user_info` ORDER BY id")); echo $row; ?></h2>
+                    </div>
+                </div>
+
+                <div class="card col-sm-3 col-12">
+                    <div class="card-body">
+                        <h1 class="card-title">Total Orders</h1>
+                        <p> need to work code</p>
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con,"SELECT id from `user_info` ORDER BY id")); echo $row; ?></h2>
+                    </div>
+                </div>
+
+                <div class="card col-sm-3 col-12">
+                    <div class="card-body">
+                        <h1 class="card-title">Total Admin</h1>
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con,"SELECT id from `admin_info` ORDER BY id")); echo $row; ?></h2>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- main end  -->
 
         <!-- footer start  -->
         <?php include("include/footer.php") ?>

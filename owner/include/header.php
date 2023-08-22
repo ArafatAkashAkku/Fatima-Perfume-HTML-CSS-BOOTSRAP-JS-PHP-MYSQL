@@ -54,6 +54,8 @@
                                 <ul class="dropdown-menu bg-dark">
                                     <li> <a class="dropdown-item text-light bg-dark" href="designer_info.php">Designer Info</a></li>
                                     <li> <a class="dropdown-item text-light bg-dark" href="products_info.php">Products Info</a></li>
+                                    <li> <a class="dropdown-item text-light bg-dark" href="designer_info_add.php">Add Designer Info</a></li>
+                                    <li> <a class="dropdown-item text-light bg-dark" href="products_info_add.php">Add Products Info</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">

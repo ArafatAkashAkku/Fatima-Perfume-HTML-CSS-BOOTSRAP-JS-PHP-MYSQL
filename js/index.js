@@ -21,3 +21,6 @@ errorImages.forEach((element) => {
         element.alt = "No Image Available";
     }
 })
+
+
+

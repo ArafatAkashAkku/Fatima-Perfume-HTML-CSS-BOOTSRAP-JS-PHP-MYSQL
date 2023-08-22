@@ -29,7 +29,7 @@ if (isset($_GET["id"])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <!-- website title  -->
-    <title>Company Info Edit |
+    <title>Products Info Edit |
         <?php
         $ret = mysqli_query($con, "select * from website_info");
         while ($row = mysqli_fetch_array($ret)) {
@@ -50,66 +50,83 @@ if (isset($_GET["id"])) {
         <main>
             <div class="d-flex flex-column align-items-center justify-content-center p-5 bg-warning">
                 <div class="bg-light p-3 res-width">
-                    <h2 class="text-muted text-center pt-2">Update Company Info details</h2>
+                    <h2 class="text-muted text-center pt-2">Update Products Info details</h2>
                     <?php
-                    $ret = mysqli_query($con, "select * from website_info where id='$id'");
+                    $ret = mysqli_query($con, "select * from all_products_info where id='$id'");
                     while ($row = mysqli_fetch_array($ret)) {
                     ?>
                         <form class="p-3" action="" method="POST" autocomplete="off">
                             <div class="form-group py-2">
                                 <div class="input-field">
-                                    <h5 class="text-muted">Website Name</h5>
-                                    <input type="text" name="name" class="form-control px-3 py-2" value="<?php
-                                                                                                            echo htmlentities($row["website_name"]);
-                                                                                                            ?>">
-                                </div>
-                            </div>
-                            <div class="form-group py-2">
-                                <div class="input-field">
-                                    <h5 class="text-muted">Email</h5>
-                                    <input type="text" name="email" class="form-control px-3 py-2" value="<?php
-                                                                                                            echo htmlentities($row["email"]);
-                                                                                                            ?>">
-                                </div>
-                            </div>
-                            <div class="form-group py-2">
-                                <div class="input-field">
-                                    <h5 class="text-muted">Phone</h5>
-                                    <input type="text" name="phone" class="form-control px-3 py-2" value="<?php
-                                                                                                            echo htmlentities($row["phone_no"]);
-                                                                                                            ?>">
-                                </div>
-                            </div>
-                            <div class="form-group py-2">
-                                <div class="input-field">
-                                    <h5 class="text-muted">Facebook</h5>
-                                    <input type="text" name="facebook" class="form-control px-3 py-2" value="<?php
-                                                                                                                echo htmlentities($row["facebook_link"]);
+                                    <h5 class="text-muted">ID</h5>
+                                    <input type="text" name="id" disabled class="form-control px-3 py-2" value="<?php
+                                                                                                                echo htmlentities($row["id"]);
                                                                                                                 ?>">
                                 </div>
                             </div>
                             <div class="form-group py-2">
                                 <div class="input-field">
-                                    <h5 class="text-muted">Instagram</h5>
-                                    <input type="text" name="instagram" class="form-control px-3 py-2" value="<?php
-                                                                                                                echo htmlentities($row["instagram_link"]);
+                                    <h5 class="text-muted">Dept</h5>
+                                    <input type="text" name="dept" class="form-control px-3 py-2" value="<?php
+                                                                                                            echo htmlentities($row["dept"]);
+                                                                                                            ?>">
+                                </div>
+                            </div>
+                            <div class="form-group py-2">
+                                <div class="input-field">
+                                    <h5 class="text-muted">Designer ID</h5>
+                                    <input type="text" name="designerid" class="form-control px-3 py-2" value="<?php
+                                                                                                                echo htmlentities($row["designer_id"]);
                                                                                                                 ?>">
                                 </div>
                             </div>
                             <div class="form-group py-2">
                                 <div class="input-field">
-                                    <h5 class="text-muted">Twitter</h5>
-                                    <input type="text" name="twitter" class="form-control px-3 py-2" value="<?php
-                                                                                                            echo htmlentities($row["twitter_link"]);
+                                    <h5 class="text-muted">Designer</h5>
+                                    <input type="text" name="designer" class="form-control px-3 py-2" value="<?php
+                                                                                                                echo htmlentities($row["designer"]);
+                                                                                                                ?>">
+                                </div>
+                            </div>
+                            <div class="form-group py-2">
+                                <div class="input-field">
+                                    <h5 class="text-muted">Item</h5>
+                                    <input type="text" name="item" class="form-control px-3 py-2" value="<?php
+                                                                                                            echo htmlentities($row["item"]);
                                                                                                             ?>">
                                 </div>
                             </div>
                             <div class="form-group py-2">
                                 <div class="input-field">
-                                    <h5 class="text-muted">Youtube</h5>
-                                    <input type="text" name="youtube" class="form-control px-3 py-2" value="<?php
-                                                                                                            echo htmlentities($row["youtube_link"]);
+                                    <h5 class="text-muted">Description</h5>
+                                    <input type="text" name="description" class="form-control px-3 py-2" value="<?php
+                                                                                                                echo htmlentities($row["description"]);
+                                                                                                                ?>">
+                                </div>
+                            </div>
+                            <div class="form-group py-2">
+                                <div class="input-field">
+                                    <h5 class="text-muted">Upc</h5>
+                                    <input type="text" name="upc" class="form-control px-3 py-2" value="<?php
+                                                                                                        echo htmlentities($row["upc"]);
+                                                                                                        ?>">
+                                </div>
+                            </div>
+                            <div class="form-group py-2">
+                                <div class="input-field">
+                                    <h5 class="text-muted">Price $</h5>
+                                    <input type="text" name="price" class="form-control px-3 py-2" value="<?php
+                                                                                                            echo htmlentities($row["price"]);
                                                                                                             ?>">
+                                </div>
+                            </div>
+                            <div class="form-group py-2">
+                                <div class="input-field">
+                                    <h5 class="text-muted">Visibility</h5>
+                                    <input type="text" name="visibility" class="form-control px-3 py-2" value="<?php
+                                                                                                                echo htmlentities($row["visibility"]);
+                                                                                                                ?>">
+                                    <h6 class="text-danger text-center">Type: bestsellers / newarrivals / toppicksfy <br>or you can also ignore.</h6>
                                 </div>
                             </div>
                             <button class="btn btn-width btn-outline-warning bg-warning text-dark" name="submit" type="submit">Update</button>
@@ -136,16 +153,16 @@ if (isset($_GET["id"])) {
 
     <?php
     if (isset($_POST['submit'])) {
-        $user_exist_query = "SELECT * from `website_info` WHERE `id`='$id'";
+        $user_exist_query = "SELECT * from `all_products_info` WHERE `id`='$id'";
         $result = mysqli_query($con, $user_exist_query);
         if ($result) {
             if (mysqli_num_rows($result) > 0) {
-                $query = "UPDATE `website_info` SET `website_name`='$_POST[name]',`email`='$_POST[email]',`phone_no`='$_POST[phone]',`facebook_link`='$_POST[facebook]',`instagram_link`='$_POST[instagram]',`twitter_link`='$_POST[twitter]',`youtube_link`='$_POST[youtube]' WHERE `id`='$id'";
+                $query = "UPDATE `all_products_info` SET `dept`='$_POST[dept]', `designer_id`='$_POST[designerid]',`designer`='$_POST[designer]',`item`='$_POST[item]', `description`='$_POST[description]',`upc`='$_POST[upc]', `price`='$_POST[price]',`visibility`='$_POST[visibility]' WHERE `id`='$id'";
                 if (mysqli_query($con, $query)) {
                     echo "
           <script>
-          alert('Company info updated.');
-          window.location.href='company_info.php';
+          alert('Products info updated.');
+          window.location.href='products_info.php';
           </script>
           ";
                 } else {

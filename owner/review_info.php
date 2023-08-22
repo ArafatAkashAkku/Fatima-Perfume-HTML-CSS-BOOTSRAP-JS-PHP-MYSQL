@@ -42,7 +42,7 @@ session_start();
     <!-- header end  -->
 
     <!-- main start  -->
-    <main class="mx-4 my-3">
+    <main class="mx-4 my-3 overflow-scroll">
         <table id="example" class="table table-striped" style="width:100%">
             <thead>
                 <tr>

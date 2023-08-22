@@ -34,55 +34,64 @@ session_start();
 </head>
 
 <body class="overflow-x-hidden">
-<?php
+    <?php
     if (isset($_SESSION['owner_logged_in']) && $_SESSION['owner_logged_in'] == true) {
     ?>
-    <!-- header start  -->
-    <?php include("include/header.php") ?>
-    <!-- header end  -->
+        <!-- header start  -->
+        <?php include("include/header.php") ?>
+        <!-- header end  -->
 
-    <!-- main start  -->
-    <main class="mx-4 my-3">
-        <table id="example" class="table table-striped" style="width:100%">
-            <thead>
-                <tr>
-                    <th scope="col">Serial</th>
-                    <th scope="col">Designer</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $serial=0;
-                $ret = mysqli_query($con, "select * from product_designer_info");
-                while ($row = mysqli_fetch_array($ret)) {
-                    $serial = $serial + 1;
-                ?>
+        <!-- main start  -->
+        <main class="mx-4 my-3 overflow-scroll">
+            <table id="example" class="table table-striped" style="width:100%">
+                <thead>
                     <tr>
-                        <th scope="row"><?php echo $serial ?> </th>
-                        <td><?php
-                            echo htmlentities($row["designer"]);
-                            ?> </td>
-                        <td><a href="" class="pe-1">Edit</a><a class="ps-1" href="">Delete</a></td>
+                        <th scope="col">Serial</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Designer</th>
+                        <th scope="col">Action</th>
                     </tr>
-                <?php
-                }
-                ?>
-            </tbody>
-            <tfoot>
-                <tr>
-                <th scope="col">Serial</th>
-                    <th scope="col">Designer</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </tfoot>
-        </table>
-    </main>
-    <!-- main end  -->
+                </thead>
+                <tbody>
+                    <?php
+                    $serial = 0;
+                    $ret = mysqli_query($con, "select * from product_designer_info");
+                    while ($row = mysqli_fetch_array($ret)) {
+                        $serial = $serial + 1;
+                    ?>
+                        <tr>
+                            <th scope="row"><?php echo $serial ?> </th>
+                            <td><?php
+                                echo htmlentities($row["id"]);
+                                ?> </td>
+                            <td><?php
+                                echo htmlentities($row["designer"]);
+                                ?> </td>
+                            <td><a href="designer_info_edit.php?id=<?php
+                                                                    echo htmlentities($row['id']);
+                                                                    ?>" class="pe-1">Edit</a><a href="designer_info_delete.php?id=<?php
+                                                                                                                                echo htmlentities($row['id']);
+                                                                                                                                ?>" onclick="return checkdelete()" class="ps-1">Delete</a></td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="col">Serial</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Designer</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </main>
+        <!-- main end  -->
 
-    <!-- footer start  -->
-    <?php include("include/footer.php") ?>
-    <!-- footer end  -->
+        <!-- footer start  -->
+        <?php include("include/footer.php") ?>
+        <!-- footer end  -->
     <?php
     } else {
         echo "<script>
@@ -104,7 +113,11 @@ session_start();
     <script>
         new DataTable('#example');
     </script>
-
+    <script>
+        function checkdelete() {
+            return confirm('Are you sure want to delete?')
+        }
+    </script>
 </body>
 
 </html>
