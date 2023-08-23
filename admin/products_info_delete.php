@@ -9,7 +9,7 @@ if (isset($_GET['id'])) {
         echo "
             <script>
             alert('Data deleted');
-           window.location.href='admin_dashboard.php';
+           window.location.href='products_info.php';
             </script>
             ";
         }else{

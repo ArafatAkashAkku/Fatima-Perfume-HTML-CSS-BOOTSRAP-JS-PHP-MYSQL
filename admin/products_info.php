@@ -81,7 +81,7 @@ session_start();
                             ?></td>
                         <td><a href="products_info_edit.php?id=<?php
                                                                 echo htmlentities($row['id']);
-                                                                ?>" class="pe-1">Edit</a><a href="deproducts_info_delete.php?id=<?php
+                                                                ?>" class="pe-1">Edit</a><a href="products_info_delete.php?id=<?php
                                                                 echo htmlentities($row['id']);
                                                                 ?>" onclick="return checkdelete()" class="ps-1">Delete</a></td>
                     </tr>

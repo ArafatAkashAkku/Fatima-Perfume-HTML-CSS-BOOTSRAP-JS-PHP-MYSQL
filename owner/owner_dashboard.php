@@ -44,7 +44,7 @@ session_start();
                 <div class="card col-sm-3 col-12">
                     <div class="card-body">
                         <h1 class="card-title">Total Users</h1>
-                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con,"SELECT id from `user_info` ORDER BY id")); echo $row; ?></h2>
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con,"SELECT id from `user_info` WHERE `verified`=1 ORDER BY id")); echo $row; ?></h2>
                     </div>
                 </div>
 
@@ -74,7 +74,7 @@ session_start();
                 <div class="card col-sm-3 col-12">
                     <div class="card-body">
                         <h1 class="card-title">Total Admin</h1>
-                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con,"SELECT id from `admin_info` ORDER BY id")); echo $row; ?></h2>
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con,"SELECT id from `admin_info` WHERE `verified`=1 ORDER BY id")); echo $row; ?></h2>
                     </div>
                 </div>
             </div>

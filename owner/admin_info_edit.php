@@ -117,7 +117,7 @@ if (isset($_GET["id"])) {
                     echo "
           <script>
           alert('Admin updated.');
-          window.location.href='verified_admin_info.php';
+          window.location.href='owner_dashboard.php';
           </script>
           ";
                 } else {
