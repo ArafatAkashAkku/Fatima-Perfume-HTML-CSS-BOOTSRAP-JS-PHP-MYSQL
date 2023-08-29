@@ -55,10 +55,17 @@ session_start();
                         <form class='p-3' action='updatepassword.php' method='POST' autocomplete='off'>
                             <div class='form-group py-2'>
                                 <div class='input-field'> 
-                                    <input type='text' name='password' placeholder='Enter your password' required class='form-control px-3 py-2'> 
+                                    <input type='password' id='myInput' name='password' placeholder='Enter your password' required class='form-control px-3 py-2'> 
                                 </div>
                                 <input type='hidden' name='email' value='$_GET[email]'> 
                             </div>
+                            <div class='form-group py-2'>
+                            <label for='showpass'>
+                                <div class='input-field'>
+                                    <input type='checkbox' id='showpass' onclick='myFunction()'>&nbsp;Show Password
+                                </div>
+                            </label>
+                        </div>
                                 <button class='btn btn-width btn-outline-warning bg-warning text-dark' name='submit' type='submit'>Update Password</button>
                         </form>
                     </div>
@@ -97,6 +104,17 @@ window.location.href='index.php';
     <script src="js/index.js"></script>
     <!-- swipper js link  -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <!-- internal script link  -->
+    <script>
+        function myFunction() {
+            let x = document.getElementById("myInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
 
     <?php
     if (isset($_POST['submit'])) {

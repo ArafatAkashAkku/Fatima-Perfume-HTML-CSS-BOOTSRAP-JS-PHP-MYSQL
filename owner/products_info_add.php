@@ -55,10 +55,19 @@ session_start();
                         </div>
                         <div class="form-group py-2">
                             <div class="input-field">
-                                <h5 class="text-muted">Designer ID<br>
-                                    <h6>Take ID from Designer Info or create one</h6>
-                                </h5>
-                                <input type="text" name="designer_id" class="form-control px-3 py-2" required>
+                                <h5 class="text-muted">Designer ID </h5>
+                                <select name="designer_id" class="form-control px-3 py-2" required>
+                                    <?php
+                                    $ret = mysqli_query($con, "select * from product_designer_info");
+                                    while ($row = mysqli_fetch_array($ret)) {
+                                    ?>
+                                        <option value="<?php echo htmlentities($row['id']);?>"><?php
+                                                echo htmlentities($row["designer"]);
+                                                ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group py-2">
@@ -94,7 +103,12 @@ session_start();
                         <div class="form-group py-2">
                             <div class="input-field">
                                 <h5 class="text-muted">Visibility</h5>
-                                <input type="text" name="visibility" class="form-control px-3 py-2" required>
+                                <select name="visibility" class="form-control px-3 py-2">
+                                    <option selected></option>
+                                    <option>bestsellers</option>
+                                    <option>newarrivals</option>
+                                    <option>toppicksfy</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group py-2">
@@ -149,7 +163,7 @@ session_start();
           </script>
           ";
         }
-    } 
+    }
 
     ?>
 

@@ -62,8 +62,11 @@ session_start();
                             <div class="form-group py-2">
                                 <div class="input-field">
                                     <h5 class="text-muted">Verified</h5>
-                                    <input type="text" name="verified" class="form-control px-3 py-2" required>
-                                    <h6 class="text-muted text-center">type 1 for verified or type 0 for not verified</h6>
+                                    <select name="verified" class="form-control px-3 py-2">
+                                        <option>1</option>
+                                        <option>0</option>
+                                    </select>
+                                    <h6 class="text-muted text-center">select 1 for verified or select 0 for not verified</h6>
                                 </div>
                             </div>
                             <button class="btn btn-width btn-outline-warning bg-warning text-dark" name="submit" type="submit">Add</button>

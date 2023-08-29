@@ -47,8 +47,8 @@ session_start();
             <thead>
                 <tr>
                     <th scope="col">Serial</th>
-                    <th scope="col">ID</th>
-                    <th scope="col">Designer ID</th>
+                    <th scope="col" style="display: none;">ID</th>
+                    <th scope="col" style="display: none;">Designer ID</th>
                     <th scope="col">Designer</th>
                     <th scope="col">Price</th>
                     <th scope="col">Visibility</th>
@@ -64,10 +64,10 @@ session_start();
                 ?>
                     <tr>
                         <th scope="row"><?php echo $serial ?> </th>
-                        <td><?php
+                        <td style="display: none;"><?php
                             echo htmlentities($row["id"]);
                             ?> </td>
-                                                    <td><?php
+                                                    <td style="display: none;"> <?php
                             echo htmlentities($row["designer_id"]);
                             ?> </td>
                         <td><?php
@@ -92,8 +92,8 @@ session_start();
             <tfoot>
                 <tr>
                     <th scope="col">Serial</th>
-                    <th scope="col">ID</th>
-                    <th scope="col">Designer ID</th>
+                    <th scope="col" style="display: none;">ID</th>
+                    <th scope="col" style="display: none;">Designer ID</th>
                     <th scope="col">Designer</th>
                     <th scope="col">Price</th>
                     <th scope="col">Visibility</th>

@@ -43,13 +43,13 @@ session_start();
             <div class="swiper top-banner">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="images/banners/banner1.png" class="img-fluid error-img banner-img" alt="Banner">
+                        <img src="images/banners/banner1.jpeg" class="img-fluid error-img banner-img" alt="Banner">
                     </div>
                     <div class="swiper-slide">
                         <img src="images/banners/banner2.jpeg" class="img-fluid error-img banner-img" alt="Banner">
                     </div>
                     <div class="swiper-slide">
-                        <img src="images/banners/banner3.png" class="img-fluid error-img banner-img" alt="Banner">
+                        <img src="images/banners/banner3.jpeg" class="img-fluid error-img banner-img" alt="Banner">
                     </div>
                     <div class="swiper-slide">
                         <img src="images/banners/banner4.jpeg" class="img-fluid error-img banner-img" alt="Banner">

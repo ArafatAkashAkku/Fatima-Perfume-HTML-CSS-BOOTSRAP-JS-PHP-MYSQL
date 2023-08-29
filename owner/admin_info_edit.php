@@ -75,10 +75,11 @@ if (isset($_GET["id"])) {
                             <div class="form-group py-2">
                                 <div class="input-field">
                                     <h5 class="text-muted">Verified</h5>
-                                    <input type="text" name="verified" class="form-control px-3 py-2" value="<?php
-                                                                                                                echo htmlentities($row["verified"]);
-                                                                                                                ?>">
-                                    <h6 class="text-muted text-center">type 1 for verified or type 0 for not verified</h6>
+                                    <select name="verified" class="form-control px-3 py-2">
+                                        <option value="1" <?php if($row["verified"]==1){ echo "selected";} ?>>1</option>
+                                        <option value="" <?php if($row["verified"]==0){ echo "selected";} ?>>0</option>
+                                    </select>
+                                    <h6 class="text-muted text-center">select 1 for verified or select 0 for not verified</h6>
                                 </div>
                             </div>
                             <button class="btn btn-width btn-outline-warning bg-warning text-dark" name="submit" type="submit">Update</button>
@@ -112,7 +113,7 @@ if (isset($_GET["id"])) {
         $result = mysqli_query($con, $user_exist_query);
         if ($result) {
             if (mysqli_num_rows($result) > 0) {
-                $query ="UPDATE `admin_info` SET `email`='$_POST[email]',`password`='$_POST[password]',`verified`='$_POST[verified]' WHERE `id`='$id'";
+                $query = "UPDATE `admin_info` SET `email`='$_POST[email]',`password`='$_POST[password]',`verified`='$_POST[verified]' WHERE `id`='$id'";
                 if (mysqli_query($con, $query)) {
                     echo "
           <script>

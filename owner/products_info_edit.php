@@ -75,9 +75,23 @@ if (isset($_GET["id"])) {
                             <div class="form-group py-2">
                                 <div class="input-field">
                                     <h5 class="text-muted">Designer ID</h5>
-                                    <input type="text" name="designerid" class="form-control px-3 py-2" value="<?php
-                                                                                                                echo htmlentities($row["designer_id"]);
-                                                                                                                ?>">
+                                    <select name="designerid" class="form-control px-3 py-2">
+                                        <?php
+                                        $ret = mysqli_query($con, "select * from product_designer_info");
+                                        while ($rows = mysqli_fetch_array($ret)) {
+                                        ?>
+                                            <option <?php if ($rows["id"] == $row["designer_id"]) {
+                                                                        echo "selected";
+                                                                    } ?> value="<?php echo htmlentities($rows['id']); ?>"><?php
+                                                                                                    echo htmlentities($rows["designer"]);
+                                                                                                    ?></option>
+                                        <?php
+                                        }
+                                        ?>
+
+                                    </select>
+
+
                                 </div>
                             </div>
                             <div class="form-group py-2">
@@ -123,10 +137,21 @@ if (isset($_GET["id"])) {
                             <div class="form-group py-2">
                                 <div class="input-field">
                                     <h5 class="text-muted">Visibility</h5>
-                                    <input type="text" name="visibility" class="form-control px-3 py-2" value="<?php
-                                                                                                                echo htmlentities($row["visibility"]);
-                                                                                                                ?>">
-                                    <h6 class="text-danger text-center">Type: bestsellers / newarrivals / toppicksfy <br>or you can also ignore.</h6>
+                                    <select name="visibility" class="form-control px-3 py-2">
+                                        <option value="" <?php if ($row["visibility"] == "") {
+                                                                echo "selected";
+                                                            } ?>></option>
+                                        <option value="bestsellers" <?php if ($row["visibility"] == "bestsellers") {
+                                                                        echo "selected";
+                                                                    } ?>>bestsellers</option>
+                                        <option value="newarrivals" <?php if ($row["visibility"] == "newarrivals") {
+                                                                        echo "selected";
+                                                                    } ?>>newarrivals</option>
+                                        <option value="toppicksfy" <?php if ($row["visibility"] == "toppicksfy") {
+                                                                        echo "selected";
+                                                                    } ?>>toppicksfy</option>
+                                    </select>
+                                    <h6 class="text-danger text-center">Select: bestsellers / newarrivals / toppicksfy <br>or you can also ignore.</h6>
                                 </div>
                             </div>
                             <button class="btn btn-width btn-outline-warning bg-warning text-dark" name="submit" type="submit">Update</button>
@@ -157,7 +182,7 @@ if (isset($_GET["id"])) {
         $result = mysqli_query($con, $user_exist_query);
         if ($result) {
             if (mysqli_num_rows($result) > 0) {
-                $query = "UPDATE `all_products_info` SET `dept`='$_POST[dept]', `designer_id`='$_POST[designerid]',`designer`='$_POST[designer]',`item`='$_POST[item]', `description`='$_POST[description]',`upc`='$_POST[upc]', `price`='$_POST[price]',`visibility`='$_POST[visibility]' WHERE `id`='$id'";
+                $query = "UPDATE `all_products_info` SET `dept`='$_POST[dept]',`designer_id`='$_POST[designerid]',`designer`='$_POST[designer]',`item`='$_POST[item]', `description`='$_POST[description]',`upc`='$_POST[upc]', `price`='$_POST[price]',`visibility`='$_POST[visibility]' WHERE `id`='$id'";
                 if (mysqli_query($con, $query)) {
                     echo "
           <script>
