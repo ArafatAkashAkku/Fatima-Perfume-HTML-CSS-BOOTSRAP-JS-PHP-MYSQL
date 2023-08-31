@@ -55,7 +55,7 @@ if (isset($_GET["id"])) {
                     $ret = mysqli_query($con, "select * from all_products_info where id='$id'");
                     while ($row = mysqli_fetch_array($ret)) {
                     ?>
-                        <form class="p-3" action="" method="POST" autocomplete="off">
+                        <form class="p-3" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
                             <div class="form-group py-2">
                                 <div class="input-field">
                                     <h5 class="text-muted">ID</h5>
@@ -81,10 +81,10 @@ if (isset($_GET["id"])) {
                                         while ($rows = mysqli_fetch_array($ret)) {
                                         ?>
                                             <option <?php if ($rows["id"] == $row["designer_id"]) {
-                                                                        echo "selected";
-                                                                    } ?> value="<?php echo htmlentities($rows['id']); ?>"><?php
-                                                                                                    echo htmlentities($rows["designer"]);
-                                                                                                    ?></option>
+                                                        echo "selected";
+                                                    } ?> value="<?php echo htmlentities($rows['id']); ?>"><?php
+                                                                                                            echo htmlentities($rows["designer"]);
+                                                                                                            ?></option>
                                         <?php
                                         }
                                         ?>
@@ -154,6 +154,26 @@ if (isset($_GET["id"])) {
                                     <h6 class="text-danger text-center">Select: bestsellers / newarrivals / toppicksfy <br>or you can also ignore.</h6>
                                 </div>
                             </div>
+
+                            <div class="form-group py-2">
+                                <div class="input-field">
+                                    <h5 class="text-muted">Photo</h5>
+                                    <h6 class="text-muted">Old Image</h6>
+                                    <img class="error-img img-fluid" loading="lazy" src="../images/products/<?php
+                                                                                        echo htmlentities($row["id"]);
+                                                                                        ?>/<?php
+                                                                                            echo htmlentities($row["product_image"]);
+                                                                                            ?>" alt="Perfume">
+                                    <input type="hidden" name="oldimg" value="<?php
+                                                                                echo htmlentities($row["product_image"]);
+                                                                                ?>">
+                                    <h6 class="text-muted">Update Image?</h6>
+                                    <input type="file" name="newimg" class="form-control px-3 py-2">
+                                </div>
+                            </div>
+
+
+
                             <button class="btn btn-width btn-outline-warning bg-warning text-dark" name="submit" type="submit">Update</button>
                         </form>
                     <?php
@@ -182,28 +202,54 @@ if (isset($_GET["id"])) {
         $result = mysqli_query($con, $user_exist_query);
         if ($result) {
             if (mysqli_num_rows($result) > 0) {
-                $query = "UPDATE `all_products_info` SET `dept`='$_POST[dept]',`designer_id`='$_POST[designerid]',`designer`='$_POST[designer]',`item`='$_POST[item]', `description`='$_POST[description]',`upc`='$_POST[upc]', `price`='$_POST[price]',`visibility`='$_POST[visibility]' WHERE `id`='$id'";
+                if ($_FILES["newimg"]["name"] != "") {
+                    $productimage = $_FILES["newimg"]["name"];
+                    $tempname = $_FILES["newimg"]["tmp_name"];
+                    move_uploaded_file($tempname, "../images/products/$id/" . $productimage);
+
+                        $query = "UPDATE `all_products_info` SET `dept`='$_POST[dept]',`designer_id`='$_POST[designerid]',`designer`='$_POST[designer]',`item`='$_POST[item]', `description`='$_POST[description]',`upc`='$_POST[upc]', `price`='$_POST[price]',`visibility`='$_POST[visibility]', `product_image`='$productimage' WHERE `id`='$id'";
+                        if (mysqli_query($con, $query)) {
+                            echo "
+                            <script>
+                            alert('Products info updated.');
+                            window.location.href='products_info.php';
+                            </script>
+                            ";
+                                        } else {
+                                            echo "
+                            <script>
+                            alert('Server Down');
+                            window.location.href='admin_dashboard.php';
+                            </script>
+                            ";
+                                        }
+                }else{
+                    $productimage= $_POST['oldimg'];
+
+                    $query = "UPDATE `all_products_info` SET `dept`='$_POST[dept]',`designer_id`='$_POST[designerid]',`designer`='$_POST[designer]',`item`='$_POST[item]', `description`='$_POST[description]',`upc`='$_POST[upc]', `price`='$_POST[price]',`visibility`='$_POST[visibility]',`product_image`='$productimage' WHERE `id`='$id'";
                 if (mysqli_query($con, $query)) {
                     echo "
-          <script>
-          alert('Products info updated.');
-          window.location.href='products_info.php';
-          </script>
-          ";
-                } else {
-                    echo "
-          <script>
-          alert('Server Down');
-          window.location.href='owner_dashboard.php';
-          </script>
-          ";
+                        <script>
+                        alert('Products info updated.');
+                        window.location.href='products_info.php';
+                        </script>
+                        ";
+                                } else {
+                                    echo "
+                        <script>
+                        alert('Server Down');
+                        window.location.href='admin_dashboard.php';
+                        </script>
+                        ";
+                                }
+
                 }
             }
         } else {
             echo "
         <script>
         alert('Can not run query');
-        window.location.href='owner_dashboard.php';
+        window.location.href='admin_dashboard.php';
         </script>
         ";
         }

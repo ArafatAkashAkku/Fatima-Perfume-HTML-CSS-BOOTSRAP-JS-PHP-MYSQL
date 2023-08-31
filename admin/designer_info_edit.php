@@ -55,23 +55,41 @@ if (isset($_GET["id"])) {
                     $ret = mysqli_query($con, "select * from product_designer_info where id='$id'");
                     while ($row = mysqli_fetch_array($ret)) {
                     ?>
-                        <form class="p-3" action="" method="POST" autocomplete="off">
+                        <form class="p-3" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
                             <div class="form-group py-2">
                                 <div class="input-field">
                                     <h5 class="text-muted">Designer ID</h5>
                                     <input type="text" name="id" disabled class="form-control px-3 py-2" value="<?php
-                                                                                                            echo htmlentities($row["id"]);
-                                                                                                            ?>">
+                                                                                                                echo htmlentities($row["id"]);
+                                                                                                                ?>">
                                 </div>
                             </div>
                             <div class="form-group py-2">
                                 <div class="input-field">
                                     <h5 class="text-muted">Designer</h5>
                                     <input type="text" name="designer" class="form-control px-3 py-2" value="<?php
-                                                                                                            echo htmlentities($row["designer"]);
-                                                                                                            ?>">
+                                                                                                                echo htmlentities($row["designer"]);
+                                                                                                                ?>">
                                 </div>
                             </div>
+
+                            <div class="form-group py-2">
+                                <div class="input-field">
+                                    <h5 class="text-muted">Photo</h5>
+                                    <h6 class="text-muted">Old Image</h6>
+                                    <img class="error-img img-fluid" loading="lazy" src="../images/designers/<?php
+                                                                                                            echo htmlentities($row["id"]);
+                                                                                                            ?>/<?php
+                                                                                                                echo htmlentities($row["designer_image"]);
+                                                                                                                ?>" alt="Perfume">
+                                    <input type="hidden" name="oldimg" value="<?php
+                                                                                echo htmlentities($row["designer_image"]);
+                                                                                ?>">
+                                    <h6 class="text-muted">Update Image?</h6>
+                                    <input type="file" name="newimg" class="form-control px-3 py-2">
+                                </div>
+                            </div>
+
                             <button class="btn btn-width btn-outline-warning bg-warning text-dark" name="submit" type="submit">Update</button>
                         </form>
                     <?php
@@ -100,21 +118,45 @@ if (isset($_GET["id"])) {
         $result = mysqli_query($con, $user_exist_query);
         if ($result) {
             if (mysqli_num_rows($result) > 0) {
-                $query = "UPDATE `product_designer_info` SET `designer`='$_POST[designer]' WHERE `id`='$id'";
-                if (mysqli_query($con, $query)) {
-                    echo "
+                if ($_FILES["newimg"]["name"] != "") {
+                    $productimage = $_FILES["newimg"]["name"];
+                    $tempname = $_FILES["newimg"]["tmp_name"];
+                    move_uploaded_file($tempname, "../images/designers/$id/" . $productimage);
+                    $query = "UPDATE `product_designer_info` SET `designer`='$_POST[designer]',`designer_image`='$productimage' WHERE `id`='$id'";
+                    if (mysqli_query($con, $query)) {
+                        echo "
+                            <script>
+                            alert('Designer info updated.');
+                            window.location.href='designer_info.php';
+                            </script>
+                            ";
+                    } else {
+                        echo "
+                            <script>
+                            alert('Server Down');
+                            window.location.href='admin_dashboard.php';
+                            </script>
+                            ";
+                    }
+                } else {
+                    $productimage = $_POST['oldimg'];
+
+                    $query = "UPDATE `product_designer_info` SET `designer`='$_POST[designer]',`designer_image`='$productimage' WHERE `id`='$id'";
+                    if (mysqli_query($con, $query)) {
+                        echo "
           <script>
           alert('Designer info updated.');
           window.location.href='designer_info.php';
           </script>
           ";
-                } else {
-                    echo "
+                    } else {
+                        echo "
           <script>
           alert('Server Down');
           window.location.href='admin_dashboard.php';
           </script>
           ";
+                    }
                 }
             }
         } else {
