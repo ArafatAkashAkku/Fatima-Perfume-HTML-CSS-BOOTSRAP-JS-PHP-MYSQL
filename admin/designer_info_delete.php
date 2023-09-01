@@ -1,5 +1,6 @@
 <?php
-include("../config.php");
+require_once '../config.php';
+include '../dbConnect.php';
 session_start();
 if (isset($_GET['id'])) {
         $id = $_GET['id'];

@@ -1,5 +1,6 @@
 <?php
-include("../config.php");
+require_once '../config.php';
+include '../dbConnect.php';
 session_start();
 ?>
 <!DOCTYPE html>
@@ -47,8 +48,12 @@ session_start();
                 <thead>
                     <tr>
                         <th scope="col">Serial</th>
+                        <th scope="col" style="display:none;">ID</th>
                         <th scope="col">Full Name</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Shipping Address</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,12 +65,24 @@ session_start();
                     ?>
                         <tr>
                             <th scope="row"><?php echo $serial ?> </th>
+                            <td style="display:none;"><?php
+                                                        echo htmlentities($row["id"]);
+                                                        ?> </td>
                             <td><?php
                                 echo htmlentities($row["fullname"]);
                                 ?> </td>
                             <td><?php
                                 echo htmlentities($row["email"]);
                                 ?></td>
+                            <td><?php
+                                echo htmlentities($row["phone"]);
+                                ?> </td>
+                            <td><?php
+                                echo htmlentities($row["address"]);
+                                ?> </td>
+                            <td><a href="not_verified_user_info_delete.php?id=<?php
+                                                                                echo htmlentities($row['id']);
+                                                                                ?>" onclick="return checkdelete()">Delete</a></td>
                         </tr>
                     <?php
                     }
@@ -74,8 +91,12 @@ session_start();
                 <tfoot>
                     <tr>
                         <th scope="col">Serial</th>
+                        <th scope="col" style="display:none;">ID</th>
                         <th scope="col">Full Name</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Shipping Address</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </tfoot>
             </table>

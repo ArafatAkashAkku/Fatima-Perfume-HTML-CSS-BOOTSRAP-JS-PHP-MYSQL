@@ -43,8 +43,8 @@
                                     Order Details
                                 </a>
                                 <ul class="dropdown-menu bg-dark">
-                                    <li> <a class="dropdown-item text-light bg-dark" href="">Pending Orders</a></li>
-                                    <li> <a class="dropdown-item text-light bg-dark" href="">Delivered Orders</a></li>
+                                    <li> <a class="dropdown-item text-light bg-dark" href="pending_orders_info.php">Pending Orders</a></li>
+                                    <li> <a class="dropdown-item text-light bg-dark" href="delivered_orders_info.php">Delivered Orders</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">

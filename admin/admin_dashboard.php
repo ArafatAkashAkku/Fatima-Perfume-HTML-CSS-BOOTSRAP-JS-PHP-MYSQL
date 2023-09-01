@@ -1,5 +1,6 @@
 <?php
-include("../config.php");
+require_once '../config.php';
+include '../dbConnect.php';
 session_start();
 ?>
 <!DOCTYPE html>
@@ -44,32 +45,51 @@ session_start();
                 <div class="card col-sm-3 col-12">
                     <div class="card-body">
                         <h1 class="card-title">Total Users</h1>
-                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con,"SELECT id from `user_info` WHERE `verified`=1 ORDER BY id")); echo $row; ?></h2>
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con, "SELECT id from `user_info` WHERE `verified`=1 ORDER BY id"));
+                                                echo $row; ?></h2>
+                    </div>
+                </div>
+
+                <div class="card col-sm-3 col-12">
+                    <div class="card-body">
+                        <h1 class="card-title">Total Admin</h1>
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con, "SELECT id from `admin_info` WHERE `verified`=1 ORDER BY id"));
+                                                echo $row; ?></h2>
                     </div>
                 </div>
 
                 <div class="card col-sm-3 col-12">
                     <div class="card-body">
                         <h1 class="card-title">Total Products</h1>
-                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con,"SELECT id from `all_products_info` ORDER BY id")); echo $row; ?></h2>
-                    </div>
-                </div>
-
-                <div class="card col-sm-3 col-12">
-                    <div class="card-body">
-                        <h1 class="card-title">Total Delivery</h1>
-                        <p> need to work code</p>
-                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con,"SELECT id from `user_info` ORDER BY id")); echo $row; ?></h2>
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con, "SELECT id from `all_products_info` ORDER BY id"));
+                                                echo $row; ?></h2>
                     </div>
                 </div>
 
                 <div class="card col-sm-3 col-12">
                     <div class="card-body">
                         <h1 class="card-title">Total Orders</h1>
-                        <p> need to work code</p>
-                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con,"SELECT id from `user_info` ORDER BY id")); echo $row; ?></h2>
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con, "SELECT * from `orders` ORDER BY id"));
+                                                echo $row; ?></h2>
                     </div>
                 </div>
+
+                <div class="card col-sm-3 col-12">
+                    <div class="card-body">
+                        <h1 class="card-title">Total Delivery</h1>
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con, "SELECT * from `orders` WHERE deliverystatus='delivered' ORDER BY id"));
+                                                echo $row; ?></h2>
+                    </div>
+                </div>
+
+                <div class="card col-sm-3 col-12">
+                    <div class="card-body">
+                        <h1 class="card-title">Pending Orders</h1>
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con, "SELECT * from `orders` WHERE deliverystatus='pending' ORDER BY id"));
+                                                echo $row; ?></h2>
+                    </div>
+                </div>
+
             </div>
         </main>
         <!-- main end  -->

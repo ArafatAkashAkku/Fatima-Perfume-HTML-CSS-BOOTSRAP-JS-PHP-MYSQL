@@ -1,5 +1,6 @@
 <?php
-include("config.php");
+require_once 'config.php';
+include 'dbConnect.php';
 session_start();
 ?>
 <!DOCTYPE html>
@@ -72,7 +73,11 @@ session_start();
                     while ($row = mysqli_fetch_array($ret)) {
                     ?>
                         <div class="col-md-3 col-4 brand-item bg-light py-2">
-                            <img src="http://69.64.95.100/pcaimages/pricelist/I0090435.jpg" class="img-fluid mb-3 error-img" alt="Perfume" loading="lazy">
+                            <img src="images/designers/<?php
+                                                        echo htmlentities($row['id']);
+                                                        ?>/<?php
+                                                                echo htmlentities($row['designer_image']);
+                                                                ?>" class="img-fluid mb-3 error-img" alt="Perfume" loading="lazy">
                             <a class="text-dark" href="product_search_filter.php?designers%5B%5D=<?php
                                                                                                     echo htmlentities($row["id"]);
                                                                                                     ?>"><?php
@@ -101,36 +106,23 @@ session_start();
                         while ($row = mysqli_fetch_array($ret)) {
                         ?>
                             <div class="swiper-slide">
-                                <form action="manage_cart.php" method="POST">
-                                    <img src="images/products/<?php
-                                                                echo htmlentities($row['id']);
-                                                                ?>/<?php
-                                                                    echo htmlentities($row['product_image']);
-                                                                    ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                    <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
-                                                                                                            echo htmlentities($row["id"]);
-                                                                                                            ?>">
-                                        <h3><?php
-                                            echo htmlentities($row["designer"]);
-                                            ?></h3>
-                                    </a>
+                                <img src="images/products/<?php
+                                                            echo htmlentities($row['id']);
+                                                            ?>/<?php
+                                                                echo htmlentities($row['product_image']);
+                                                                ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
+                                                                                                        echo htmlentities($row["id"]);
+                                                                                                        ?>">
+                                    <h3><?php
+                                        echo htmlentities($row["designer"]);
+                                        ?></h3>
 
                                     <p>Price: $<?php
                                                 echo htmlentities($row["price"]);
                                                 ?></p>
-                                    <button class="btn btn-link" type="submit" name="Add_To_Cart">Add to Cart</button>
-                                    <input type="hidden" name="Item_Name" value='<?php
-                                                                                    echo htmlentities($row["designer"]);
-                                                                                    ?>'>
-
-                                    <input type="hidden" name="Price" value='<?php
-                                                                                echo htmlentities($row["price"]);
-                                                                                ?>'>
-                                    <input type="hidden" name="Upc" value='<?php
-                                                                            echo htmlentities($row["upc"]);
-                                                                            ?>'>
-
-                                </form>
+                                    <button class="btn btn-link">Buy Item</button>
+                                </a>
                             </div>
                         <?php
                         }
@@ -155,36 +147,23 @@ session_start();
                         while ($row = mysqli_fetch_array($ret)) {
                         ?>
                             <div class="swiper-slide">
-                                <form action="manage_cart.php" method="POST">
-                                    <img src="images/products/<?php
-                                                                echo htmlentities($row['id']);
-                                                                ?>/<?php
-                                                                    echo htmlentities($row['product_image']);
-                                                                    ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                    <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
-                                                                                                            echo htmlentities($row["id"]);
-                                                                                                            ?>">
-                                        <h3><?php
-                                            echo htmlentities($row["designer"]);
-                                            ?></h3>
-                                    </a>
+                                <img src="images/products/<?php
+                                                            echo htmlentities($row['id']);
+                                                            ?>/<?php
+                                                                echo htmlentities($row['product_image']);
+                                                                ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
+                                                                                                        echo htmlentities($row["id"]);
+                                                                                                        ?>">
+                                    <h3><?php
+                                        echo htmlentities($row["designer"]);
+                                        ?></h3>
 
                                     <p>Price: $<?php
                                                 echo htmlentities($row["price"]);
                                                 ?></p>
-                                    <button class="btn btn-link" type="submit" name="Add_To_Cart">Add to Cart</button>
-                                    <input type="hidden" name="Item_Name" value='<?php
-                                                                                    echo htmlentities($row["designer"]);
-                                                                                    ?>'>
-
-                                    <input type="hidden" name="Price" value='<?php
-                                                                                echo htmlentities($row["price"]);
-                                                                                ?>'>
-                                    <input type="hidden" name="Upc" value='<?php
-                                                                            echo htmlentities($row["upc"]);
-                                                                            ?>'>
-
-                                </form>
+                                    <button class="btn btn-link">Buy Item</button>
+                                </a>
                             </div>
                         <?php
                         }
@@ -239,36 +218,23 @@ session_start();
                         while ($row = mysqli_fetch_array($ret)) {
                         ?>
                             <div class="swiper-slide">
-                                <form action="manage_cart.php" method="POST">
-                                    <img src="images/products/<?php
-                                                                echo htmlentities($row['id']);
-                                                                ?>/<?php
-                                                                    echo htmlentities($row['product_image']);
-                                                                    ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                    <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
-                                                                                                            echo htmlentities($row["id"]);
-                                                                                                            ?>">
-                                        <h3><?php
-                                            echo htmlentities($row["designer"]);
-                                            ?></h3>
-                                    </a>
+                                <img src="images/products/<?php
+                                                            echo htmlentities($row['id']);
+                                                            ?>/<?php
+                                                                echo htmlentities($row['product_image']);
+                                                                ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
+                                                                                                        echo htmlentities($row["id"]);
+                                                                                                        ?>">
+                                    <h3><?php
+                                        echo htmlentities($row["designer"]);
+                                        ?></h3>
 
                                     <p>Price: $<?php
                                                 echo htmlentities($row["price"]);
                                                 ?></p>
-                                    <button class="btn btn-link" type="submit" name="Add_To_Cart">Add to Cart</button>
-                                    <input type="hidden" name="Item_Name" value='<?php
-                                                                                    echo htmlentities($row["designer"]);
-                                                                                    ?>'>
-
-                                    <input type="hidden" name="Price" value='<?php
-                                                                                echo htmlentities($row["price"]);
-                                                                                ?>'>
-                                    <input type="hidden" name="Upc" value='<?php
-                                                                            echo htmlentities($row["upc"]);
-                                                                            ?>'>
-
-                                </form>
+                                    <button class="btn btn-link">Buy Item</button>
+                                </a>
                             </div>
                         <?php
                         }

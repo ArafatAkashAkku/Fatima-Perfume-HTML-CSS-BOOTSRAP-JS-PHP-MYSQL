@@ -1,6 +1,6 @@
 <?php
-include("config.php");
-
+require_once 'config.php'; 
+include 'dbConnect.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;

@@ -1,6 +1,7 @@
 <?php
 session_start();
-include("config.php");
+require_once 'config.php'; 
+include 'dbConnect.php';
 
 if (isset($_POST['submit'])) {
     $query = " SELECT * FROM `user_info` WHERE `email`='$_POST[email]'";

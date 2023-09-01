@@ -1,5 +1,6 @@
 <?php
-include("config.php");
+require_once 'config.php'; 
+include 'dbConnect.php';
 session_start();
 
 ?>
@@ -61,21 +62,9 @@ session_start();
                                                                                                         echo htmlentities($items["id"]);
                                                                                                         ?>">
                                     <h5><?= $items['designer']; ?></h5>
+                                    <p>Price: $<?= $items['price']; ?></p>
+                                    <button class="btn btn-link">Buy Item</button>
                                 </a>
-                                <p>Price: $<?= $items['price']; ?></p>
-                                <form action="manage_cart.php" method="POST">
-                                    <button class="btn btn-link" type="submit" name="Add_To_Cart">Add to Cart</button>
-                                    <input type="hidden" name="Item_Name" value='<?php
-                                                                                    echo htmlentities($items["designer"]);
-                                                                                    ?>'>
-
-                                    <input type="hidden" name="Price" value='<?php
-                                                                                echo htmlentities($items["price"]);
-                                                                                ?>'>
-                                    <input type="hidden" name="Upc" value='<?php
-                                                                            echo htmlentities($items["upc"]);
-                                                                            ?>'>
-                                </form>
                             </div>
                         </div>
                     <?php

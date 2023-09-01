@@ -1,5 +1,7 @@
 <?php
-include("config.php");
+// Include configuration file  
+require_once 'config.php';
+include 'dbConnect.php';
 session_start();
 
 
@@ -26,13 +28,14 @@ if (isset($_GET["id"])) {
     <!-- favicon link  -->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <!-- website title  -->
-    <title>Product Details |
-        <?php
-        $ret = mysqli_query($con, "select * from website_info");
-        while ($row = mysqli_fetch_array($ret)) {
-            echo htmlentities($row["website_name"]);
-        } ?></title>
-
+    <title>Product Details | <?php
+                                $ret = mysqli_query($con, "select * from website_info");
+                                while ($row = mysqli_fetch_array($ret)) {
+                                    echo htmlentities($row["website_name"]);
+                                } ?>
+    </title>
+    <!-- Stripe JavaScript library -->
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 
 <body class="overflow-x-hidden">
@@ -48,45 +51,42 @@ if (isset($_GET["id"])) {
                 <div class="col-sm-12 col-12 text-center">
                     <h4>Product Details</h4>
                 </div>
+                <div id="paymentResponse"></div>
                 <?php
                 $ret = mysqli_query($con, "select * from all_products_info where id='$id'");
-                while ($row = mysqli_fetch_array($ret)) {
+                $rowitems = mysqli_fetch_array($ret, MYSQLI_ASSOC);
                 ?>
-                    <div class="col-sm-6 col-12">
-                        <img src="images/products/<?php
-                                                    echo htmlentities($row['id']);
-                                                    ?>/<?php
-                                                        echo htmlentities($row['product_image']);
-                                                        ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                    </div>
-                    <div class="col-sm-6 col-12 d-flex flex-column justify-content-center gap-3">
-                        <h3><?php
-                            echo htmlentities($row["designer"]);
-                            ?></h3>
-                        <p>Price: $<?php
-                                    echo htmlentities($row["price"]);
-                                    ?></p>
-                        <form action="manage_cart.php" method="POST">
-                            <button class="btn btn-link" type="submit" name="Add_To_Cart">Add to Cart</button>
-                            <input type="hidden" name="Item_Name" value='<?php
-                                                                            echo htmlentities($row["designer"]);
-                                                                            ?>'>
+                <div class="col-sm-6 col-12">
+                    <img src="images/products/<?php
+                                                echo ($rowitems['id']);
+                                                ?>/<?php
+                                                    echo ($rowitems['product_image']);
+                                                    ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                </div>
+                <div class="col-sm-6 col-12 d-flex flex-column justify-content-center gap-3">
+                    <h3><?php
+                        echo ($rowitems["designer"]);
+                        ?></h3>
+                    <p>Price: $<?php
+                                echo ($rowitems["price"]);
+                                ?></p>
+                    <?php
+                    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
+                    ?>
+                        <button class="btn btn-link text-start" id="payButton">Buy Now</button>
+                    <?php
+                    } else {
+                    ?>
+                        <button class="btn btn-link text-start"><a href="login.php">Buy Now</a></button>
 
-                            <input type="hidden" name="Price" value='<?php
-                                                                        echo htmlentities($row["price"]);
-                                                                        ?>'>
-                            <input type="hidden" name="Upc" value='<?php
-                                                                    echo htmlentities($row["upc"]);
-                                                                    ?>'>
-                        </form>
-                        <h6>Product Description</h6>
-                        <p><?php
-                            echo htmlentities($row["description"]);
-                            ?></p>
-                    </div>
-                <?php
-                }
-                ?>
+                    <?php
+                    }
+                    ?>
+                    <h6>Product Description</h6>
+                    <p><?php
+                        echo ($rowitems["description"]);
+                        ?></p>
+                </div>
             </div>
         </section>
 
@@ -101,35 +101,23 @@ if (isset($_GET["id"])) {
                         while ($row = mysqli_fetch_array($ret)) {
                         ?>
                             <div class="swiper-slide">
-                                <form action="manage_cart.php" method="POST">
-                                    <img src="images/products/<?php
-                                                                echo htmlentities($row['id']);
-                                                                ?>/<?php
-                                                                    echo htmlentities($row['product_image']);
-                                                                    ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                    <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
-                                                                                                            echo htmlentities($row["id"]);
-                                                                                                            ?>">
-                                        <h3><?php
-                                            echo htmlentities($row["designer"]);
-                                            ?></h3>
-                                    </a>
+                                <img src="images/products/<?php
+                                                            echo htmlentities($row['id']);
+                                                            ?>/<?php
+                                                                echo htmlentities($row['product_image']);
+                                                                ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
+                                                                                                        echo htmlentities($row["id"]);
+                                                                                                        ?>">
+                                    <h3><?php
+                                        echo htmlentities($row["designer"]);
+                                        ?></h3>
 
                                     <p>Price: $<?php
                                                 echo htmlentities($row["price"]);
                                                 ?></p>
-                                    <button class="btn btn-link" type="submit" name="Add_To_Cart">Add to Cart</button>
-                                    <input type="hidden" name="Item_Name" value='<?php
-                                                                                    echo htmlentities($row["designer"]);
-                                                                                    ?>'>
-
-                                    <input type="hidden" name="Price" value='<?php
-                                                                                echo htmlentities($row["price"]);
-                                                                                ?>'>
-                                    <input type="hidden" name="Upc" value='<?php
-                                                                            echo htmlentities($row["upc"]);
-                                                                            ?>'>
-                                </form>
+                                    <button class="btn btn-link">Buy Item</button>
+                                </a>
                             </div>
                         <?php
                         }
@@ -146,6 +134,7 @@ if (isset($_GET["id"])) {
 
     <!-- footer start  -->
     <?php include("include/footer.php") ?>
+
     <!-- footer end  -->
 
     <!-- bootstrap js link  -->
@@ -154,6 +143,55 @@ if (isset($_GET["id"])) {
     <script src="js/index.js"></script>
     <!-- swipper js link  -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <!-- internal js link  -->
+    <script>
+        var buyBtn = document.getElementById('payButton');
+        var responseContainer = document.getElementById('paymentResponse');
+        // Create a Checkout Session with the selected product
+        var createCheckoutSession = function(stripe) {
+            return fetch("stripe_charge.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    checkoutSession: 1,
+                    Name: "<?php echo $rowitems['designer']; ?>",
+                    ID: "<?php echo $rowitems['id']; ?>",
+                    Price: "<?php echo $rowitems['price']; ?>",
+                    Currency: "<?php echo $rowitems['currency']; ?>",
+                }),
+            }).then(function(result) {
+                return result.json();
+            });
+        };
+
+        // Handle any errors returned from Checkout
+        var handleResult = function(result) {
+            if (result.error) {
+                responseContainer.innerHTML = '<p>' + result.error.message + '</p>';
+            }
+            buyBtn.disabled = false;
+            buyBtn.textContent = 'Buy Now';
+        };
+
+        // Specify Stripe publishable key to initialize Stripe.js
+        var stripe = Stripe('<?php echo STRIPE_PUBLISHABLE_KEY; ?>');
+
+        buyBtn.addEventListener("click", function(evt) {
+            buyBtn.disabled = true;
+            buyBtn.textContent = 'Please wait...';
+            createCheckoutSession().then(function(data) {
+                if (data.sessionId) {
+                    stripe.redirectToCheckout({
+                        sessionId: data.sessionId,
+                    }).then(handleResult);
+                } else {
+                    handleResult(data);
+                }
+            });
+        });
+    </script>
     <script>
         // swipper for all brands 
         const allbrandswiper = new Swiper('.slider-for-all', {

@@ -1,5 +1,6 @@
 <?php
-include("config.php");
+require_once 'config.php'; 
+include 'dbConnect.php';
 session_start();
 $email = "";
 $id = "";
@@ -72,6 +73,22 @@ if (isset($_GET["email"]) & isset($_GET["id"])) {
                             </div>
                             <div class="form-group py-2">
                                 <div class="input-field">
+                                    <h5 class="text-muted">Phone No</h5>
+                                    <input type="number" name="phone" class="form-control px-3 py-2" value="<?php
+                                                                                                                echo htmlentities($row["phone"]);
+                                                                                                                ?>">
+                                </div>
+                            </div>
+                            <div class="form-group py-2">
+                                <div class="input-field">
+                                    <h5 class="text-muted">Billing Address</h5>
+                                    <input type="text" name="address" class="form-control px-3 py-2" value="<?php
+                                                                                                                echo htmlentities($row["address"]);
+                                                                                                                ?>">
+                                </div>
+                            </div>
+                            <div class="form-group py-2">
+                                <div class="input-field">
                                     <h5 class="text-muted">Password</h5>
                                     <input type="password" id="myInput" name="password" class="form-control px-3 py-2" value="<?php
                                                                                                                                 echo htmlentities($row["password"]);
@@ -119,7 +136,7 @@ if (isset($_GET["email"]) & isset($_GET["id"])) {
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
         if ($result) {
             if (mysqli_num_rows($result) > 0) {
-                $query = "UPDATE `user_info` SET `fullname`='$_POST[fullname]',`password`='$password' WHERE `email`='$email' and `id`='$id'";
+                $query = "UPDATE `user_info` SET `fullname`='$_POST[fullname]',`password`='$password',`phone`='$_POST[phone]',`address`='$_POST[address]' WHERE `email`='$email' and `id`='$id'";
                 if (mysqli_query($con, $query)) {
                     echo "
           <script>

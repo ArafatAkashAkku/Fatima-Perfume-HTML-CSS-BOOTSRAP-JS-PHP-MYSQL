@@ -1,5 +1,6 @@
 <?php
-include("config.php");
+require_once 'config.php'; 
+include 'dbConnect.php';
 session_start();
 
 ?>
@@ -45,11 +46,13 @@ session_start();
                 <form class="p-3" action="loginprocessing.php" method="POST" autocomplete="off">
                     <div class="form-group py-2">
                         <div class="input-field">
+                            <h5 class="text-muted">Email</h5>
                             <input type="email" name="email" placeholder="Enter your Email" required class="form-control px-3 py-2">
                         </div>
                     </div>
                     <div class="form-group py-2">
                         <div class="input-field">
+                            <h5 class="text-muted">Password</h5>
                             <input type="password" id="myInput" name="password" placeholder="Enter your Password" required class="form-control px-3 py-2 ">
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 <?php
 
-include("config.php");
+require_once 'config.php'; 
+include 'dbConnect.php';
 session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -64,7 +65,7 @@ if (isset($_POST['submit'])) {
     } else {
       $v_code = bin2hex(random_bytes(16));
       $password = password_hash($_POST['password'],PASSWORD_BCRYPT);
-      $query = "INSERT INTO `user_info`(`email`, `password`,`fullname`,`v_code`,`verified`) VALUES ('$_POST[email]','$password','$_POST[fullname]', '$v_code','0')";
+      $query = "INSERT INTO `user_info`(`email`, `password`,`fullname`,`v_code`,`verified`,`phone`,`address`) VALUES ('$_POST[email]','$password','$_POST[fullname]', '$v_code','0','$_POST[phone]','$_POST[address]')";
       if(mysqli_query($con,$query) && sendMail($_POST['email'],$v_code))
       {
         echo "

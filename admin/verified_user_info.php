@@ -1,5 +1,6 @@
 <?php
-include("../config.php");
+require_once '../config.php';
+include '../dbConnect.php';
 session_start();
 ?>
 <!DOCTYPE html>
@@ -49,6 +50,8 @@ session_start();
                         <th scope="col">Serial</th>
                         <th scope="col">Full Name</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Shipping Address</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,6 +69,12 @@ session_start();
                             <td><?php
                                 echo htmlentities($row["email"]);
                                 ?></td>
+                            <td><?php
+                                echo htmlentities($row["phone"]);
+                                ?> </td>
+                            <td><?php
+                                echo htmlentities($row["address"]);
+                                ?></td>
                         </tr>
                     <?php
                     }
@@ -76,6 +85,8 @@ session_start();
                         <th scope="col">Serial</th>
                         <th scope="col">Full Name</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Shipping Address</th>
                     </tr>
                 </tfoot>
             </table>

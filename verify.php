@@ -1,6 +1,7 @@
 <?php
 session_start();
-include("config.php");
+require_once 'config.php'; 
+include 'dbConnect.php';
 
 if (isset($_GET['email']) && isset($_GET['v_code'])) {
     $query = "SELECT * from `user_info` WHERE `email`='$_GET[email]' AND `v_code`='$_GET[v_code]'";

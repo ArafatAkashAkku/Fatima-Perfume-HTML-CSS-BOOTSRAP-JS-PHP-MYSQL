@@ -1,6 +1,8 @@
 <?php
-include("config.php");
+require_once 'config.php';
+include 'dbConnect.php';
 session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +21,10 @@ session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
     <!-- favicon link  -->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <!-- datatables net  -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <!-- website title  -->
     <title>Cart |
         <?php
@@ -38,71 +44,100 @@ session_start();
         <!-- header end  -->
 
         <!-- main start  -->
-        <main>
+        <main class="mx-4 my-3 overflow-scroll">
+            <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th scope="col">Serial</th>
+                        <th scope="col" style="display:none;">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Item No</th>
+                        <th scope="col">Item Name</th>
+                        <th scope="col">Item Price</th>
+                        <th scope="col">Payment Status</th>
+                        <th scope="col">Shipping Address</th>
+                        <th scope="col">Transaction ID</th>
+                        <th scope="col">Status</th>
 
-            <div class="mx-4 text-center">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <h4>My Cart</h4>
-                    </div>
-                    <div class="col-lg-8 overflow-scroll">
-                        <table class="table">
-                            <thead class="text-center">
-                                <tr>
-                                    <th scope="col">Serial No.</th>
-                                    <th scope="col">Item Name</th>
-                                    <th scope="col">Item Price</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Total</th>
-                                    <th scope="col">Remove</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center">
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $ret = mysqli_query($con, "select * from orders where email='$_SESSION[email]' or name='$_SESSION[fullname]'");
+                    $serial = 0;
+                    while ($row = mysqli_fetch_array($ret)) {
+                        $serial = $serial + 1;
+                    ?>
+                        <tr>
+                            <th scope="row"><?php echo $serial ?> </th>
+                            <td style="display:none;"><?php
+                                                        echo htmlentities($row["id"]);
+                                                        ?> </td>
+                            <td><?php
+                                echo htmlentities($row["name"]);
+                                ?> </td>
+                            <td><?php
+                                echo htmlentities($row["email"]);
+                                ?></td>
+                            <td>
                                 <?php
-                                $serial = 0;
-                                if (isset($_SESSION['cart'])) {
-                                    foreach ($_SESSION['cart'] as $key => $value) {
-                                        $serial = $serial + 1;
-                                        echo "
-                                <tr>
-                                <th>$serial</th>
-                                <td>$value[Item_Name]</td>
-                                <td>$$value[Price]<input type='hidden' class='iprice' value='$value[Price]'></td>
-                                <td><input class='text-center iquantity' onchange='subTotal()' type='number' value='$value[Quantity]' min='1' max='10'></td>
-                                <td>$<span class='itotal'></span></td>
-                                <td>
-                                <form action='manage_cart.php' method='POST'>
-                                <button name='Remove_Item' class='btn btn-sm btn-outline-danger'>Remove</button>
-                                <input type='hidden' name='Upc' value='$value[Upc]'>
-                                </form>
-                                </td>
-                            </tr>
-                            ";
-                                    }
-                                }
-                                else{
-                                    echo"
-                                    <tr>
-                                    <th>$serial</th>
-                                    <td colspan='5'>No Items</td>
-                                </tr>
-                                    ";
+                                $rets = mysqli_query($con, "select * from all_products_info");
+                                $rows = mysqli_fetch_array($rets);
+                                if ($rows["id"] === $row["item_number"]) {
+                                    echo $rows["item"];
                                 }
                                 ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="border bg-light rounded p-4">
-                            <h3>Grand Total:</h3>
-                            <h5 class="text-right">$<span id="gtotal"></span></h5>
-                            <form action="">
-                                <button class="btn btn-primary btn-block">Purchase</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            </td>
+                            <td><?php
+                                echo htmlentities($row["item_name"]);
+                                ?> </td>
+                            <td>$ <?php
+                                    echo htmlentities($row["item_price"]);
+                                    ?> </td>
+                            <td><?php
+                                echo htmlentities($row["payment_status"]);
+                                ?> </td>
+                            <td>
+                                <?php
+                                $rets = mysqli_query($con, "select * from user_info");
+                                $rows = mysqli_fetch_array($rets);
+                                if ($rows["fullname"] === $row["name"]) {
+                                    echo $rows["address"];
+                                } elseif ($rows["email"] === $row["email"]) {
+                                    echo $rows["address"];
+                                } else {
+                                    echo "No Address";
+                                }
+                                ?>
+                            </td>
+                            <td><?php
+                                echo htmlentities($row["txn_id"]);
+                                ?> </td>
+                            <td><?php
+                                echo htmlentities($row["deliverystatus"]);
+                                ?> </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="col">Serial</th>
+                        <th scope="col" style="display:none;">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Item No</th>
+                        <th scope="col">Item Name</th>
+                        <th scope="col">Item Price</th>
+                        <th scope="col">Payment Status</th>
+                        <th scope="col">Shipping Address</th>
+                        <th scope="col">Transaction ID</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </tfoot>
+            </table>
         </main>
         <!-- main end  -->
 
@@ -111,13 +146,12 @@ session_start();
         <!-- footer end  -->
     <?php
     } else {
-    echo "<script>
-            alert('You need to log in first');
-            window.location.href='login.php';
-            </script>";
+        echo "<script>
+                alert('You need to log in first');
+                window.location.href='index.php';
+                </script>";
     }
     ?>
-
 
     <!-- bootstrap js link  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -125,24 +159,13 @@ session_start();
     <script src="js/index.js"></script>
     <!-- swipper js link  -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <!-- jquery js  -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- datatables net  -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
-        let iprice = document.getElementsByClassName('iprice');
-        let iquantity = document.getElementsByClassName('iquantity');
-        let itotal = document.getElementsByClassName('itotal');
-        let gtotal = document.getElementById("gtotal");
-        let gt = 0;
-
-        function subTotal() {
-            gt = 0
-            for (i = 0; i < iprice.length; i++) {
-                itotal[i].innerText = (iprice[i].value) * (iquantity[i].value);
-                gt = gt + (iprice[i].value) * (iquantity[i].value);
-            }
-            gtotal.innerText = gt;
-        }
-        subTotal();
+        new DataTable('#example');
     </script>
-
 </body>
 
 </html>

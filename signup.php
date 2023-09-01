@@ -1,6 +1,7 @@
 <?php
 
-include("config.php");
+require_once 'config.php'; 
+include 'dbConnect.php';
 session_start();
 
 ?>
@@ -47,18 +48,40 @@ session_start();
                 <form class="p-3" action="signupprocessing.php" method="POST" autocomplete="off">
                     <div class="form-group py-2">
                         <div class="input-field">
+                            <h5 class="text-muted">Full Name</h5>
                             <input type="text" name="fullname" placeholder="Enter your full name" required class="form-control px-3 py-2">
                         </div>
                     </div>
                     <div class="form-group py-2">
                         <div class="input-field">
+                            <h5 class="text-muted">Email</h5>
                             <input type="email" name="email" placeholder="Enter your email" required class="form-control px-3 py-2">
                         </div>
                     </div>
                     <div class="form-group py-2">
                         <div class="input-field">
-                            <input type="password" name="password" placeholder="Enter your password" required class="form-control px-3 py-2 ">
+                            <h5 class="text-muted">Phone No</h5>
+                            <input type="number" name="phone" placeholder="Enter your phone no" required class="form-control px-3 py-2">
                         </div>
+                    </div>
+                    <div class="form-group py-2">
+                        <div class="input-field">
+                            <h5 class="text-muted">Shipping Address</h5>
+                            <input type="text" name="address" placeholder="Enter your address" required class="form-control px-3 py-2">
+                        </div>
+                    </div>
+                    <div class="form-group py-2">
+                        <div class="input-field">
+                            <h5 class="text-muted">Password</h5>
+                            <input type="password" id="myInput" name="password" placeholder="Enter your password" required class="form-control px-3 py-2 ">
+                        </div>
+                    </div>
+                    <div class="form-group py-2">
+                        <label for="showpass">
+                            <div class="input-field">
+                                <input type="checkbox" id="showpass" onclick="myFunction()">&nbsp;Show Password
+                            </div>
+                        </label>
                     </div>
                     <button class="btn btn-width btn-outline-warning bg-warning text-dark" name="submit" type="submit">Sign Up</button>
                     <div class="text-center mt-3 text-muted">Already a member? <a href="login.php">Sign In</a></div>
@@ -83,6 +106,16 @@ session_start();
     <!-- swipper js link  -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <!-- internal script link  -->
+    <script>
+        function myFunction() {
+            let x = document.getElementById("myInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
 </body>
 
 </html>
