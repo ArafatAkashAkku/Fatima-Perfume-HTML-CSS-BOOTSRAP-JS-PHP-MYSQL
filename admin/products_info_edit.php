@@ -160,7 +160,7 @@ if (isset($_GET["id"])) {
                                 <div class="input-field">
                                     <h5 class="text-muted">Photo</h5>
                                     <h6 class="text-muted">Old Image</h6>
-                                    <img class="error-img img-fluid" loading="lazy" src="../images/products/<?php
+                                    <img style="width: 200px;height:200px" class="error-img" loading="lazy" src="../images/products/<?php
                                                                                         echo htmlentities($row["id"]);
                                                                                         ?>/<?php
                                                                                             echo htmlentities($row["product_image"]);

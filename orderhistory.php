@@ -1,7 +1,8 @@
 <?php
-require_once '../config.php';
-include '../dbConnect.php';
+require_once 'config.php';
+include 'dbConnect.php';
 session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,13 +20,13 @@ session_start();
     <!-- font awesome cdn 6.3.0 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
     <!-- favicon link  -->
-    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <!-- datatables net  -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <!-- website title  -->
-    <title>Designer Info |
+    <title>Order History |
         <?php
         $ret = mysqli_query($con, "select * from website_info");
         while ($row = mysqli_fetch_array($ret)) {
@@ -36,7 +37,7 @@ session_start();
 
 <body class="overflow-x-hidden">
     <?php
-    if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] == true) {
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
     ?>
         <!-- header start  -->
         <?php include("include/header.php") ?>
@@ -44,53 +45,54 @@ session_start();
 
         <!-- main start  -->
         <main class="mx-4 my-3 overflow-scroll">
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-link text-decoration-none "><a class="text-decoration-none bg-warning text-dark px-3 py-1 border border-warning rounded" href="index.php">Continue shopping</a></button>
+            </div>
             <table id="example" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
-                        <th scope="col">Serial</th>
-                        <th scope="col" style="display: none;">ID</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Designer</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Order Decription</th>
+                        <th scope="col">Transaction ID</th>
+                        <th scope="col">Delivery Status</th>
+                        <th scope="col">Order Date</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $serial = 0;
-                    $ret = mysqli_query($con, "select * from product_designer_info");
-                    while ($row = mysqli_fetch_array($ret)) {
-                        $serial = $serial + 1;
-                    ?>
+                    $ret = mysqli_query($con, "select * from orders where email='$_SESSION[email]'");
+                    while ($row = mysqli_fetch_array($ret)) { ?>
                         <tr>
-                            <th scope="row"><?php echo $serial ?> </th>
-                            <td><img style="width
-                            50px; height:50px" src="../images/designers/<?php echo htmlentities($row["id"]); ?>/<?php echo htmlentities($row["designer_image"]); ?>" alt="Perfume"></td>
-                            <td style="display: none;"><?php
-                                                        echo htmlentities($row["id"]);
-                                                        ?> </td>
-                            <td><?php
-                                echo htmlentities($row["designer"]);
-                                ?> </td>
-                            <td><a href="designer_info_edit.php?id=<?php
-                                                                    echo htmlentities($row['id']);
-                                                                    ?>" class="pe-1">Edit</a><a href="designer_info_delete.php?id=<?php
-                                                                                                                                    echo htmlentities($row['id']);
-                                                                                                                                    ?>" onclick="return checkdelete()" class="ps-1">Delete</a></td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Item Price</th>
+                                        <th>Item Quantity</th>
+                                        <th>Item No</th>
+                                    </tr>
+                                    <tr  class="text-center">
+                                        <?php echo $row['orderdescription']; ?>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td><?php echo $row["txn_id"]; ?></td>
+                            <td><?php echo $row["deliverystatus"]; ?> </td>
+                            <td><?php echo $row["modified"]; ?></td>
                         </tr>
-                    <?php
-                    }
+                    <?php }
                     ?>
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th scope="col">Serial</th>
-                        <th scope="col" style="display: none;">ID</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Designer</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Order Decription</th>
+                        <th scope="col">Transaction ID</th>
+                        <th scope="col">Delivery Status</th>
+                        <th scope="col">Order Date</th>
                     </tr>
                 </tfoot>
             </table>
+            <?php
+            ?>
         </main>
         <!-- main end  -->
 
@@ -105,6 +107,7 @@ session_start();
                 </script>";
     }
     ?>
+
     <!-- bootstrap js link  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- external js link  -->
@@ -118,11 +121,7 @@ session_start();
     <script>
         new DataTable('#example');
     </script>
-    <script>
-        function checkdelete() {
-            return confirm('Are you sure want to delete?')
-        }
-    </script>
+
 </body>
 
 </html>

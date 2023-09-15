@@ -15,17 +15,45 @@
 
 /* html body start  */
 
-html{
+html {
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
 
 /* html body end */
 
+.banner-img {
+    width: 100% !important;
+    height: 90vh !important;
+}
+
+.product-img {
+    height: 200px!important;
+    width: 100%!important;
+}
+
+.slider-for-all{
+    position: static!important;
+}
+
+.slider-for-review{
+    position: static!important;
+
+}
+
+.swipper-arrow{
+    position: relative!important;
+}
+
+.product-detail-img{
+    width: 100%!important;
+    height: 350px!important;
+}
+
 /* view all brands section start  */
 
-#view-all-brands{
-background-color: rgba(191,198,254,.25);
+#view-all-brands {
+    background-color: rgba(191, 198, 254, .25);
 }
 
 .brand-item {
@@ -50,23 +78,23 @@ background-color: rgba(191,198,254,.25);
 
 /* best sellers section start  */
 
-#best-sellers{
-background-color: #fff;
+#best-sellers {
+    background-color: #fff;
 }
 
 /* best sellers section start  */
 
 /* reviews section start  */
 
-.review-bg{
-background-color: rgba(191,198,254,.25);
+.review-bg {
+    background-color: rgba(191, 198, 254, .25);
 }
 
-.error-img{
-    background-image: url(../images/loader-gif.gif)!important;
-    background-position: center!important;
-    background-repeat: no-repeat!important;
-    background-size: auto!important;
+.error-img {
+    background-image: url(../images/loader-gif.gif) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: auto !important;
 }
 
 /* reviews section end  */
@@ -137,9 +165,19 @@ background-color: rgba(191,198,254,.25);
 }
 
 @media screen and (max-width:770px) {
+
     .swiper-button-next,
-    .swiper-button-prev{
-        display: none!important;
+    .swiper-button-prev {
+        display: none !important;
+    }
+
+    .banner-img {
+        width: 100% !important;
+        height: 20vh !important;
+    }
+
+    .swipper-arrow{
+        padding: 0 10px!important;
     }
 
 }

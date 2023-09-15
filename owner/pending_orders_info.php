@@ -44,91 +44,107 @@ session_start();
 
         <!-- main start  -->
         <main class="mx-4 my-3 overflow-scroll">
-            <table id="example" class="table table-striped" style="width:100%">
-                <thead>
+            <table id="example" class="table table-striped" style="width:100%;">
+            <thead>
+                <tr>
+                    <th scope="col">Serial</th>
+                    <th scope="col" style="display:none;">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone No</th>
+                    <th scope="col">Shipping Address</th>
+                    <th scope="col">Item Description</th>
+                    <th scope="col">Transaction ID</th>
+                    <th scope="col">Payment Status</th>
+                    <th scope="col">Delivery Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $ret = mysqli_query($con, "select * from orders where deliverystatus='pending'");
+                $serial = 0;
+                while ($row = mysqli_fetch_array($ret)) {
+                    $serial = $serial + 1;
+                ?>
                     <tr>
-                        <th scope="col">Serial</th>
-                        <th scope="col" style="display:none;">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Item No</th>
-                        <th scope="col">Item Name</th>
-                        <th scope="col">Item Price</th>
-                        <th scope="col">Payment Status</th>
-                        <th scope="col">Shipping Address</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $ret = mysqli_query($con, "select * from orders where deliverystatus='pending'");
-                    $serial = 0;
-                    while ($row = mysqli_fetch_array($ret)) {
-                        $serial = $serial + 1;
-                    ?>
-                        <tr>
-                            <th scope="row"><?php echo $serial ?> </th>
-                            <td style="display:none;"><?php
-                                                        echo htmlentities($row["id"]);
-                                                        ?> </td>
-                            <td><?php
-                                echo htmlentities($row["name"]);
-                                ?> </td>
-                            <td><?php
-                                echo htmlentities($row["email"]);
-                                ?></td>
-                            <td>
+                        <th scope="row"><?php echo $serial ?> </th>
+                        <td style="display:none;"><?php
+                                                    echo htmlentities($row["id"]);
+                                                    ?> </td>
+                        <td><?php
+                            echo htmlentities($row["name"]);
+                            ?> </td>
+                        <td><?php
+                            echo htmlentities($row["email"]);
+                            ?></td>
+                        <td>
                             <?php
-                                $rets = mysqli_query($con, "select * from all_products_info");
-                                $rows = mysqli_fetch_array($rets);
-                                    if ($rows["id"] === $row["item_number"]) {
-                                        echo $rows["item"];
-                                    } 
-                                ?>
-                            </td>
-                            <td><?php
-                                echo htmlentities($row["item_name"]);
-                                ?> </td>
-                            <td>$ <?php
-                                echo htmlentities($row["item_price"]);
-                                ?> </td>
-                            <td><?php
-                                echo htmlentities($row["payment_status"]);
-                                ?> </td>
-                            <td>
-                                <?php
-                                $rets = mysqli_query($con, "select * from user_info");
-                                $rows = mysqli_fetch_array($rets);
-                                    if ($rows["fullname"] === $row["name"]) {
-                                        echo $rows["address"];
-                                    } elseif ($rows["email"] === $row["email"]) {
-                                        echo $rows["address"];
-                                    } else {
-                                        echo "No Address";
-                                    }
-                                ?>
-                            </td>
-                            <td><a href="pending_orders_info_edit.php?id=<?php echo htmlentities($row['id']);
-                                                                            ?>">Edit</a></td>
-                        </tr>
-                    <?php
-                    }
-                    ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th scope="col">Serial</th>
-                        <th scope="col" style="display:none;">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Item No</th>
-                        <th scope="col">Item Name</th>
-                        <th scope="col">Item Price</th>
-                        <th scope="col">Payment Status</th>
-                        <th scope="col">Shipping Address</th>
-                        <th scope="col">Action</th>
+                            $rets = mysqli_query($con, "select * from user_info");
+                            $rows = mysqli_fetch_array($rets);
+                            if ($rows["email"] === $row["email"]) {
+                                echo $rows["phone"];
+                            }
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                            $rets = mysqli_query($con, "select * from user_info");
+                            $rows = mysqli_fetch_array($rets);
+                            if ($rows["email"] === $row["email"]) {
+                                echo $rows["address"];
+                            } else {
+                                echo "No Address";
+                            }
+                            ?>
+                        </td>
+                        <td>
+                            <table class="text-center">
+                                <tr>
+                                    <th>Name&nbsp;</th>
+                                    <th>Price&nbsp;</th>
+                                    <th>Quantity&nbsp;</th>
+                                    <th>No&nbsp;</th>
+                                </tr>
+                                <tr>
+                                    <?php
+                                    echo $row['orderdescription'];
+                                    ?>
+                                    <br>
+                                </tr>
+                            </table>
+                        </td>
+                        <td><?php
+                            echo htmlentities($row["txn_id"]);
+                            ?> </td>
+                        <td><?php
+                            echo htmlentities($row["payment_status"]);
+                            ?> </td>
+                        <td><?php
+                            echo $row['deliverystatus'];
+                            ?></td>
+                        <td><a onclick="return update()" href="pending_orders_info_edit.php?id=<?php echo htmlentities($row['id']);
+                                                                        ?>">Delivered?</a></td>
                     </tr>
-                </tfoot>
+                <?php
+                }
+                ?>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th scope="col">Serial</th>
+                    <th scope="col" style="display:none;">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone No</th>
+                    <th scope="col">Shipping Address</th>
+                    <th scope="col">Item Description</th>
+                    <th scope="col">Transaction ID</th>
+                    <th scope="col">Payment Status</th>
+                    <th scope="col">Delivery Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </tfoot>
             </table>
         </main>
         <!-- main end  -->
@@ -157,7 +173,11 @@ session_start();
     <script>
         new DataTable('#example');
     </script>
-
+    <script>
+        function update() {
+            return confirm('Are you sure want to update?')
+        }
+    </script>
 </body>
 
 </html>

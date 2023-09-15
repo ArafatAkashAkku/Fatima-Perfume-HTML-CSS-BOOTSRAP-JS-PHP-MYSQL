@@ -1,8 +1,56 @@
 <?php
-require_once 'config.php'; 
+require_once 'config.php';
 include 'dbConnect.php';
 session_start();
 
+
+
+if (isset($_POST['item']) && $_POST['item'] != "") {
+    $item = $_POST['item'];
+    $result = mysqli_query($con, "SELECT * FROM `all_products_info` WHERE `item`='$item'");
+    $row = mysqli_fetch_assoc($result);
+    $name = $row['designer'];
+    $price = $row['price'];
+    $item = $row['item'];
+    $image = $row['product_image'];
+    $id = $row['id'];
+
+    $cartArray = array(
+        $item => array(
+            'name' => $name,
+            'price' => $price,
+            'quantity' => 1,
+            'item' => $item,
+            'image' => $image,
+            'id' => $id
+        )
+    );
+
+    if (empty($_SESSION["shopping_cart"])) {
+        $_SESSION["shopping_cart"] = $cartArray;
+        echo "
+        <script>
+        alert('Product is added to your cart!');
+        </script>
+        ";
+    } else {
+        $array_keys = array_keys($_SESSION["shopping_cart"]);
+        if (in_array($item, $array_keys)) {
+            echo "
+            <script>
+            alert('Product is already added to your cart!');
+            </script>
+            ";
+        } else {
+            $_SESSION["shopping_cart"] = array_merge($_SESSION["shopping_cart"], $cartArray);
+            echo "
+        <script>
+        alert('Product is added to your cart!');
+        </script>
+        ";
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,15 +104,22 @@ session_start();
                     foreach ($query_run as $items) {
             ?>
                         <div class="col-md-4 col-6 mt-3 text-center">
-                            <div class="border border-warning p-2">
-                                <img src="images/products/<?= $items['id']; ?>/<?= $items['product_image']; ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
-                                                                                                        echo htmlentities($items["id"]);
-                                                                                                        ?>">
-                                    <h5><?= $items['designer']; ?></h5>
+                            <div class="border border-warning bg-light">
+                                <form action="" method="post">
+                                    <div class="product-img">
+                                        <img src="images/products/<?= $items['id']; ?>/<?= $items['product_image']; ?>" class="product-img mb-3 bg-light error-img" alt="Perfume" loading="lazy">
+                                    </div>
+                                    <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
+                                                                                                            echo htmlentities($items["id"]);
+                                                                                                            ?>">
+                                        <h5><?= $items['designer']; ?></h5>
+                                    </a>
                                     <p>Price: $<?= $items['price']; ?></p>
-                                    <button class="btn btn-link">Buy Item</button>
-                                </a>
+                                    <input type="hidden" name="item" value="<?php
+                                                                            echo htmlentities($items["item"]);
+                                                                            ?>">
+                                    <button type="submit" class="btn btn-link text-decoration-none border border-warning text-dark px-4 py-1 rounded-pill bg-warning mb-2">Add to Cart</button>
+                                </form>
                             </div>
                         </div>
                     <?php

@@ -3,6 +3,31 @@ require_once 'config.php';
 include 'dbConnect.php';
 session_start();
 
+if (isset($_POST['action']) && $_POST['action'] == "remove") {
+    if (!empty($_SESSION["shopping_cart"])) {
+        foreach ($_SESSION["shopping_cart"] as $key => $value) {
+            if ($_POST["item"] == $key) {
+                unset($_SESSION["shopping_cart"][$key]);
+                echo "
+                <script>
+                alert('Product is removed from your cart!');
+                </script>
+                ";
+            }
+            if (empty($_SESSION["shopping_cart"]))
+                unset($_SESSION["shopping_cart"]);
+        }
+    }
+}
+
+if (isset($_POST['action']) && $_POST['action'] == "change") {
+    foreach ($_SESSION["shopping_cart"] as &$value) {
+        if ($value['item'] === $_POST["item"]) {
+            $value['quantity'] = $_POST["quantity"];
+            break; // Stop the loop after we've found the product
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,99 +70,80 @@ session_start();
 
         <!-- main start  -->
         <main class="mx-4 my-3 overflow-scroll">
-            <table id="example" class="table table-striped" style="width:100%">
-                <thead>
-                    <tr>
-                        <th scope="col">Serial</th>
-                        <th scope="col" style="display:none;">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Item No</th>
-                        <th scope="col">Item Name</th>
-                        <th scope="col">Item Price</th>
-                        <th scope="col">Payment Status</th>
-                        <th scope="col">Shipping Address</th>
-                        <th scope="col">Transaction ID</th>
-                        <th scope="col">Status</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $ret = mysqli_query($con, "select * from orders where email='$_SESSION[email]' or name='$_SESSION[fullname]'");
-                    $serial = 0;
-                    while ($row = mysqli_fetch_array($ret)) {
-                        $serial = $serial + 1;
-                    ?>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-link text-decoration-none "><a class="text-decoration-none bg-warning text-dark px-3 py-1 border border-warning rounded" href="orderhistory.php">Order History</a></button>
+                <button class="btn btn-link text-decoration-none "><a class="text-decoration-none bg-warning text-dark px-3 py-1 border border-warning rounded" href="index.php">Continue shopping</a></button>
+            </div>
+            <?php
+            if (isset($_SESSION["shopping_cart"])) {
+                $total_price = 0;
+            ?>
+                <table id="example" class="table table-striped" style="width:100%">
+                    <thead>
                         <tr>
-                            <th scope="row"><?php echo $serial ?> </th>
-                            <td style="display:none;"><?php
-                                                        echo htmlentities($row["id"]);
-                                                        ?> </td>
-                            <td><?php
-                                echo htmlentities($row["name"]);
-                                ?> </td>
-                            <td><?php
-                                echo htmlentities($row["email"]);
-                                ?></td>
-                            <td>
-                                <?php
-                                $rets = mysqli_query($con, "select * from all_products_info");
-                                $rows = mysqli_fetch_array($rets);
-                                if ($rows["id"] === $row["item_number"]) {
-                                    echo $rows["item"];
-                                }
-                                ?>
-                            </td>
-                            <td><?php
-                                echo htmlentities($row["item_name"]);
-                                ?> </td>
-                            <td>$ <?php
-                                    echo htmlentities($row["item_price"]);
-                                    ?> </td>
-                            <td><?php
-                                echo htmlentities($row["payment_status"]);
-                                ?> </td>
-                            <td>
-                                <?php
-                                $rets = mysqli_query($con, "select * from user_info");
-                                $rows = mysqli_fetch_array($rets);
-                                if ($rows["fullname"] === $row["name"]) {
-                                    echo $rows["address"];
-                                } elseif ($rows["email"] === $row["email"]) {
-                                    echo $rows["address"];
-                                } else {
-                                    echo "No Address";
-                                }
-                                ?>
-                            </td>
-                            <td><?php
-                                echo htmlentities($row["txn_id"]);
-                                ?> </td>
-                            <td><?php
-                                echo htmlentities($row["deliverystatus"]);
-                                ?> </td>
+                            <th scope="col">Product Image</th>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Unit Price</th>
+                            <th scope="col">Items Total</th>
+                            <th scope="col">Remove</th>
                         </tr>
-                    <?php
-                    }
-                    ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th scope="col">Serial</th>
-                        <th scope="col" style="display:none;">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Item No</th>
-                        <th scope="col">Item Name</th>
-                        <th scope="col">Item Price</th>
-                        <th scope="col">Payment Status</th>
-                        <th scope="col">Shipping Address</th>
-                        <th scope="col">Transaction ID</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </tfoot>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($_SESSION["shopping_cart"] as $product) {
+                        ?>
+                            <tr>
+                                <td><img src='images/products/<?php
+                                                                echo ($product['id']);
+                                                                ?>/<?php echo $product["image"]; ?>' width="70" height="50" /></td>
+                                <td><?php echo $product["name"]; ?></td>
+                                <td>
+                                    <form method='post' action=''>
+                                        <input type='hidden' name='item' value="<?php echo $product["item"]; ?>" />
+                                        <input type='hidden' name='action' value="change" />
+                                        <select name='quantity' class='quantity' onchange="this.form.submit()">
+                                            <option <?php if ($product["quantity"] == 1) echo "selected"; ?> value="1">1</option>
+                                            <option <?php if ($product["quantity"] == 2) echo "selected"; ?> value="2">2</option>
+                                            <option <?php if ($product["quantity"] == 3) echo "selected"; ?> value="3">3</option>
+                                            <option <?php if ($product["quantity"] == 4) echo "selected"; ?> value="4">4</option>
+                                            <option <?php if ($product["quantity"] == 5) echo "selected"; ?> value="5">5</option>
+                                            <option <?php if ($product["quantity"] == 6) echo "selected"; ?> value="6">6</option>
+                                            <option <?php if ($product["quantity"] == 7) echo "selected"; ?> value="7">7</option>
+                                            <option <?php if ($product["quantity"] == 8) echo "selected"; ?> value="8">8</option>
+                                            <option <?php if ($product["quantity"] == 9) echo "selected"; ?> value="9">9</option>
+                                            <option <?php if ($product["quantity"] == 10) echo "selected"; ?> value="10">10</option>
+                                        </select>
+                                    </form>
+                                </td>
+                                <td><?php echo "$" . $product["price"]; ?></td>
+                                <td><?php echo "$" . $product["price"] * $product["quantity"]; ?></td>
+                                <td>
+                                    <form method='post' action=''>
+                                        <input type='hidden' name='item' value="<?php echo $product["item"]; ?>" />
+                                        <input type='hidden' name='action' value="remove" />
+                                        <button type='submit' class='remove px-3 py-1 bg-danger border text-light border-warning rounded'>Remove Item</button>
+                                    </form>
+                                </td>
+                            </tr>
+                    </tbody>
+                <?php
+                            $total_price += ($product["price"] * $product["quantity"]);
+                        }
+                ?>
+                <td colspan="6" class="text-center">
+                    <strong>TOTAL: <?php echo "$" . $total_price; ?></strong>
+                </td>
+                </table>
+                <div class="bg-warning text-center border border-warning rounded">
+                    <button class="btn btn-link text-decoration-none text-dark" id="payButton">Proceed to Checkout</button>
+                </div>
+                <div id="paymentResponse" class="text-center"></div>
+            <?php
+            } else {
+                echo "<h3 class='text-center'>Your cart is empty!</h3>";
+            }
+            ?>
         </main>
         <!-- main end  -->
 
@@ -163,8 +169,59 @@ session_start();
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <!-- datatables net  -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script>
+    <!-- <script>
         new DataTable('#example');
+    </script> -->
+    <!-- Stripe JavaScript library -->
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script>
+        var buyBtn = document.getElementById('payButton');
+        var responseContainer = document.getElementById('paymentResponse');
+        // Create a Checkout Session with the selected product
+        var createCheckoutSession = function(stripe) {
+            return fetch("stripe_charge.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    checkoutSession: 1,
+                    Name: "Fatima Perfumes & Gift Inc",
+                    ID: "Fatima Perfumes & Gift Inc",
+                    Price: "<?php echo $total_price ?>",
+                    Currency: "USD",
+                }),
+            }).then(function(result) {
+                return result.json();
+            });
+        };
+
+        // Handle any errors returned from Checkout
+        var handleResult = function(result) {
+            if (result.error) {
+                responseContainer.innerHTML = '<p>' + result.error.message + '</p>';
+            }
+            buyBtn.disabled = false;
+            buyBtn.textContent = 'Proceed to Checkout';
+        };
+
+        // Specify Stripe publishable key to initialize Stripe.js
+        var stripe = Stripe('<?php echo STRIPE_PUBLISHABLE_KEY; ?>');
+
+        buyBtn.addEventListener("click", function(evt) {
+            buyBtn.disabled = true;
+            buyBtn.textContent = 'Please wait for a minute...';
+            createCheckoutSession().then(function(data) {
+                if (data.sessionId) {
+                    stripe.redirectToCheckout({
+                        sessionId: data.sessionId,
+                    }).then(handleResult);
+                } else {
+                    handleResult(data);
+                }
+            });
+        });
     </script>
 </body>
 

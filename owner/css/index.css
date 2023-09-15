@@ -7,7 +7,7 @@
     text-decoration: none;
     list-style: none;
     text-transform: none;
-    user-select: none;
+    /* user-select: none; */
     /* overflow-x: hidden; */
 }
 

@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php'; 
+require_once 'config.php';
 include 'dbConnect.php';
 session_start();
 $email = "";
@@ -75,28 +75,27 @@ if (isset($_GET["email"]) & isset($_GET["id"])) {
                                 <div class="input-field">
                                     <h5 class="text-muted">Phone No</h5>
                                     <input type="number" name="phone" class="form-control px-3 py-2" value="<?php
-                                                                                                                echo htmlentities($row["phone"]);
-                                                                                                                ?>">
+                                                                                                            echo htmlentities($row["phone"]);
+                                                                                                            ?>">
                                 </div>
                             </div>
                             <div class="form-group py-2">
                                 <div class="input-field">
                                     <h5 class="text-muted">Billing Address</h5>
                                     <input type="text" name="address" class="form-control px-3 py-2" value="<?php
-                                                                                                                echo htmlentities($row["address"]);
-                                                                                                                ?>">
+                                                                                                            echo htmlentities($row["address"]);
+                                                                                                            ?>">
+                                    <h6 class="text-danger text-center">Please enter your full billing address</h6>
                                 </div>
                             </div>
-                            <div class="form-group py-2">
+                            <div class="form-group py-2" style="display: none;">
                                 <div class="input-field">
                                     <h5 class="text-muted">Password</h5>
-                                    <input type="password" id="myInput" name="password" class="form-control px-3 py-2" value="<?php
-                                                                                                                                echo htmlentities($row["password"]);
-                                                                                                                                ?>">
+                                    <input type="password" id="myInput" name="password" class="form-control px-3 py-2" value="<?php echo htmlentities($row["password"]); ?>">
                                     <h6 class="text-danger text-center">please note that if you want to change password then clear whole box and write your password. <br> Otherwise don't edit because it is your encrypted password.</h6>
                                 </div>
                             </div>
-                            <div class="form-group py-2">
+                            <div class="form-group py-2" style="display: none;">
                                 <label for="showpass">
                                     <div class="input-field">
                                         <input type="checkbox" id="showpass" onclick="myFunction()">&nbsp;Show Password
@@ -133,10 +132,10 @@ if (isset($_GET["email"]) & isset($_GET["id"])) {
     if (isset($_POST['submit'])) {
         $user_exist_query = "SELECT * from `user_info` WHERE `email`='$email' and `id`='$id'";
         $result = mysqli_query($con, $user_exist_query);
-        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        // $password = password_hash($_POST['password'], PASSWORD_BCRYPT); `password`='$password',
         if ($result) {
             if (mysqli_num_rows($result) > 0) {
-                $query = "UPDATE `user_info` SET `fullname`='$_POST[fullname]',`password`='$password',`phone`='$_POST[phone]',`address`='$_POST[address]' WHERE `email`='$email' and `id`='$id'";
+                $query = "UPDATE `user_info` SET `fullname`='$_POST[fullname]',`phone`='$_POST[phone]',`address`='$_POST[address]' WHERE `email`='$email' and `id`='$id'";
                 if (mysqli_query($con, $query)) {
                     echo "
           <script>

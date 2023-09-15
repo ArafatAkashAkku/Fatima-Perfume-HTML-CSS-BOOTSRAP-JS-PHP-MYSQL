@@ -1,12 +1,8 @@
 <?php
 session_start();
-// Include configuration file 
 require_once 'config.php';
 include 'dbConnect.php';
 
-$pageview = $_GET['getID'];
-$selectproduct = mysqli_query($con, "select * from all_products_info where id = '$pageview' ");
-$rowproduct = mysqli_fetch_array($selectproduct, MYSQLI_ASSOC);
 
 $payment_id = $statusMsg = '';
 $ordStatus = 'error';
@@ -62,26 +58,29 @@ if (!empty($_GET['session_id'])) {
             if (empty($api_error) && $intent) {
                 // Check whether the charge is successful
                 if ($intent->status == 'succeeded') {
-                    // Customer details
-                    $name = $customer->name;
-                    $email = $customer->email;
+                    foreach ($_SESSION['shopping_cart'] as $product) {
+                        // Customer details
+                        $name = $customer->name;
+                        $email = $customer->email;
 
-                    // Transaction details 
-                    $transactionID = $intent->id;
-                    $paidAmount = $intent->amount;
-                    $paidAmount = ($paidAmount / 100);
-                    $paidCurrency = $intent->currency;
-                    $paymentStatus = $intent->status;
+                        // Transaction details 
+                        $transactionID = $intent->id;
+                        $paidAmount = $intent->amount;
+                        $paidAmount = ($paidAmount / 100);
+                        $paidCurrency = $intent->currency;
+                        $paymentStatus = $intent->status;
 
-                    // Insert transaction data into the database 
+                        // Insert transaction data into the database 
+                        // mysqli_query($con, "INSERT INTO abs (`ww`,`desc`)values('ddd','<td>$product[name]</td><td>$product[quantity]</td><td> $product[item]<td>')");
 
-                    $sql = "INSERT INTO orders(name,email,item_name,item_number,item_price,item_price_currency,paid_amount,paid_amount_currency,txn_id,payment_status,checkout_session_id,created,modified,deliverystatus) VALUES('" . $name . "','" . $email . "','" . $rowproduct['designer'] . "','" . $rowproduct['id'] . "','" . $rowproduct['price'] . "','" . $rowproduct['currency'] . "','" . $paidAmount . "','" . $paidCurrency . "','" . $transactionID . "','" . $paymentStatus . "','" . $session_id . "',NOW(),NOW(),'pending')";
+                        $sql = "INSERT INTO orders(name,email,orderdescription,paid_amount,paid_amount_currency,txn_id,payment_status,checkout_session_id,created,modified,deliverystatus) VALUES('" . $_SESSION['fullname'] . "','" . $_SESSION['email'] . "','<td>$product[name]</td><td>$$product[price]</td><td>$product[quantity]</td><td> $product[item]<td>','" . $paidAmount . "','" . $paidCurrency . "','" . $transactionID . "','" . $paymentStatus . "','" . $session_id . "',NOW(),NOW(),'pending')";
+                        $insert = $con->query($sql);
+                        $paymentID = $con->insert_id;
 
-                    $insert = $con->query($sql);
-                    $paymentID = $con->insert_id;
-
-                    $ordStatus = 'success';
-                    $statusMsg = 'Your Payment has been Successful!';
+                        $ordStatus = 'success';
+                        $statusMsg = 'Your Payment has been Successful!';
+                    }
+                    unset($_SESSION["shopping_cart"]);
                 } else {
                     $statusMsg = "Transaction has been failed!";
                 }
@@ -139,12 +138,35 @@ if (!empty($_GET['session_id'])) {
                 <h4>Payment Information</h4>
                 <p><b>Reference Number:</b> <?php echo $paymentID; ?></p>
                 <p><b>Transaction ID:</b> <?php echo $transactionID; ?></p>
-                <p><b>Paid Amount:</b> <?php echo $paidAmount . ' ' . $paidCurrency; ?></p>
+                <p><b>Paid Amount: $</b><?php echo $paidAmount ?></p>
                 <p><b>Payment Status:</b> <?php echo $paymentStatus; ?></p>
 
                 <h4>Product Information</h4>
-                <p><b>Name:</b> <?php echo $rowproduct['designer']; ?></p>
-                <p><b>Price:</b> <?php echo $rowproduct['price'] . ' ' . $rowproduct['currency']; ?></p>
+                <table class="text-center">
+                    <thead>
+                        <tr>
+                            <th>Item Name&nbsp;</th>
+                            <th>Item Price&nbsp;</th>
+                            <th>Item Quantity&nbsp;</th>
+                            <th>Item No&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $ret = mysqli_query($con, "SELECT * from `orders` WHERE `txn_id`='$transactionID'");
+                        while ($row = mysqli_fetch_array($ret)) {
+                        ?>
+                            <tr>
+                                <?php
+                                echo $row['orderdescription'];
+                                ?>
+                                <br>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
             <?php } ?>
             <a href="index.php" class="btn-link">Back to Product Page</a>
         </div>

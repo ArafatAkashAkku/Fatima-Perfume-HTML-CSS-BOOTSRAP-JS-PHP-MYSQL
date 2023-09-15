@@ -49,6 +49,7 @@ session_start();
                     <tr>
                         <th scope="col">Serial</th>
                         <th scope="col" style="display: none;">ID</th>
+                        <th scope="col">Image</th>
                         <th scope="col">Designer</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -62,17 +63,19 @@ session_start();
                     ?>
                         <tr>
                             <th scope="row"><?php echo $serial ?> </th>
+                            <td><img style="width
+                            50px; height:50px" src="../images/designers/<?php echo htmlentities($row["id"]); ?>/<?php echo htmlentities($row["designer_image"]); ?>" alt="Perfume"></td>
                             <td style="display: none;"><?php
-                                echo htmlentities($row["id"]);
-                                ?> </td>
+                                                        echo htmlentities($row["id"]);
+                                                        ?> </td>
                             <td><?php
                                 echo htmlentities($row["designer"]);
                                 ?> </td>
                             <td><a href="designer_info_edit.php?id=<?php
                                                                     echo htmlentities($row['id']);
                                                                     ?>" class="pe-1">Edit</a><a href="designer_info_delete.php?id=<?php
-                                                                                                                                echo htmlentities($row['id']);
-                                                                                                                                ?>" onclick="return checkdelete()" class="ps-1">Delete</a></td>
+                                                                                                                                    echo htmlentities($row['id']);
+                                                                                                                                    ?>" onclick="return checkdelete()" class="ps-1">Delete</a></td>
                         </tr>
                     <?php
                     }
@@ -82,6 +85,7 @@ session_start();
                     <tr>
                         <th scope="col">Serial</th>
                         <th scope="col" style="display: none;">ID</th>
+                        <th scope="col">Image</th>
                         <th scope="col">Designer</th>
                         <th scope="col">Action</th>
                     </tr>

@@ -2,6 +2,53 @@
 require_once 'config.php';
 include 'dbConnect.php';
 session_start();
+
+if (isset($_POST['item']) && $_POST['item'] != "") {
+    $item = $_POST['item'];
+    $result = mysqli_query($con, "SELECT * FROM `all_products_info` WHERE `item`='$item'");
+    $row = mysqli_fetch_assoc($result);
+    $name = $row['designer'];
+    $price = $row['price'];
+    $item = $row['item'];
+    $image = $row['product_image'];
+    $id = $row['id'];
+
+    $cartArray = array(
+        $item => array(
+            'name' => $name,
+            'price' => $price,
+            'quantity' => 1,
+            'item' => $item,
+            'image' => $image,
+            'id' => $id
+        )
+    );
+
+    if (empty($_SESSION["shopping_cart"])) {
+        $_SESSION["shopping_cart"] = $cartArray;
+        echo "
+        <script>
+        alert('Product is added to your cart!');
+        </script>
+        ";
+    } else {
+        $array_keys = array_keys($_SESSION["shopping_cart"]);
+        if (in_array($item, $array_keys)) {
+            echo "
+            <script>
+            alert('Product is already added to your cart!');
+            </script>
+            ";
+        } else {
+            $_SESSION["shopping_cart"] = array_merge($_SESSION["shopping_cart"], $cartArray);
+            echo "
+        <script>
+        alert('Product is added to your cart!');
+        </script>
+        ";
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,20 +91,20 @@ session_start();
             <div class="swiper top-banner">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="images/banners/banner1.jpeg" class="img-fluid error-img banner-img" alt="Banner">
+                        <img src="images/banners/banner1.jpeg" class="error-img banner-img" alt="Banner">
                     </div>
                     <div class="swiper-slide">
-                        <img src="images/banners/banner2.jpeg" class="img-fluid error-img banner-img" alt="Banner">
+                        <img src="images/banners/banner2.jpeg" class="error-img banner-img" alt="Banner">
                     </div>
                     <div class="swiper-slide">
-                        <img src="images/banners/banner3.jpeg" class="img-fluid error-img banner-img" alt="Banner">
+                        <img src="images/banners/banner3.jpeg" class="error-img banner-img" alt="Banner">
                     </div>
                     <div class="swiper-slide">
-                        <img src="images/banners/banner4.jpeg" class="img-fluid error-img banner-img" alt="Banner">
+                        <img src="images/banners/banner4.jpeg" class="error-img banner-img" alt="Banner">
                     </div>
                 </div>
-                <div class="swiper-button-next text-warning"></div>
-                <div class="swiper-button-prev text-warning"></div>
+                <div class="swiper-pagination"></div>
+
             </div>
         </section>
         <!-- top banner section end  -->
@@ -67,22 +114,24 @@ session_start();
             <div class="text-center">
                 <h1>Top Fragrance Brand</h1>
                 <a href="product_search_filter.php">View All Brands</a>
-                <div class="row gap-3 d-flex align-items-center justify-content-center mt-3">
+                <div class="row gap-2 d-flex align-items-center justify-content-center mt-3">
                     <?php
                     $ret = mysqli_query($con, "select * from product_designer_info");
                     while ($row = mysqli_fetch_array($ret)) {
                     ?>
-                        <div class="col-md-3 col-4 brand-item bg-light py-2">
-                            <img src="images/designers/<?php
-                                                        echo htmlentities($row['id']);
-                                                        ?>/<?php
+                        <div class="col-md-3 col-5 brand-item bg-light py-2">
+                            <div class="product-img">
+                                <img src="images/designers/<?php
+                                                            echo htmlentities($row['id']);
+                                                            ?>/<?php
                                                                 echo htmlentities($row['designer_image']);
-                                                                ?>" class="img-fluid mb-3 error-img" alt="Perfume" loading="lazy">
-                            <a class="text-dark" href="product_search_filter.php?designers%5B%5D=<?php
-                                                                                                    echo htmlentities($row["id"]);
-                                                                                                    ?>"><?php
-                                                                                                        echo htmlentities($row["designer"]);
-                                                                                                        ?></a>
+                                                                ?>" class="product-img mb-3 error-img" alt="Perfume" loading="lazy">
+                            </div>
+                            <a class="text-dark text-decoration-none" href="product_search_filter.php?designers%5B%5D=<?php
+                                                                                                                        echo htmlentities($row["id"]);
+                                                                                                                        ?>"><?php
+                                                                                                                            echo htmlentities($row["designer"]);
+                                                                                                                            ?></a>
                         </div>
                     <?php
                     }
@@ -99,37 +148,45 @@ session_start();
             <div class="text-center">
                 <h1>Best Sellers</h1>
                 <a href="product_search_filter.php">See All</a>
-                <div class="swiper slider-for-all mx-4 mt-3">
-                    <div class="swiper-wrapper">
-                        <?php
-                        $ret = mysqli_query($con, "select * from all_products_info where visibility='bestsellers'");
-                        while ($row = mysqli_fetch_array($ret)) {
-                        ?>
-                            <div class="swiper-slide">
-                                <img src="images/products/<?php
-                                                            echo htmlentities($row['id']);
-                                                            ?>/<?php
-                                                                echo htmlentities($row['product_image']);
-                                                                ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
-                                                                                                        echo htmlentities($row["id"]);
-                                                                                                        ?>">
-                                    <h3><?php
-                                        echo htmlentities($row["designer"]);
-                                        ?></h3>
-
-                                    <p>Price: $<?php
-                                                echo htmlentities($row["price"]);
-                                                ?></p>
-                                    <button class="btn btn-link">Buy Item</button>
-                                </a>
-                            </div>
-                        <?php
-                        }
-                        ?>
+                <div class="px-5 swipper-arrow">
+                    <div class="swiper slider-for-all mt-3 d-flex align-items-center">
+                        <div class="swiper-wrapper">
+                            <?php
+                            $ret = mysqli_query($con, "select * from all_products_info where visibility='bestsellers' order by `id` desc");
+                            while ($row = mysqli_fetch_array($ret)) {
+                            ?>
+                                <div class="swiper-slide bg-light border border-warning">
+                                    <form action="" method="post">
+                                        <div class="product-img">
+                                            <img src="images/products/<?php
+                                                                        echo htmlentities($row['id']);
+                                                                        ?>/<?php
+                                                                            echo htmlentities($row['product_image']);
+                                                                            ?>" class="mb-3 bg-light error-img product-img" alt="Perfume" loading="lazy">
+                                        </div>
+                                        <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
+                                                                                                                echo htmlentities($row["id"]);
+                                                                                                                ?>">
+                                            <h3><?php
+                                                echo htmlentities($row["designer"]);
+                                                ?></h3>
+                                        </a>
+                                        <p>Price: $<?php
+                                                    echo htmlentities($row["price"]);
+                                                    ?></p>
+                                        <input type="hidden" name="item" value="<?php
+                                                                                echo htmlentities($row["item"]);
+                                                                                ?>">
+                                        <button type="submit" class="btn btn-link text-decoration-none border border-warning text-dark px-4 py-1 rounded-pill bg-warning mb-2">Add to Cart</button>
+                                    </form>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                        <div class="swiper-button-next text-warning"></div>
+                        <div class="swiper-button-prev text-warning"></div>
                     </div>
-                    <div class="swiper-button-next text-warning"></div>
-                    <div class="swiper-button-prev text-warning"></div>
                 </div>
             </div>
         </section>
@@ -140,37 +197,45 @@ session_start();
             <div class="text-center">
                 <h1>New Arrivals</h1>
                 <a href="product_search_filter.php">See All</a>
-                <div class="swiper slider-for-all mx-4 mt-3">
-                    <div class="swiper-wrapper">
-                        <?php
-                        $ret = mysqli_query($con, "select * from all_products_info where visibility='newarrivals'");
-                        while ($row = mysqli_fetch_array($ret)) {
-                        ?>
-                            <div class="swiper-slide">
-                                <img src="images/products/<?php
-                                                            echo htmlentities($row['id']);
-                                                            ?>/<?php
-                                                                echo htmlentities($row['product_image']);
-                                                                ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
-                                                                                                        echo htmlentities($row["id"]);
-                                                                                                        ?>">
-                                    <h3><?php
-                                        echo htmlentities($row["designer"]);
-                                        ?></h3>
-
-                                    <p>Price: $<?php
-                                                echo htmlentities($row["price"]);
-                                                ?></p>
-                                    <button class="btn btn-link">Buy Item</button>
-                                </a>
-                            </div>
-                        <?php
-                        }
-                        ?>
+                <div class="px-5 swipper-arrow">
+                    <div class="swiper slider-for-all mt-3 d-flex align-items-center">
+                        <div class="swiper-wrapper">
+                            <?php
+                            $ret = mysqli_query($con, "select * from all_products_info where visibility='newarrivals' order by `id` desc");
+                            while ($row = mysqli_fetch_array($ret)) {
+                            ?>
+                                <div class="swiper-slide bg-light border border-warning">
+                                    <form action="" method="post">
+                                        <div class="product-img">
+                                            <img src="images/products/<?php
+                                                                        echo htmlentities($row['id']);
+                                                                        ?>/<?php
+                                                                            echo htmlentities($row['product_image']);
+                                                                            ?>" class="mb-3 bg-light error-img product-img" alt="Perfume" loading="lazy">
+                                        </div>
+                                        <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
+                                                                                                                echo htmlentities($row["id"]);
+                                                                                                                ?>">
+                                            <h3><?php
+                                                echo htmlentities($row["designer"]);
+                                                ?></h3>
+                                        </a>
+                                        <p>Price: $<?php
+                                                    echo htmlentities($row["price"]);
+                                                    ?></p>
+                                        <input type="hidden" name="item" value="<?php
+                                                                                echo htmlentities($row["item"]);
+                                                                                ?>">
+                                        <button type="submit" class="btn btn-link text-decoration-none border border-warning text-dark px-4 py-1 rounded-pill bg-warning mb-2">Add to Cart</button>
+                                    </form>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                        <div class="swiper-button-next text-warning"></div>
+                        <div class="swiper-button-prev text-warning"></div>
                     </div>
-                    <div class="swiper-button-next text-warning"></div>
-                    <div class="swiper-button-prev text-warning"></div>
                 </div>
             </div>
         </section>
@@ -180,28 +245,30 @@ session_start();
         <section id="reviews" class="py-3">
             <div class="text-center">
                 <h1>Reviews</h1>
-                <div class="swiper slider-for-review mx-4 mt-3">
-                    <div class="swiper-wrapper mb-5">
-                        <?php
-                        $ret = mysqli_query($con, "select * from frontpage_reviews");
-                        while ($row = mysqli_fetch_array($ret)) {
-                        ?>
-                            <div class="swiper-slide review-bg p-3">
-                                <i class="fa-solid fa-user fs-3 text-warning border rounded-circle bg-white p-3"></i>
-                                <h5><?php
-                                    echo htmlentities($row["review_message"]);
-                                    ?></h5>
-                                <p><?php
-                                    echo htmlentities($row["review_sender"]);
-                                    ?></p>
-                            </div>
-                        <?php
-                        }
-                        ?>
+                <div class="px-5 swipper-arrow">
+                    <div class="swiper slider-for-review mt-3 d-flex align-items-center">
+                        <div class="swiper-wrapper">
+                            <?php
+                            $ret = mysqli_query($con, "select * from frontpage_reviews");
+                            while ($row = mysqli_fetch_array($ret)) {
+                            ?>
+                                <div class="swiper-slide review-bg p-3">
+                                    <i class="fa-solid fa-user fs-3 text-warning border rounded-circle bg-white p-3"></i>
+                                    <h5><?php
+                                        echo htmlentities($row["review_message"]);
+                                        ?></h5>
+                                    <p><?php
+                                        echo htmlentities($row["review_sender"]);
+                                        ?></p>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                        <div class="swiper-button-next text-warning"></div>
+                        <div class="swiper-button-prev text-warning"></div>
+                        <div class="swiper-pagination"></div>
                     </div>
-                    <div class="swiper-button-next text-warning"></div>
-                    <div class="swiper-button-prev text-warning"></div>
-                    <div class="swiper-pagination"></div>
                 </div>
             </div>
         </section>
@@ -211,37 +278,45 @@ session_start();
         <section id="top-picks-for-you" class="py-3">
             <div class="text-center">
                 <h1>Top picks for you</h1>
-                <div class="swiper slider-for-all mx-4 mt-3">
-                    <div class="swiper-wrapper">
-                        <?php
-                        $ret = mysqli_query($con, "select * from all_products_info where visibility='toppicksfy'");
-                        while ($row = mysqli_fetch_array($ret)) {
-                        ?>
-                            <div class="swiper-slide">
-                                <img src="images/products/<?php
-                                                            echo htmlentities($row['id']);
-                                                            ?>/<?php
-                                                                echo htmlentities($row['product_image']);
-                                                                ?>" class="img-fluid mb-3 bg-light error-img" alt="Perfume" loading="lazy">
-                                <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
-                                                                                                        echo htmlentities($row["id"]);
-                                                                                                        ?>">
-                                    <h3><?php
-                                        echo htmlentities($row["designer"]);
-                                        ?></h3>
-
-                                    <p>Price: $<?php
-                                                echo htmlentities($row["price"]);
-                                                ?></p>
-                                    <button class="btn btn-link">Buy Item</button>
-                                </a>
-                            </div>
-                        <?php
-                        }
-                        ?>
+                <div class="px-5 swipper-arrow">
+                    <div class="swiper slider-for-all mt-3 d-flex align-items-center">
+                        <div class="swiper-wrapper">
+                            <?php
+                            $ret = mysqli_query($con, "select * from all_products_info where visibility='toppicksfy' order by `id` desc");
+                            while ($row = mysqli_fetch_array($ret)) {
+                            ?>
+                                <div class="swiper-slide bg-light border border-warning">
+                                    <form action="" method="post">
+                                        <div class="product-img">
+                                            <img src="images/products/<?php
+                                                                        echo htmlentities($row['id']);
+                                                                        ?>/<?php
+                                                                        echo htmlentities($row['product_image']);
+                                                                        ?>" class="mb-3 bg-light error-img product-img" alt="Perfume" loading="lazy">
+                                        </div>
+                                        <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
+                                                                                                                echo htmlentities($row["id"]);
+                                                                                                                ?>">
+                                            <h3><?php
+                                                echo htmlentities($row["designer"]);
+                                                ?></h3>
+                                        </a>
+                                        <p>Price: $<?php
+                                                    echo htmlentities($row["price"]);
+                                                    ?></p>
+                                        <input type="hidden" name="item" value="<?php
+                                                                                echo htmlentities($row["item"]);
+                                                                                ?>">
+                                        <button type="submit" class="btn btn-link text-decoration-none border border-warning text-dark px-4 py-1 rounded-pill bg-warning mb-2">Add to Cart</button>
+                                    </form>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                        <div class="swiper-button-next text-warning"></div>
+                        <div class="swiper-button-prev text-warning"></div>
                     </div>
-                    <div class="swiper-button-next text-warning"></div>
-                    <div class="swiper-button-prev text-warning"></div>
                 </div>
             </div>
         </section>
@@ -272,11 +347,7 @@ session_start();
             },
             pagination: {
                 el: ".swiper-pagination",
-                clickable: false
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev"
+                clickable: true,
             }
         });
         // swipper for all brands 

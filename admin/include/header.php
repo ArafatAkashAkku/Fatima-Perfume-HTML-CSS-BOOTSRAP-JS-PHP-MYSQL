@@ -6,24 +6,16 @@
 </style>
 
 <header>
-    <?php
-    $ret = mysqli_query($con, "select * from website_info");
-    while ($row = mysqli_fetch_array($ret)) {
-    ?>
         <nav class="navbar navbar-expand-lg bg-dark top-0 start-0 navigation-header">
             <div class="container-fluid">
                 <?php
                 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] == true) {
                 ?>
-                    <a class="navbar-brand text-warning" href="admin_dashboard.php"> <?php
-                                                                                        echo htmlentities($row["website_name"]);
-                                                                                        ?></a>
+                    <a class="navbar-brand text-warning" href="admin_dashboard.php"><img src="../images/logo.jpeg" class="border rounded-pill" style="width: 50px;" alt="Logo"></a>
                 <?php
                 } else {
                 ?>
-                    <a class="navbar-brand text-warning" href="../index.php"> <?php
-                                                                                echo htmlentities($row["website_name"]);
-                                                                                ?></a>
+                    <a class="navbar-brand text-warning" href="../index.php"><img src="../images/logo.jpeg" class="border rounded-pill" style="width: 50px;" alt="Logo"></a>
                 <?php
                 }
                 ?>
@@ -81,8 +73,8 @@
                                 </a>
                                 <ul class="dropdown-menu bg-dark">
                                     <li> <a class="dropdown-item text-light bg-dark" href="admin_account.php?email=<?php
-                                                                                                                echo $_SESSION['email'];
-                                                                                                                ?>&id=<?php echo $_SESSION['id']?>">Change Password</a></li>
+                                                                                                                    echo $_SESSION['email'];
+                                                                                                                    ?>&id=<?php echo $_SESSION['id'] ?>">Change Password</a></li>
                                     <li> <a class="dropdown-item text-light bg-dark" href="logout.php">Log Out</a></li>
                                 </ul>
                             </li>
@@ -100,9 +92,6 @@
                 </div>
             </div>
         </nav>
-    <?php
-    }
-    ?>
 </header>
 
 <script>

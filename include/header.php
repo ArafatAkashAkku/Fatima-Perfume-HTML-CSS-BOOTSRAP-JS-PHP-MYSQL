@@ -6,15 +6,9 @@
 </style>
 
 <header>
-    <?php
-    $ret = mysqli_query($con, "select * from website_info");
-    while ($row = mysqli_fetch_array($ret)) {
-    ?>
         <nav class="navbar navbar-expand-lg bg-dark top-0 start-0 navigation-header">
             <div class="container-fluid">
-                <a class="navbar-brand text-warning" href="index.php"> <?php
-                                                                        echo htmlentities($row["website_name"]);
-                                                                        ?></a>
+                <a class="navbar-brand text-warning" href="index.php"><img src="images/logo.jpeg" class="border rounded-pill" style="width: 50px;" alt="Logo"></a>
                 <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -76,9 +70,6 @@
                 </div>
             </div>
         </nav>
-    <?php
-    }
-    ?>
 </header>
 
 <script>

@@ -90,14 +90,14 @@ session_start();
                     echo "
            <script>
            alert('$result_fetch[designer] - designer already added');
-           window.location.href='admin_dashboard.php';
+           window.location.href='designer_info.php';
            </script>
            ";
                 } else {
                     echo "
           <script>
           alert('$result_fetch[designer] - Designer available for adding');
-          window.location.href='admin_dashboard.php';
+          window.location.href='designer_info.php';
           </script>
       ";
                 }

@@ -78,12 +78,12 @@ session_start();
                                 echo htmlentities($row["email"]);
                                 ?></td>
                             <td>
-                            <?php
+                                <?php
                                 $rets = mysqli_query($con, "select * from all_products_info");
                                 $rows = mysqli_fetch_array($rets);
-                                    if ($rows["id"] === $row["item_number"]) {
-                                        echo $rows["item"];
-                                    } 
+                                if ($rows["id"] === $row["item_number"]) {
+                                    echo $rows["item"];
+                                }
                                 ?>
                             </td>
                             <td><?php
@@ -108,8 +108,8 @@ session_start();
                                 }
                                 ?>
                             </td>
-                            <td><a href="pending_orders_info_edit.php?id=<?php echo htmlentities($row['id']);
-                                                                            ?>">Edit</a></td>
+                            <td><a onclick="return update()" href="pending_orders_info_edit.php?id=<?php echo htmlentities($row['id']);
+                                                                                                    ?>">Edit</a></td>
                         </tr>
                     <?php
                     }
@@ -157,7 +157,11 @@ session_start();
     <script>
         new DataTable('#example');
     </script>
-
+    <script>
+        function update() {
+            return confirm('Are you sure want to update?')
+        }
+    </script>
 </body>
 
 </html>
