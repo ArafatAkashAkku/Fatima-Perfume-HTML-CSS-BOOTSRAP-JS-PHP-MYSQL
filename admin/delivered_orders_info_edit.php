@@ -2,21 +2,21 @@
 require_once '../config.php';
 include '../dbConnect.php';
 session_start();
-if (isset($_GET['id'])) {
-        $id = $_GET['id'];
-        $sql = "UPDATE `orders` SET `deliverystatus`='pending' where id=$id";
+if (isset($_GET['txn_id'])) {
+        $id = $_GET['txn_id'];
+        $sql = "UPDATE `orders` SET `deliverystatus`='pending' where txn_id='$id'";
         $result = mysqli_query($con, $sql);
         if($result){
         echo "
             <script>
-            alert('Order Pending');
+            alert('Order updated');
            window.location.href='delivered_orders_info.php';
             </script>
             ";
         }else{
             echo "
             <script>
-            alert('Order not pending');
+            alert('Order not updated');
            window.location.href='delivered_orders_info.php';
             </script>
             ";

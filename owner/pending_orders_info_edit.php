@@ -2,9 +2,9 @@
 require_once '../config.php';
 include '../dbConnect.php';
 session_start();
-if (isset($_GET['id'])) {
-        $id = $_GET['id'];
-        $sql = "UPDATE `orders` SET `deliverystatus`='delivered' where id=$id";
+if (isset($_GET['txn_id'])) {
+        $id = $_GET['txn_id'];
+        $sql = "UPDATE `orders` SET `deliverystatus`='delivered' where txn_id='$id'";
         $result = mysqli_query($con, $sql);
         if($result){
         echo "

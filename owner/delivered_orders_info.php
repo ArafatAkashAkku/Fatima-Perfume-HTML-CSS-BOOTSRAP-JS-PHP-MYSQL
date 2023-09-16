@@ -54,6 +54,7 @@ session_start();
                         <th scope="col">Phone No</th>
                         <th scope="col">Shipping Address</th>
                         <th scope="col">Item Description</th>
+                        <th scope="col">Paid Ammount</th>
                         <th scope="col">Transaction ID</th>
                         <th scope="col">Payment Status</th>
                         <th scope="col">Delivery Status</th>
@@ -62,7 +63,7 @@ session_start();
                 </thead>
                 <tbody>
                     <?php
-                    $ret = mysqli_query($con, "select * from orders where deliverystatus='delivered'");
+                    $ret = mysqli_query($con, "SELECT DISTINCT `txn_id`,`id`,`email`,`name`,`paid_amount`,`payment_status`,`deliverystatus`, GROUP_CONCAT(`orderdescription` SEPARATOR '||') as `orderlist` FROM `orders` where `deliverystatus`='delivered' GROUP BY `txn_id` ");
                     $serial = 0;
                     while ($row = mysqli_fetch_array($ret)) {
                         $serial = $serial + 1;
@@ -108,12 +109,12 @@ session_start();
                                     </tr>
                                     <tr>
                                         <?php
-                                        echo $row['orderdescription'];
+                                        echo $row['orderlist'];
                                         ?>
-                                        <br>
                                     </tr>
                                 </table>
                             </td>
+                            <td>$<?php echo htmlentities($row['paid_amount']); ?></td>
                             <td><?php
                                 echo htmlentities($row["txn_id"]);
                                 ?> </td>
@@ -123,8 +124,8 @@ session_start();
                             <td><?php
                                 echo $row['deliverystatus'];
                                 ?></td>
-                            <td><a onclick="return update()" href="delivered_orders_info_edit.php?id=<?php echo htmlentities($row['id']);
-                                                                            ?>">Pending?</a></td>
+                            <td><a onclick="return update()" href="delivered_orders_info_edit.php?txn_id=<?php echo htmlentities($row['txn_id']);
+                                                                                ?>">Pending?</a></td>
                         </tr>
                     <?php
                     }
@@ -139,6 +140,7 @@ session_start();
                         <th scope="col">Phone No</th>
                         <th scope="col">Shipping Address</th>
                         <th scope="col">Item Description</th>
+                        <th scope="col">Paid Ammount</th>
                         <th scope="col">Transaction ID</th>
                         <th scope="col">Payment Status</th>
                         <th scope="col">Delivery Status</th>

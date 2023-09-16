@@ -44,24 +44,26 @@ session_start();
 
         <!-- main start  -->
         <main class="mx-4 my-3 overflow-scroll">
-            <table id="example" class="table table-striped" style="width:100%">
+            <table id="example" class="table table-striped" style="width:100%;">
                 <thead>
                     <tr>
                         <th scope="col">Serial</th>
                         <th scope="col" style="display:none;">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Item No</th>
-                        <th scope="col">Item Name</th>
-                        <th scope="col">Item Price</th>
-                        <th scope="col">Payment Status</th>
+                        <th scope="col">Phone No</th>
                         <th scope="col">Shipping Address</th>
+                        <th scope="col">Item Description</th>
+                        <th scope="col">Paid Ammount</th>
+                        <th scope="col">Transaction ID</th>
+                        <th scope="col">Payment Status</th>
+                        <th scope="col">Delivery Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $ret = mysqli_query($con, "select * from orders where deliverystatus='pending'");
+                    $ret = mysqli_query($con, "SELECT DISTINCT `txn_id`,`id`,`email`,`name`,`paid_amount`,`payment_status`,`deliverystatus`, GROUP_CONCAT(`orderdescription` SEPARATOR '||') as `orderlist` FROM `orders` where `deliverystatus`='pending' GROUP BY `txn_id` ");
                     $serial = 0;
                     while ($row = mysqli_fetch_array($ret)) {
                         $serial = $serial + 1;
@@ -79,37 +81,51 @@ session_start();
                                 ?></td>
                             <td>
                                 <?php
-                                $rets = mysqli_query($con, "select * from all_products_info");
+                                $rets = mysqli_query($con, "select * from user_info");
                                 $rows = mysqli_fetch_array($rets);
-                                if ($rows["id"] === $row["item_number"]) {
-                                    echo $rows["item"];
+                                if ($rows["email"] === $row["email"]) {
+                                    echo $rows["phone"];
                                 }
                                 ?>
                             </td>
-                            <td><?php
-                                echo htmlentities($row["item_name"]);
-                                ?> </td>
-                            <td>$ <?php
-                                    echo htmlentities($row["item_price"]);
-                                    ?> </td>
-                            <td><?php
-                                echo htmlentities($row["payment_status"]);
-                                ?> </td>
                             <td>
                                 <?php
                                 $rets = mysqli_query($con, "select * from user_info");
                                 $rows = mysqli_fetch_array($rets);
-                                if ($rows["fullname"] === $row["name"]) {
-                                    echo $rows["address"];
-                                } elseif ($rows["email"] === $row["email"]) {
+                                if ($rows["email"] === $row["email"]) {
                                     echo $rows["address"];
                                 } else {
                                     echo "No Address";
                                 }
                                 ?>
                             </td>
-                            <td><a onclick="return update()" href="pending_orders_info_edit.php?id=<?php echo htmlentities($row['id']);
-                                                                                                    ?>">Edit</a></td>
+                            <td>
+                                <table class="text-center">
+                                    <tr>
+                                        <th>Name&nbsp;</th>
+                                        <th>Price&nbsp;</th>
+                                        <th>Quantity&nbsp;</th>
+                                        <th>No&nbsp;</th>
+                                    </tr>
+                                    <tr>
+                                        <?php
+                                        echo $row['orderlist'];
+                                        ?>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>$<?php echo htmlentities($row['paid_amount']); ?></td>
+                            <td><?php
+                                echo htmlentities($row["txn_id"]);
+                                ?> </td>
+                            <td><?php
+                                echo htmlentities($row["payment_status"]);
+                                ?> </td>
+                            <td><?php
+                                echo $row['deliverystatus'];
+                                ?></td>
+                            <td><a onclick="return update()" href="pending_orders_info_edit.php?txn_id=<?php echo htmlentities($row['txn_id']);
+                                                                                                        ?>">Delivered?</a></td>
                         </tr>
                     <?php
                     }
@@ -121,11 +137,13 @@ session_start();
                         <th scope="col" style="display:none;">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Item No</th>
-                        <th scope="col">Item Name</th>
-                        <th scope="col">Item Price</th>
-                        <th scope="col">Payment Status</th>
+                        <th scope="col">Phone No</th>
                         <th scope="col">Shipping Address</th>
+                        <th scope="col">Item Description</th>
+                        <th scope="col">Paid Ammount</th>
+                        <th scope="col">Transaction ID</th>
+                        <th scope="col">Payment Status</th>
+                        <th scope="col">Delivery Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </tfoot>

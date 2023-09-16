@@ -69,7 +69,7 @@ session_start();
                 <div class="card col-sm-3 col-12">
                     <div class="card-body">
                         <h1 class="card-title">Total Orders</h1>
-                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con, "SELECT * from `orders` ORDER BY id"));
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con, "SELECT DISTINCT `txn_id`,`id`,`email`,`name`,`paid_amount`,`payment_status`,`deliverystatus`, GROUP_CONCAT(`orderdescription` SEPARATOR '||') as `orderlist` FROM `orders` GROUP BY `txn_id`"));
                                                 echo $row; ?></h2>
                     </div>
                 </div>
@@ -77,7 +77,7 @@ session_start();
                 <div class="card col-sm-3 col-12">
                     <div class="card-body">
                         <h1 class="card-title">Total Delivery</h1>
-                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con, "SELECT * from `orders` WHERE deliverystatus='delivered' ORDER BY id"));
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con, "SELECT DISTINCT `txn_id`,`id`,`email`,`name`,`paid_amount`,`payment_status`,`deliverystatus`, GROUP_CONCAT(`orderdescription` SEPARATOR '||') as `orderlist` FROM `orders` where `deliverystatus`='delivered' GROUP BY `txn_id`"));
                                                 echo $row; ?></h2>
                     </div>
                 </div>
@@ -85,7 +85,7 @@ session_start();
                 <div class="card col-sm-3 col-12">
                     <div class="card-body">
                         <h1 class="card-title">Pending Orders</h1>
-                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con, "SELECT * from `orders` WHERE deliverystatus='pending' ORDER BY id"));
+                        <h2 class="card-text"> <?php $row = mysqli_num_rows(mysqli_query($con, "SELECT DISTINCT `txn_id`,`id`,`email`,`name`,`paid_amount`,`payment_status`,`deliverystatus`, GROUP_CONCAT(`orderdescription` SEPARATOR '||') as `orderlist` FROM `orders` where `deliverystatus`='pending' GROUP BY `txn_id` "));
                                                 echo $row; ?></h2>
                     </div>
                 </div>
