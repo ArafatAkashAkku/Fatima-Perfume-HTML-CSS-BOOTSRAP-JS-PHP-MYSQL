@@ -54,16 +54,17 @@ session_start();
                         <th scope="col">Phone No</th>
                         <th scope="col">Shipping Address</th>
                         <th scope="col">Item Description</th>
-                        <th scope="col">Paid Ammount</th>
+                        <th scope="col">Paid Amount</th>
                         <th scope="col">Transaction ID</th>
                         <th scope="col">Payment Status</th>
+                        <th scope="col">Order Date</th>
                         <th scope="col">Delivery Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $ret = mysqli_query($con, "SELECT DISTINCT `txn_id`,`id`,`email`,`name`,`paid_amount`,`payment_status`,`deliverystatus`, GROUP_CONCAT(`orderdescription` SEPARATOR '||') as `orderlist` FROM `orders` where `deliverystatus`='delivered' GROUP BY `txn_id` ");
+                    $ret = mysqli_query($con, "SELECT DISTINCT `txn_id`,`id`,`email`,`phone`,`address`,`name`,`paid_amount`,`modified`,`payment_status`,`deliverystatus`, GROUP_CONCAT(`orderdescription` SEPARATOR ' ') as `orderlist` FROM `orders` where `deliverystatus`='delivered' GROUP BY `txn_id` ");
                     $serial = 0;
                     while ($row = mysqli_fetch_array($ret)) {
                         $serial = $serial + 1;
@@ -79,26 +80,12 @@ session_start();
                             <td><?php
                                 echo htmlentities($row["email"]);
                                 ?></td>
-                            <td>
-                                <?php
-                                $rets = mysqli_query($con, "select * from user_info");
-                                $rows = mysqli_fetch_array($rets);
-                                if ($rows["email"] === $row["email"]) {
-                                    echo $rows["phone"];
-                                }
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                $rets = mysqli_query($con, "select * from user_info");
-                                $rows = mysqli_fetch_array($rets);
-                                if ($rows["email"] === $row["email"]) {
-                                    echo $rows["address"];
-                                } else {
-                                    echo "No Address";
-                                }
-                                ?>
-                            </td>
+                            <td><?php
+                                echo htmlentities($row["phone"]);
+                                ?></td>
+                            <td><?php
+                                echo htmlentities($row["address"]);
+                                ?></td>
                             <td>
                                 <table class="text-center">
                                     <tr>
@@ -107,11 +94,9 @@ session_start();
                                         <th>Quantity&nbsp;</th>
                                         <th>No&nbsp;</th>
                                     </tr>
-                                    <tr>
                                         <?php
                                         echo $row['orderlist'];
                                         ?>
-                                    </tr>
                                 </table>
                             </td>
                             <td>$<?php echo htmlentities($row['paid_amount']); ?></td>
@@ -121,6 +106,7 @@ session_start();
                             <td><?php
                                 echo htmlentities($row["payment_status"]);
                                 ?> </td>
+                            <td><?php echo $row["modified"]; ?></td>
                             <td><?php
                                 echo $row['deliverystatus'];
                                 ?></td>
@@ -143,6 +129,7 @@ session_start();
                         <th scope="col">Paid Ammount</th>
                         <th scope="col">Transaction ID</th>
                         <th scope="col">Payment Status</th>
+                        <th scope="col">Order Date</th>
                         <th scope="col">Delivery Status</th>
                         <th scope="col">Action</th>
                     </tr>

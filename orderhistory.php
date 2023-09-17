@@ -52,6 +52,7 @@ session_start();
                 <thead>
                     <tr>
                         <th scope="col">Order Decription</th>
+                        <th scope="col">Paid Amount</th>
                         <th scope="col">Transaction ID</th>
                         <th scope="col">Delivery Status</th>
                         <th scope="col">Order Date</th>
@@ -59,7 +60,7 @@ session_start();
                 </thead>
                 <tbody>
                     <?php
-                    $ret = mysqli_query($con, "select * from orders where email='$_SESSION[email]'");
+                    $ret = mysqli_query($con, "SELECT DISTINCT `txn_id`,`id`,`email`,`name`,`phone`,`address`,`paid_amount`,`modified`,`payment_status`,`deliverystatus`, GROUP_CONCAT(`orderdescription` SEPARATOR ' ') as `orderlist` FROM `orders` WHERE `email`='$_SESSION[email]' GROUP BY `txn_id`");
                     while ($row = mysqli_fetch_array($ret)) { ?>
                         <tr>
                             <td>
@@ -70,11 +71,12 @@ session_start();
                                         <th>Item Quantity</th>
                                         <th>Item No</th>
                                     </tr>
-                                    <tr  class="text-center">
-                                        <?php echo $row['orderdescription']; ?>
-                                    </tr>
+                                    <?php
+                                    echo $row['orderlist'];
+                                    ?>
                                 </table>
                             </td>
+                            <td>$<?php echo htmlentities($row['paid_amount']); ?></td>
                             <td><?php echo $row["txn_id"]; ?></td>
                             <td><?php echo $row["deliverystatus"]; ?> </td>
                             <td><?php echo $row["modified"]; ?></td>

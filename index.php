@@ -57,6 +57,10 @@ if (isset($_POST['item']) && $_POST['item'] != "") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Perfume, Fragrance, Fatima Perfumes, Fatima Perfumes Inc, Fatima Perfumes and Gift Inc">
+    <meta name="description" content="At Fatima Perfumes and Gift Inc, we're dedicated to bringing you an exquisite world of fragrances and thoughtful gifting options. Our passion lies in creating unforgettable olfactory experiences. With a vast collection of perfumes from renowned brands and artisanal fragrances, we cater to your unique tastes and desires. Whether you're seeking a signature scent, a gift for a loved one, or a rare fragrance find, our knowledgeable staff is here to assist you in finding the perfect match.">
+    <meta name="author" content="Fatima Perfumes and Gift Inc">
+    <meta name="robots" content="index, follow">
     <!-- bootstrap css link  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- external css link  -->
@@ -291,8 +295,8 @@ if (isset($_POST['item']) && $_POST['item'] != "") {
                                             <img src="images/products/<?php
                                                                         echo htmlentities($row['id']);
                                                                         ?>/<?php
-                                                                        echo htmlentities($row['product_image']);
-                                                                        ?>" class="mb-3 bg-light error-img product-img" alt="Perfume" loading="lazy">
+                                                                            echo htmlentities($row['product_image']);
+                                                                            ?>" class="mb-3 bg-light error-img product-img" alt="Perfume" loading="lazy">
                                         </div>
                                         <a class="text-dark text-decoration-none" href="product_details.php?id=<?php
                                                                                                                 echo htmlentities($row["id"]);

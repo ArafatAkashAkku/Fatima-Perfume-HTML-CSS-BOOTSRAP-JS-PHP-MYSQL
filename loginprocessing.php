@@ -16,6 +16,8 @@ if (isset($_POST['submit'])) {
                     $_SESSION['email'] = $result_fetch['email'];
                     $_SESSION['id'] = $result_fetch['id'];
                     $_SESSION['fullname'] = $result_fetch['fullname'];
+                    $_SESSION['phone'] = $result_fetch['phone'];
+                    $_SESSION['address'] = $result_fetch['address'];
                     header("location:index.php");
                 } else {
                     echo "<script>

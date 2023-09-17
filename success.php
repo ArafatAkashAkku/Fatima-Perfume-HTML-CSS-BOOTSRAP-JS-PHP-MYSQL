@@ -73,7 +73,7 @@ if (!empty($_GET['session_id'])) {
                         // Insert transaction data into the database 
                         // mysqli_query($con, "INSERT INTO abs (`ww`,`desc`)values('ddd','<td>$product[name]</td><td>$product[quantity]</td><td> $product[item]<td>')");
 
-                        $sql = "INSERT INTO orders(name,email,orderdescription,paid_amount,paid_amount_currency,txn_id,payment_status,checkout_session_id,created,modified,deliverystatus) VALUES('" . $_SESSION['fullname'] . "','" . $_SESSION['email'] . "','<td>$product[name]</td><td>$$product[price]</td><td>$product[quantity]</td><td> $product[item]<td>','" . $paidAmount . "','" . $paidCurrency . "','" . $transactionID . "','" . $paymentStatus . "','" . $session_id . "',NOW(),NOW(),'pending')";
+                        $sql = "INSERT INTO orders(`name`,email,phone,`address`,orderdescription,paid_amount,paid_amount_currency,txn_id,payment_status,checkout_session_id,created,modified,deliverystatus) VALUES('" . $_SESSION['fullname'] . "','" . $_SESSION['email'] . "','" . $_SESSION['phone'] . "','" . $_SESSION['address'] . "','<tr><td>$product[name]</td><td>$$product[price]</td><td>$product[quantity]</td><td> $product[item]<td></tr>','" . $paidAmount . "','" . $paidCurrency . "','" . $transactionID . "','" . $paymentStatus . "','" . $session_id . "',NOW(),NOW(),'pending')";
                         $insert = $con->query($sql);
                         $paymentID = $con->insert_id;
 
@@ -156,12 +156,9 @@ if (!empty($_GET['session_id'])) {
                         $ret = mysqli_query($con, "SELECT * from `orders` WHERE `txn_id`='$transactionID'");
                         while ($row = mysqli_fetch_array($ret)) {
                         ?>
-                            <tr>
-                                <?php
-                                echo $row['orderdescription'];
-                                ?>
-                                <br>
-                            </tr>
+                            <?php
+                            echo $row['orderdescription'];
+                            ?>
                         <?php
                         }
                         ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2023 at 05:56 PM
+-- Generation Time: Sep 17, 2023 at 04:44 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -3145,6 +3145,8 @@ CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
   `orderdescription` varchar(255) NOT NULL,
   `paid_amount` float(10,2) NOT NULL,
   `paid_amount_currency` varchar(10) NOT NULL,
@@ -3155,13 +3157,6 @@ CREATE TABLE `orders` (
   `modified` datetime NOT NULL,
   `deliverystatus` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `name`, `email`, `orderdescription`, `paid_amount`, `paid_amount_currency`, `txn_id`, `checkout_session_id`, `payment_status`, `created`, `modified`, `deliverystatus`) VALUES
-(40, 'Md. Arafat Akash', 'arafatakash5@gmail.com', '<td>Jean Paul Gaultier</td><td>$46.00</td><td>1</td><td> I0089866                       <td>', 58.75, 'usd', 'pi_3NqbM8IuhitIP6cR2n6XKtXm', 'cs_test_a1ewLyWW29ObEQ3CnMa0F7SDP6CXx9OIl07ReDFfYgGE2OCvC2tiZi36Kp', 'succeeded', '2023-09-15 18:43:11', '2023-09-15 18:43:11', 'pending');
 
 -- --------------------------------------------------------
 
@@ -3513,13 +3508,6 @@ CREATE TABLE `user_info` (
   `address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dumping data for table `user_info`
---
-
-INSERT INTO `user_info` (`id`, `email`, `password`, `resettoken`, `resettokenexpire`, `fullname`, `v_code`, `verified`, `phone`, `address`) VALUES
-(43, 'arafatakash5@gmail.com', '$2y$10$vvkWN0pEU6J1h4Zhu7AR0OilEAIy0JAg3dlDY1s44RW46QOg1WKne', NULL, NULL, 'Md. Arafat Akash', 'e9c8c8bfc2a061554289901dc3021417', 1, '01798480941', 'Bangladesh');
-
 -- --------------------------------------------------------
 
 --
@@ -3622,7 +3610,7 @@ ALTER TABLE `frontpage_reviews`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `owner_info`
@@ -3640,7 +3628,7 @@ ALTER TABLE `product_designer_info`
 -- AUTO_INCREMENT for table `user_info`
 --
 ALTER TABLE `user_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
